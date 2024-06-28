@@ -1,9 +1,10 @@
+import { Calendar, Day, Task, Profile } from "../pages";
 import { AUTH_USER_ROUTES } from "./routesNames";
 
 export const authorizedUserRouter = [
   {
     path: AUTH_USER_ROUTES.CLAENDAR,
-    element: <CALENDAR/>
+    element: <Calendar/>
   },
   {
     path: AUTH_USER_ROUTES.DAY,

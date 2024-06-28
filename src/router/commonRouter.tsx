@@ -1,6 +1,7 @@
+import { Home, About, Contact, Not_Found } from "../pages";
 import { COMMON_ROUTES } from "./routesNames";
 
-const commonRouter = [
+export const commonRouter = [
   {
     path: COMMON_ROUTES.HOME,
     element: <Home/>
@@ -15,6 +16,6 @@ const commonRouter = [
   },
   {
     path: COMMON_ROUTES.NOT_FOUND,
-    element: <NotFound/>
+    element: <Not_Found/>
   }
 ]

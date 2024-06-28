@@ -1,6 +1,7 @@
+import { Users, Events, Settings } from "../pages";
 import { ADMIN_ROUTES } from "./routesNames";
 
-const adminRouter = [
+export const adminRouter = [
   {
     path: ADMIN_ROUTES.USERS,
     element: <Users/>

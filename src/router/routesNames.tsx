@@ -1,5 +1,5 @@
 export enum  COMMON_ROUTES {
-    HOME = 'home',
+    HOME = '/',
     ABOUT = 'about',
     CONTACT = 'contact',
     NOT_FOUND = 'not-found',

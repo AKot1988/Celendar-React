@@ -1,0 +1,91 @@
+@import "../../app/variables.scss";
+
+.container {
+  width: 100vw;
+  background-color: $mainGray;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+
+.header {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: $contentWidth;
+  margin: 0 auto;
+  height: 100px;
+  background-color: $mainGray;
+
+
+  &Logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+  }
+
+  &Nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    // width: 50%;
+    &Menu {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    &Item {
+      color: #000000;
+      transition: all 0.3s;
+    }
+
+    &Item:hover {
+      color: #1e00ff;
+      scale: 1.1;
+    }
+
+    &Button {
+      width: 100px;
+    }
+
+    &UserLogo {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+    }
+  }
+  
+
+  &Title {
+    font-weight: bold;
+    color: #000000;
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+  }
+}
+
+.headerLink {
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #000000;
+  background-color: #064cff;
+  color: rgb(56, 7, 204);
+  font-size: 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background-color: #ff0000;
+    color: rgb(0, 0, 0);
+  }
+}

@@ -1,0 +1,33 @@
+@import "../../app/variables.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+
+  &Title{
+    margin-bottom: 40px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  &Button {
+    width: 50%;
+    box-sizing:content-box;
+    margin: 20px auto 20px;
+    background-color: $mainGray;
+    color: $lightGray;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    font-size: 16px;
+    padding: 10px 20px;
+    font-weight: 300;
+    border-radius: 0px;
+    &:hover {
+      background-color: #3e3d3d;;
+      color: $lightGray;
+      transition: all 0.3s;
+    }
+  }
+}
