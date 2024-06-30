@@ -1,0 +1,43 @@
+@import "../../app/variables.scss";
+
+.modal{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: none;
+    backdrop-filter: blur(1.5px);
+
+    &BtnClose{
+        position: relative;
+        margin-left: auto;
+        order: 2;
+        width: 1em;
+        height: 1em;
+        border-radius: 5px;
+        background-color: $lightGray;
+        cursor: pointer;
+    }
+    &Title {
+        text-align: center;
+        margin: 10px 0;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 20px;
+        color: black;
+    }
+    &Content{
+        padding: 20px;
+        border: 1px solid $white;
+        background-color: $lightGray;
+        overflow: hidden;
+        color: black;
+        cursor: initial;
+    }
+    &.active{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

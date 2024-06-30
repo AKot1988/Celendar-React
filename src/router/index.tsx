@@ -30,7 +30,7 @@ const AppRouter = () => {
   const router = createBrowserRouter([{
     path: "/",
     element: <Layout/>,
-    children: createRouterByRole(role),
+    children: createRouterByRole(currentRole),
     errorElement: <Not_Found/>
     },
   ]);

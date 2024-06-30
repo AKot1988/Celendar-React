@@ -8,7 +8,7 @@ type FooterProps = {
 
 }
 
-const Header: FC<FooterProps> = ({title, className = 'header'}) => {
+const Footer: FC<FooterProps> = ({title, className = 'header'}) => {
   return (
     <footer className={classes.footer}>
       <h4 className={classes.footerTitle}>{title}</h4>
@@ -16,4 +16,4 @@ const Header: FC<FooterProps> = ({title, className = 'header'}) => {
   )
 }
 
-export default Header
+export default Footer

@@ -14,9 +14,13 @@ export type HeaderProps = {
 
 const Header: FC<HeaderProps> = ({logo, navMenu, onClick=()=>{}}) => {
   const [user, setUser] = useState(auth.currentUser)
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  })
+  // onAuthStateChanged(auth, (currentUser) => {
+  //   setUser(currentUser);
+  // })
+
+  useEffect(() => {
+    setUser(auth.currentUser)
+},[auth.currentUser])
   return (
     <div className={classes.container}>
         <header className={classes.header}>
