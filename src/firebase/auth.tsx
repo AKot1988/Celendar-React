@@ -40,30 +40,30 @@ export const googleSignOut = async () => {
 }
 
 
-// const createNewUser = (email: string, password: string) => {
-//   createUserWithEmailAndPassword(auth, email, password) // This is the function that creates a new user
-//     .then((userCredential) => {
-//       // Signed up 
-//       const user = userCredential.user;
-//       // ...
-//     })
-//     .catch((error) => {
-//       const errorCode = error.code;
-//       const errorMessage = error.message;
-//       // ..
-//     });
-// }
+export const signUpWithEmailAndPassword = (email: string, password: string) => {
+  createUserWithEmailAndPassword(auth, email, password) // This is the function that creates a new user
+    .then((userCredential) => {
+      // Signed up 
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
+}
 
 
-// const signInWithEmailAndPassword = (auth, email: string, password: string) => {
-//   signInWithEmailAndPassword(auth, email, password) // This is the function that signs in a user
-//     .then((userCredential) => {
-//       // Signed in 
-//       const user = userCredential.user;
-//       // ...
-//     })
-//     .catch((error) => {
-//       const errorCode = error.code;
-//       const errorMessage = error.message;
-//     });
-// }
+export const logInWithEmailAndPassword = (auth, email: string, password: string) => {
+  signInWithEmailAndPassword(auth, email, password) // This is the function that signs in a user
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
+}

@@ -6,7 +6,7 @@ export enum  COMMON_ROUTES {
 }
 
 export enum  AUTH_USER_ROUTES {
-  CLAENDAR= 'calendar',
+  CALENDAR= 'calendar',
   DAY = 'day',
   TASK = 'task',
   PROFILE = 'profile',

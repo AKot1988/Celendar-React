@@ -1,4 +1,4 @@
-content {
+.content {
   width: 300px;
   display: flex;
   flex-direction: column;
@@ -13,9 +13,45 @@ content {
   }
 
   &Buttons {
-    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 20px;
     width: 100%;
     color: black;
     align-self: center;
+
+    &ButtonGoogle,
+    &ButtonEmailLogIn,
+    &ButtonEmailSignUp {
+      margin: 10px 0;
+      transition: all 0.3s;
+    }
+
+    &ButtonGoogle {
+      background-color: #4285f4;
+      color: rgb(0, 0, 255);
+
+      &:hover {
+        background-color: #3367d6;
+      }
+    }
+
+    &ButtonEmailLogIn {
+      background-color: #f50000;
+      color: rgb(56, 0, 0);
+      &:hover {
+        background-color: #cb0000;
+      }
+    }
+
+    &ButtonEmailSignUp {
+      background-color: #f57c00;
+      color: rgb(56, 0, 0);
+      
+      &:hover {
+        background-color: #d06800;
+      }
+    }
+
   }
 }
