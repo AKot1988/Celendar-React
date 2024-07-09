@@ -1,10 +1,12 @@
-import { Home, About, Contact, Not_Found } from "../pages";
+import { Home, About, Contact, Not_Found, LogIn } from "../pages";
 import { COMMON_ROUTES } from "./routesNames";
+import { collectFormDataLogIn, collectFormDataSignUp } from "../pages/Login/LogIn";
+
 
 export const commonRouter = [
   {
-    path: COMMON_ROUTES.HOME,
-    element: <Home/>
+    index: true,
+    element: <Home/>,
   },
   {
     path: COMMON_ROUTES.ABOUT,
@@ -17,5 +19,10 @@ export const commonRouter = [
   {
     path: COMMON_ROUTES.NOT_FOUND,
     element: <Not_Found/>
+  },
+  {
+    path: COMMON_ROUTES.LOGIN,
+    element: <LogIn/>,
+    action: collectFormDataSignUp,
   }
 ]

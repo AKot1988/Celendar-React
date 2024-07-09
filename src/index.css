@@ -2,6 +2,8 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  margin: 100px 0px;
+  /* height: calc(100vh - 200px); */
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -23,11 +25,17 @@ a:hover {
 }
 
 body {
-  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  place-content: center;
+  width: 100%;
+  box-sizing:content-box;
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  height: calc(100vh - 250px);
+  /* min-height: 100vh; */
 }
 
 h1 {

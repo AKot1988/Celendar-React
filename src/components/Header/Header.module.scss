@@ -33,7 +33,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    // width: 50%;
+
     &Menu {
       display: flex;
       flex-direction: row;
@@ -54,6 +54,14 @@
 
     &Button {
       width: 100px;
+      background-color: $lightGray;
+      border-radius: 5px;
+      color: #000000;
+      text-align: center;
+
+      &:hover {
+        color: $main;
+      }
     }
 
     &UserLogo {

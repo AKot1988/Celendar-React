@@ -3,8 +3,8 @@ import { AUTH_USER_ROUTES } from "./routesNames";
 
 export const authorizedUserRouter = [
   {
-    path: AUTH_USER_ROUTES.CLAENDAR,
-    element: <Calendar/>
+    path: AUTH_USER_ROUTES.CALENDAR,
+    element: <Calendar/>,
   },
   {
     path: AUTH_USER_ROUTES.DAY,

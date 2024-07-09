@@ -17,5 +17,5 @@ export type FormProps = {
          text: string;
          clickHandler: () => void;
       },
-   // redirect?: COMMON_ROUTES | AUTH_USER_ROUTES | ADMIN_ROUTES;
+   redirect?: COMMON_ROUTES | AUTH_USER_ROUTES | ADMIN_ROUTES;
 }

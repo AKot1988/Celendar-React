@@ -12,7 +12,7 @@ export const headerProps = {
       },
       {
         title: 'Calendar',
-        path: AUTH_USER_ROUTES.CLAENDAR,
+        path: AUTH_USER_ROUTES.CALENDAR,
         className: 'classes.headerNavItem'
       },
       {

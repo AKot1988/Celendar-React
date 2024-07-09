@@ -28,6 +28,10 @@
     }
 
     &ButtonGoogle {
+      text-align: center;
+      width: 100%;
+      padding: 10px 0px;
+      border-radius: 10px;
       background-color: #4285f4;
       color: rgb(0, 0, 255);
 
@@ -37,6 +41,10 @@
     }
 
     &ButtonEmailLogIn {
+      text-align: center;
+      width: 100%;
+      padding: 10px 0px;
+      border-radius: 10px;
       background-color: #f50000;
       color: rgb(56, 0, 0);
       &:hover {
@@ -45,6 +53,10 @@
     }
 
     &ButtonEmailSignUp {
+      text-align: center;
+      width: 100%;
+      padding: 10px 0px;
+      border-radius: 10px;
       background-color: #f57c00;
       color: rgb(56, 0, 0);
       

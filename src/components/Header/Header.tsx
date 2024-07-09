@@ -3,8 +3,7 @@ import { FC, useState, useEffect } from 'react';
 import { CustomNavLinkProps } from '../CustomNavLink/CustomNavLink.tsx'
 import { CustomNavLink } from '../index.tsx';
 import classes from './Header.module.scss';
-import { auth } from '../../firebase/auth';
-import { onAuthStateChanged } from "firebase/auth"
+import { auth } from '../../firebase/firebase.tsx';
 
 export type HeaderProps = {
   logo: string
@@ -28,11 +27,12 @@ const Header: FC<HeaderProps> = ({logo, navMenu, onClick=()=>{}}) => {
               ))}
             </nav>
             {auth.currentUser && <img src={user?.photoURL} alt="user" className={classes.headerNavUserLogo} />}
-            <button onClick={onClick} className={classes.headerNavButton}>{user?'Logout' : 'Login'}</button>
+            {auth.currentUser? <CustomNavLink title={'LogOut'} path='/home' className={classes.headerNavButton} onClick={onClick}/>:
+            <CustomNavLink title={'Login'} path='/login' className={classes.headerNavButton} onClick={onClick}/> }
           </div>
-        </header>
-    </div>
-  )
-}
-
+          </header>
+          </div>
+        )
+      }
+      
 export default Header

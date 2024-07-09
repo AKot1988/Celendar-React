@@ -1,7 +1,16 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
-import { app, googleAuthProvider } from './firebase'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
+import { app, googleAuthProvider, auth } from './firebase'
 
-export const auth = getAuth(app)
+/**
+ * Function creates a new user and automatically signs in with new user credentials.
+ *
+ * @param {string} firstName - new user's first name;
+ * @param {string} lastName - new user's last name;
+ * @param {ROLES} role - new user's role in the system (admin or garson);
+ * @param {string} email - new user's e-mail;
+ * @param {string} password - new user's password;
+ */
+
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -41,7 +50,7 @@ export const googleSignOut = async () => {
 
 
 export const signUpWithEmailAndPassword = (email: string, password: string) => {
-  createUserWithEmailAndPassword(auth, email, password) // This is the function that creates a new user
+  return createUserWithEmailAndPassword(auth, email, password) // This is the function that creates a new user
     .then((userCredential) => {
       // Signed up 
       const user = userCredential.user;
@@ -55,10 +64,10 @@ export const signUpWithEmailAndPassword = (email: string, password: string) => {
 }
 
 
-export const logInWithEmailAndPassword = (auth, email: string, password: string) => {
+export const logInWithEmailAndPassword = (email: string, password: string) => {
   signInWithEmailAndPassword(auth, email, password) // This is the function that signs in a user
     .then((userCredential) => {
-      // Signed in 
+      console.log(userCredential + 'Юзер зайшов за допомогою email та пароля')
       const user = userCredential.user;
       // ...
     })
@@ -66,4 +75,15 @@ export const logInWithEmailAndPassword = (auth, email: string, password: string)
       const errorCode = error.code;
       const errorMessage = error.message;
     });
+}
+
+/**
+ * Function signs out current user.
+ */
+export const logOut = async (): Promise<void> => {
+	try {
+		await signOut(auth)
+	} catch (error) {
+		throw new Error(`AN ERROR OCCURED: ${error}`)
+	}
 }
