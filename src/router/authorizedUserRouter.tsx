@@ -1,10 +1,12 @@
 import { Calendar, Day, Task, Profile } from "../pages";
 import { AUTH_USER_ROUTES } from "./routesNames";
+import { mockTimeOutFunction } from '../pages/Calendar/Calendar'
 
 export const authorizedUserRouter = [
   {
     path: AUTH_USER_ROUTES.CALENDAR,
     element: <Calendar/>,
+    loader : mockTimeOutFunction
   },
   {
     path: AUTH_USER_ROUTES.DAY,

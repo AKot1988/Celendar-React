@@ -17,7 +17,7 @@ const Input: FC<InputElementProps> = ({type, placeHolder, name, required, id, op
       <p className={classes.error}>{errorMessage}</p>
       {type === InputType.SELECT?
         (<select name={name} className={classes.inputItem} required={required}>
-          <option className={classes.inputItem} disabled defaultValue={value} >{placeHolder}</option>
+          <option className={classes.inputItem} disabled selected value={value} >{placeHolder}</option>
           {options.map((option) => <option key={`${id}${option.value}`} className={classes.inputItem} value={option.value}>{option.label}</option>)}
         </select>):
         (<input type={type} placeholder={placeHolder} name={name} onChange={handleOnChange} className={classes.inputItem} required={required}/>)}

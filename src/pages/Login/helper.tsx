@@ -46,9 +46,18 @@ export const newUserFormData: FormProps = {
       value: "Оберіть стать",
       name: "gender",
       options: [
-        {value: "Буратіно"},
-        {value: "Мальвіна"},
-        {value: "Неоприділився"},
+        {
+          value: "Буратіно",
+          label: "Буратіно"
+        },
+        {
+          value: "Мальвіна",
+          label: "Мальвіна"
+        },
+        {
+          value: "Неоприділився",
+          label: "Неоприділився"
+        },
       ]
     }
   ],

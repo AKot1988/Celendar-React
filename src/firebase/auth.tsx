@@ -1,5 +1,7 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
 import { app, googleAuthProvider, auth } from './firebase'
+import { addNewUserToBase } from './API'
+import { NewUserFormData } from './types.tsx'
 
 /**
  * Function creates a new user and automatically signs in with new user credentials.
@@ -12,6 +14,8 @@ import { app, googleAuthProvider, auth } from './firebase'
  */
 
 
+
+
 onAuthStateChanged(auth, (user) => {
     if (user) {
       return auth.currentUser
@@ -20,6 +24,7 @@ onAuthStateChanged(auth, (user) => {
     }
   }
 )
+
 export const googleSignIn = async ()=> {
   await signInWithPopup(auth, googleAuthProvider)
   .then((result) => {
@@ -49,10 +54,12 @@ export const googleSignOut = async () => {
 }
 
 
-export const signUpWithEmailAndPassword = (email: string, password: string) => {
-  return createUserWithEmailAndPassword(auth, email, password) // This is the function that creates a new user
+export const signUpWithEmailAndPassword = (newUserData: NewUserFormData) => {
+  return createUserWithEmailAndPassword(auth, newUserData.email, newUserData.password) // This is the function that creates a new user
     .then((userCredential) => {
-      // Signed up 
+      console.log(newUserData + 'Юзер зареєструвався за допомогою email та пароля')
+      addNewUserToBase(userCredential.user.uid, newUserData)
+      // Signed up
       const user = userCredential.user;
       // ...
     })

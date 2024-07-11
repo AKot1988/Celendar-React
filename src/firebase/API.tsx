@@ -1,14 +1,19 @@
 import { collection, getDocs, doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from './firebase';
+import { NewUserFormData  } from './types.tsx';
+import { ROLES } from "../router/types";
 
 export const usersCollectionRef = collection(db, 'users'); //отримання колекції юзерів
 
-export const addNewUser = async function(UID: string) {
+export const addNewUserToBase = async function(UID: string, userData: NewUserFormData) {
     setDoc(doc(usersCollectionRef, UID), {
     created_at: new Date(),
-    email: 'email',
-    name: 'name',
-    password: 'password',
+    email: userData.email,
+    name: userData.name,
+    password: userData.password,
+    birthdate: userData.birthdate,
+    gender: userData.gender,
+    role: ROLES.AUTHORIZED_USER,
     updated_at: new Date()
   })
 }

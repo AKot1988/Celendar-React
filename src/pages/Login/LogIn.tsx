@@ -1,12 +1,26 @@
 import { FC, useState } from 'react';
 import { googleSignIn, googleSignOut, logInWithEmailAndPassword, signUpWithEmailAndPassword } from '../../firebase/auth';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
 import { ActionFunctionArgs, redirect } from 'react-router-dom'
 import { CustomNavLink } from '../../components/index.tsx';
 import { UniversalModal, UniversalForm } from "../../components";
 import { LoginProps, logInData, newUserFormData } from './helper';
 import { AUTH_USER_ROUTES } from '../../router/routesNames';
 import classes from './LogIn.module.scss';
+
+export const collectFormDataSignUp = async ({request}: ActionFunctionArgs) => {
+  const formData = await request.formData();
+  const newUserData = {
+    username: formData.get('username') as string,
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+    birthdate: formData.get('birthdate') as string,
+    gender: formData.get('gender') as string,
+  }
+  console.log(newUserData)
+  signUpWithEmailAndPassword(newUserData);
+  return redirect(AUTH_USER_ROUTES.CALENDAR)
+}
+
 
 export const collectFormDataLogIn = async ({request}: ActionFunctionArgs) => {
   console.log(request)
@@ -19,18 +33,6 @@ export const collectFormDataLogIn = async ({request}: ActionFunctionArgs) => {
   return redirect(AUTH_USER_ROUTES.CALENDAR)
 }
 
-export const collectFormDataSignUp = async ({request}: ActionFunctionArgs) => {
-  const formData = await request.formData();
-  const newUserData = {
-    username: formData.get('username') as string,
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-    birthdate: formData.get('birthdate') as string,
-    gender: formData.get('gender') as string,
-  }
-  await signUpWithEmailAndPassword(newUserData.email, newUserData.password);
-  return redirect(AUTH_USER_ROUTES.CALENDAR)
-}
 
 const LogIn: FC = () => {
   const [isOpenLogIn, setVisibleLogIn] = useState(false);
