@@ -12,7 +12,7 @@ const Layout: FC = () => {
   useEffect(() => {
     setHeaderData(auth.currentUser ? headerProps.authorizedUser : headerProps.guest);
   }, [auth.currentUser]);
-  const handleAuthClick = auth.currentUser ? () => logOut() : () => console.log('user is not logged in');
+  const handleAuthClick = auth.currentUser ? () => logOut() : () => null;
 
   return (
     <>

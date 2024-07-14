@@ -1,7 +1,6 @@
 import { googleSignIn, googleSignOut, logInWithEmailAndPassword, signUpWithEmailAndPassword } from '../../firebase/auth';
 import { Method, FormProps } from '../../components/UniversalForm/types';
-import { InputType } from '../../components/Input/type';
-import { UniversalModal, UniversalForm } from "../../components";
+import { InputType, FormType } from '../../components/Input/type';
 import { AUTH_USER_ROUTES, COMMON_ROUTES } from '../../router/routesNames';
 
 
@@ -18,7 +17,7 @@ export const newUserFormData: FormProps = {
       id: "1",
       type: InputType.TEXT,
       placeHolder: "Enter your username",
-      name: "username"
+      name: "name"
     },
     {
       id: "2",
@@ -59,6 +58,12 @@ export const newUserFormData: FormProps = {
           label: "Неоприділився"
         },
       ]
+    },
+    {
+      id: "6",
+      type: InputType.HIDDEN,
+      value: FormType.SIGNUP,
+      name: "formType"
     }
   ],
   button: {
@@ -85,6 +90,12 @@ export const logInData: FormProps = {
       placeHolder: "Enter your password",
       name: "password",
       required: true
+    },
+    {
+      id: "3",
+      type: InputType.HIDDEN,
+      value: FormType.LOGIN,
+      name: "formType"
     }
   ],
   button: {
@@ -92,21 +103,4 @@ export const logInData: FormProps = {
     clickHandler: () => console.log("Submit button clicked")
   }
 
-}
-
-export const handleAuthOptions = {
-  GOOGLEAUTH: () => {
-    googleSignIn()
-  },
-  EMAILAUTH: (setVisible) => {
-    return(
-      <UniversalModal content={<UniversalForm data={logInData} />} setVisible={setVisible} isOpen={true}/>
-    )
-  },
-  EMAILSIGNUP: (setVisible) => {
-    return (
-      <UniversalModal content={<UniversalForm data={newUserFormData} />} setVisible={setVisible} isOpen={true}/>
-    )
-    console.log('signin')
-  }
 }

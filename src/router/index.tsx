@@ -10,12 +10,13 @@ import { onAuthStateChanged } from "firebase/auth"
 
 
 const createRouterByRole = (role: ROLES) => {
+  console.log('user role switced to ', role, 'routes are being created')
   switch(role) {
     case ROLES.ADMIN:
       return [...adminRouter, ...commonRouter];
     case ROLES.AUTHORIZED_USER:
       return [...commonRouter, ...authorizedUserRouter];
-    case ROLES.GUEST:
+    case ROLES.GUEST || null || undefined:
       return [...commonRouter];
     default:
       return [...commonRouter];
@@ -26,8 +27,8 @@ const createRouterByRole = (role: ROLES) => {
 const AppRouter = () => {
   const role = auth.currentUser ? ROLES.AUTHORIZED_USER : ROLES.GUEST;
   const [currentRole, setRole] = useState<ROLES>(role);
-  console.log("currentRole ", currentRole, auth.currentUser)
-  useEffect(() => {onAuthStateChanged(auth, (currentUser)=>{setRole(currentUser? ROLES.AUTHORIZED_USER : ROLES.GUEST)})}, [auth.currentUser]);
+  // useEffect(()=>{setRole(role)}, [auth.currentUser])
+  useEffect(() => {onAuthStateChanged(auth, (currentUser)=>{setRole(currentUser? ROLES.AUTHORIZED_USER : ROLES.GUEST), console.log('user role has been changed')})}, [auth.currentUser]);
   const router = createBrowserRouter([{
     path: "/",
     element: <Layout/>,

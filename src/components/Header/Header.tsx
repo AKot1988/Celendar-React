@@ -27,7 +27,7 @@ const Header: FC<HeaderProps> = ({logo, navMenu, onClick=()=>{}}) => {
               ))}
             </nav>
             {auth.currentUser && <img src={user?.photoURL} alt="user" className={classes.headerNavUserLogo} />}
-            {auth.currentUser? <CustomNavLink title={'LogOut'} path='/home' className={classes.headerNavButton} onClick={onClick}/>:
+            {auth.currentUser? <CustomNavLink title={'LogOut'} path='/' className={classes.headerNavButton} onClick={onClick}/>:
             <CustomNavLink title={'Login'} path='/login' className={classes.headerNavButton} onClick={onClick}/> }
           </div>
           </header>

@@ -5,14 +5,43 @@ import { NewUserFormData } from './types.tsx'
 
 /**
  * Function creates a new user and automatically signs in with new user credentials.
- *
- * @param {string} firstName - new user's first name;
- * @param {string} lastName - new user's last name;
- * @param {ROLES} role - new user's role in the system (admin or garson);
- * @param {string} email - new user's e-mail;
- * @param {string} password - new user's password;
- */
+*
+* @param {string} firstName - new user's first name;
+* @param {string} lastName - new user's last name;
+* @param {ROLES} role - new user's role in the system (admin or garson);
+* @param {string} email - new user's e-mail;
+* @param {string} password - new user's password;
+*/
 
+export const signUpWithEmailAndPassword = (newUserData: NewUserFormData) => {
+  return createUserWithEmailAndPassword(auth, newUserData.email, newUserData.password) // This is the function that creates a new user
+    .then((userCredential) => {
+      console.log(newUserData, userCredential.user.uid, 'Юзер зареєструвався за допомогою email та пароля')
+      addNewUserToBase(userCredential.user.uid, newUserData)
+      // Signed up
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
+}
+
+
+export const logInWithEmailAndPassword = (email: string, password: string) => {
+  signInWithEmailAndPassword(auth, email, password) // This is the function that signs in a user
+    .then((userCredential) => {
+      console.log(userCredential, 'Юзер зайшов за допомогою email та пароля')
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
+}
 
 
 
@@ -54,35 +83,6 @@ export const googleSignOut = async () => {
 }
 
 
-export const signUpWithEmailAndPassword = (newUserData: NewUserFormData) => {
-  return createUserWithEmailAndPassword(auth, newUserData.email, newUserData.password) // This is the function that creates a new user
-    .then((userCredential) => {
-      console.log(newUserData + 'Юзер зареєструвався за допомогою email та пароля')
-      addNewUserToBase(userCredential.user.uid, newUserData)
-      // Signed up
-      const user = userCredential.user;
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
-    });
-}
-
-
-export const logInWithEmailAndPassword = (email: string, password: string) => {
-  signInWithEmailAndPassword(auth, email, password) // This is the function that signs in a user
-    .then((userCredential) => {
-      console.log(userCredential + 'Юзер зайшов за допомогою email та пароля')
-      const user = userCredential.user;
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
-}
 
 /**
  * Function signs out current user.

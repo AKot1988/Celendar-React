@@ -6,7 +6,8 @@ import { ROLES } from "../router/types";
 export const usersCollectionRef = collection(db, 'users'); //отримання колекції юзерів
 
 export const addNewUserToBase = async function(UID: string, userData: NewUserFormData) {
-    setDoc(doc(usersCollectionRef, UID), {
+  console.log(userData)
+    await setDoc(doc(usersCollectionRef, UID), {
     created_at: new Date(),
     email: userData.email,
     name: userData.name,

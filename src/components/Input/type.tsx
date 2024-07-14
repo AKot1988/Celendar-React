@@ -10,12 +10,18 @@ export enum InputType {
   SUBMIT = 'submit',
   RESET = 'reset',
   BUTTON = 'button',
-  SELECT = 'select'
+  SELECT = 'select',
+  HIDDEN = 'hidden',
 }
 
 export type SelectOption = {
   label: string;
   value: string;
+}
+
+export enum FormType {
+  SIGNUP = 'signUp',
+  LOGIN = 'logIn',
 }
 
 export type InputElementProps = {
@@ -26,6 +32,6 @@ export type InputElementProps = {
   required?: boolean | undefined;
   options?: SelectOption[];
   onChange?: () => void;
-  value?: string;
+  value?: string | FormType.LOGIN | FormType.SIGNUP;
   label?: string;
 }

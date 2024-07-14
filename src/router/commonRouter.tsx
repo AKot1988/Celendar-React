@@ -1,6 +1,8 @@
 import { Home, About, Contact, Not_Found, LogIn } from "../pages";
 import { COMMON_ROUTES } from "./routesNames";
-import { collectFormDataLogIn, collectFormDataSignUp } from "../pages/Login/LogIn";
+import { authType } from "../pages/Login/LogIn";
+
+
 
 
 export const commonRouter = [
@@ -23,6 +25,6 @@ export const commonRouter = [
   {
     path: COMMON_ROUTES.LOGIN,
     element: <LogIn/>,
-    action: collectFormDataSignUp,
+    action: authType
   }
 ]
