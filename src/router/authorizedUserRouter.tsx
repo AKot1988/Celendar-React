@@ -6,7 +6,7 @@ export const authorizedUserRouter = [
   {
     path: AUTH_USER_ROUTES.CALENDAR,
     element: <Calendar/>,
-    loader : mockTimeOutFunction
+    // loader : mockTimeOutFunction
   },
   {
     path: AUTH_USER_ROUTES.DAY,
