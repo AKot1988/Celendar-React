@@ -23,7 +23,6 @@ const CalendarPage: FC = () => {
       <Calendar
       onClickDay={(value, event) =>
           {
-            console.log('Clicked day: ', value)
             setDayContent(value.toString())
             setDayVisible(true)
           }
