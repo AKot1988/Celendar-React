@@ -1,0 +1,13 @@
+// .calendarWrapper {
+//   height: 500px;
+//   width: 1000px;
+// }
+
+.calendarTile {
+  height: 100px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,21 @@
+.addButton {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    background-color: #D9D9D9;
+    border-color: transparent;
+    border-radius: 0px;
+    transition: all 0.2s;
+    &:hover {
+        border: 1px solid #787878;
+    }
+    &:focus,
+    &:focus-visible {
+        background-color: #787878;
+        outline: none;
+    }
+}

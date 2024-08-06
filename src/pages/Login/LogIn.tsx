@@ -43,8 +43,8 @@ const LogIn: FC = () => {
           <CustomNavLink title="Login by google" path='' className={classes.contentButtonsButtonGoogle} onClick={googleSignIn} />
           <CustomNavLink title="Login by e-mail" path='' className={classes.contentButtonsButtonEmailLogIn} onClick={()=>{setVisibleLogIn(true), authType}} />
           <CustomNavLink title="SignUp with e-mail" path='' className={classes.contentButtonsButtonEmailSignUp} onClick={()=>{setVisibleSignUp(true), authType}} />
-          {isOpenLogIn && <UniversalModal content={<UniversalForm data={logInData} />} setVisible={setVisibleLogIn} isOpen={true} />}
-          {isOpenSignUp && <UniversalModal content={<UniversalForm data={newUserFormData} />} setVisible={setVisibleSignUp} isOpen={true} />}
+          {isOpenLogIn && <UniversalModal content={<UniversalForm data={logInData} />} setVisible={setVisibleLogIn} visible={true} title={''}/>}
+          {isOpenSignUp && <UniversalModal content={<UniversalForm data={newUserFormData} />} setVisible={setVisibleSignUp} visible={true} title={''}/>}
         </div>
       </div>
   );

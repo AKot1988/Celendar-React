@@ -1,25 +1,21 @@
-import { FC, ReactNode, SetStateAction, Dispatch } from 'react'
+import { FC } from 'react'
 import { CloseBtn } from './CloseBtn'
+import { ModalProps } from './helper'
 import classes from './UniversalModal.module.scss'
 
-type ModalProps = {
-    content: ReactNode
-    isOpen: boolean
-    setVisible: Dispatch<SetStateAction<boolean>>
-}
+const UniversalModal:FC<ModalProps> = ({ content, title, visible, setVisible  }) => {
 
-const UniversalModal:FC<ModalProps> = (props) => {
-    const { content, isOpen, setVisible  } = props
+    const rootClasses: string[] = [classes.modal, visible ? classes.active : '']
     
-    const rootClasses = [classes.modal]
-    isOpen ? rootClasses.push(classes.active) : null
-
 	return (
         <div className={rootClasses.join(' ')} onClick={() => setVisible(false)}>
             <div className={classes.modalContent} onClick={(e) => e.stopPropagation()}>
                 <div className={classes.modalBtnClose} onClick={() => setVisible(false)}>
                     {CloseBtn.closeIcon}
                 </div>
+                <h2 className={classes.modalTitle}>
+                    {title}
+                </h2>
                 {content}
             </div>
         </div>
