@@ -25,7 +25,7 @@ const Input: FC<InputElementProps> = ({
       <p className={classes.error}>{errorMessage}</p>
       {type === InputType.SELECT ? (
         <select name={name} className={classes.inputItem} required={required}>
-          <option className={classes.inputItem} disabled selected value={value}>
+          <option className={classes.inputItem} disabled value={value}>
             {placeHolder}
           </option>
           {options.map((option) => (
@@ -45,6 +45,7 @@ const Input: FC<InputElementProps> = ({
           onInput={(ev) => handleOnChange(ev)}
           className={classes.inputItem}
           required={required}
+          value={value}
         />
       )}
     </label>

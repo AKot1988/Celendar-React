@@ -1,106 +1,108 @@
-import { googleSignIn, googleSignOut, logInWithEmailAndPassword, signUpWithEmailAndPassword } from '../../firebase/auth';
+import {
+  googleSignIn,
+  googleSignOut,
+  logInWithEmailAndPassword,
+  signUpWithEmailAndPassword,
+} from '../../firebase/auth';
 import { Method, FormProps } from '../../components/UniversalForm/types';
 import { InputType, FormType } from '../../components/Input/type';
 import { AUTH_USER_ROUTES, COMMON_ROUTES } from '../../router/routesNames';
 
-
 export type LoginProps = {
   closeModal: () => void;
-}
+};
 
 export const newUserFormData: FormProps = {
-  title: "Новий користувач",
+  title: 'Новий користувач',
   action: COMMON_ROUTES.LOGIN,
   method: Method.POST,
   inputs: [
     {
-      id: "1",
+      id: '1',
       type: InputType.TEXT,
-      placeHolder: "Enter your username",
-      name: "name"
+      placeHolder: 'Enter your username',
+      name: 'name',
     },
     {
-      id: "2",
+      id: '2',
       type: InputType.PASSWORD,
-      placeHolder: "Enter your password",
-      name: "password",
-      required: true
+      placeHolder: 'Enter your password',
+      name: 'password',
+      required: true,
     },
     {
-      id: "3",
+      id: '3',
       type: InputType.EMAIL,
-      placeHolder: "Enter your email",
-      name: "email"
+      placeHolder: 'Enter your email',
+      name: 'email',
     },
     {
-      id: "4",
+      id: '4',
       type: InputType.DATE,
-      placeHolder: "Select your birthdate",
-      name: "birthdate"
+      placeHolder: 'Select your birthdate',
+      name: 'birthdate',
     },
     {
-      id: "5",
+      id: '5',
       type: InputType.SELECT,
-      placeHolder: "Оберіть стать",
-      value: "Оберіть стать",
-      name: "gender",
+      placeHolder: 'Оберіть стать',
+      value: 'Оберіть стать',
+      name: 'gender',
       options: [
         {
-          value: "Буратіно",
-          label: "Буратіно"
+          value: 'Чоловік',
+          label: 'Чоловік',
         },
         {
-          value: "Мальвіна",
-          label: "Мальвіна"
+          value: 'Жінка',
+          label: 'Жінка',
         },
         {
-          value: "Неоприділився",
-          label: "Неоприділився"
+          value: 'Неоприділився',
+          label: 'Неоприділився',
         },
-      ]
+      ],
     },
     {
-      id: "6",
+      id: '6',
       type: InputType.HIDDEN,
       value: FormType.SIGNUP,
-      name: "formType"
-    }
+      name: 'formType',
+    },
   ],
   button: {
-    text: "Зарееструватись",
-    clickHandler: () => console.log('Submit button clicked')
-  }
-
-}
+    text: 'Зарееструватись',
+    clickHandler: () => console.log('Submit button clicked'),
+  },
+};
 
 export const logInData: FormProps = {
-  title: "Введіть дані для входу",
+  title: 'Введіть дані для входу',
   action: COMMON_ROUTES.LOGIN,
   method: Method.POST,
   inputs: [
     {
-      id: "1",
+      id: '1',
       type: InputType.EMAIL,
-      placeHolder: "Enter your email",
-      name: "email"
+      placeHolder: 'Enter your email',
+      name: 'email',
     },
     {
-      id: "2",
+      id: '2',
       type: InputType.PASSWORD,
-      placeHolder: "Enter your password",
-      name: "password",
-      required: true
+      placeHolder: 'Enter your password',
+      name: 'password',
+      required: true,
     },
     {
-      id: "3",
+      id: '3',
       type: InputType.HIDDEN,
       value: FormType.LOGIN,
-      name: "formType"
-    }
+      name: 'formType',
+    },
   ],
   button: {
-    text: "Увійти",
-    clickHandler: () => console.log("Submit button clicked")
-  }
-
-}
+    text: 'Увійти',
+    clickHandler: () => console.log('Submit button clicked'),
+  },
+};

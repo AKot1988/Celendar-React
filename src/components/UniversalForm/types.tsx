@@ -1,6 +1,5 @@
 import { InputElementProps } from '../Input/type';
 import { COMMON_ROUTES, AUTH_USER_ROUTES, ADMIN_ROUTES } from '../../router/routesNames';
-import { Auth } from 'firebase/auth';
 
 export enum Method {
    POST = 'post',

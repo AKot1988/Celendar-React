@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
-import { app, googleAuthProvider, auth } from './firebase'
+import { googleAuthProvider, auth } from './firebase'
 import { addNewUserToBase } from './API'
 import { NewUserFormData } from './types.tsx'
 
@@ -39,6 +39,7 @@ export const logInWithEmailAndPassword = (email: string, password: string) => {
     })
     .catch((error) => {
       const errorCode = error.code;
+      console.log("Сталась помилка аутентифікації", errorCode)
       const errorMessage = error.message;
     });
 }

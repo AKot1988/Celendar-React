@@ -7,7 +7,6 @@ import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
 import { DateRangeCalendar } from '@mui/x-date-pickers-pro/DateRangeCalendar';
 
 const date = new Date();
-console.log(date);
 
 const BasicDateRangeCalendar: FC = () => {
   const [value, setValue] = React.useState<DateRange<Dayjs>>([
@@ -20,11 +19,13 @@ const BasicDateRangeCalendar: FC = () => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DateRangeCalendar']}>
-      <DateRangeCalendar value={value} onChange={(newValue) => setValue(newValue)}
-          />
+        <DateRangeCalendar
+          value={value}
+          onChange={(newValue) => setValue(newValue)}
+        />
       </DemoContainer>
     </LocalizationProvider>
   );
-}
+};
 
 export default BasicDateRangeCalendar;
