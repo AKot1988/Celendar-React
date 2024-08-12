@@ -5,7 +5,10 @@ import { ROLES } from '../router/types';
 
 export const usersCollectionRef = collection(db, 'users'); //отримання колекції юзерів
 export const eventsCollectionRef = collection(db, 'events'); //отримання подій юзерів
-export const userEventsCollectionRef = collection(db, 'events', auth.currentUser?.uid as string); //отримання подій конкретного юзера
+// export const dayTasksCollectionRef = collection(db, 'events', '2024', "Aug", '01', 'taskList
+//   '); //отримання подій юзерів
+// console.log(dayTasksCollectionRef)
+// // export const docRefUserEvents = doc(eventsCollectionRef, auth.currentUser?.uid);
 
 export const addNewUserToBase = async function (
   UID: string,
@@ -88,10 +91,12 @@ export const checkDoesUserHaveEvents = async function () {
   }
 }
 
-const setNewEvent = async function (data: NewEventData) {
+const setNewEvent = async function (year, mounth, day, data: NewEventData) {
   //Створення нової події
   console.log('створюємо подію')
-  await setDoc(doc(userEventsCollectionRef), {
+  const taskRef = doc(collection(db, 'events'), year, mounth, day);
+  console.log(taskRef)
+  await setDoc(taskRef, {
     content: data.content,
     beggining: data.begin,
     end: data.end,
@@ -102,9 +107,24 @@ const setNewEvent = async function (data: NewEventData) {
   });
 }
 
-await setNewEvent({
+const setNewEvent = async function (year, mounth, day, data: NewEventData) {
+const docRef = doc(collection(db, 'events'), auth.currentUser.uid);
+
+
+  await setDoc(docRef, {
+    content: data.content,
+    beginning: data.begin,
+    end: data.end,
+    owner: data.owner,
+    title: data.title,
+    type: data.type,
+    priority: data.priority,
+  });
+}
+
+await setNewEvent('2024', 'Aug', '11', {
   title: 'title',
-  begin: 'beggining',
+  begin: 'begin',
   content: 'content',
   end: 'end',
   owner: 'owner',
