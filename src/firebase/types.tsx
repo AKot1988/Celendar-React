@@ -8,7 +8,29 @@ export enum PRIORITY {
   HIGH = 'high',
 }
 
+export enum MOUNTHS {
+  Jan = 'Jan',
+  Feb = 'Feb',
+  Mar = 'Mar',
+  Apr = 'Apr',
+  May = 'May',
+  Jun = 'Jun',
+  Jul = 'Jul',
+  Aug = 'Aug',
+  Sep = 'Sep',
+  Oct = 'Oct',
+  Nov = 'Nov',
+  Dec = 'Dec',
+}
+
+export type DatePattern = {
+  mounth: MOUNTHS,
+  year: string,
+  day: string,
+}
+
 export type NewEventData = {
+  date: DatePattern,
   title?: string,
   begin: string,
   end: string,
@@ -16,4 +38,5 @@ export type NewEventData = {
   owner: string,
   type?: string,
   priority?: PRIORITY,
+  id: string,
 }

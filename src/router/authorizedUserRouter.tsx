@@ -1,6 +1,7 @@
 import { Calendar, DayPage, Task, Profile } from '../pages';
 import { AUTH_USER_ROUTES } from './routesNames';
 import { mockTimeOutFunction } from '../pages/DayPage/DayPage';
+import { getEventsByDay } from "../firebase/API";
 
 export const authorizedUserRouter = [
   {
@@ -11,7 +12,7 @@ export const authorizedUserRouter = [
       {
         path: `${AUTH_USER_ROUTES.CALENDAR}/:currentUser/:day`,
         element: <DayPage />,
-        loader: mockTimeOutFunction,
+        // loader: getEventsByDay,
       },
     ],
   },

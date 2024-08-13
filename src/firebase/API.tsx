@@ -1,6 +1,14 @@
-import { collection, getDocs, doc, getDoc, setDoc, query, where } from 'firebase/firestore';
+import {
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  setDoc,
+  query,
+  where,
+} from 'firebase/firestore';
 import { auth, db } from './firebase';
-import { NewUserFormData, NewEventData, PRIORITY } from './types.tsx';
+import { NewUserFormData, NewEventData, DatePattern, MOUNTHS } from './types.tsx';
 import { ROLES } from '../router/types';
 
 export const usersCollectionRef = collection(db, 'users'); //отримання колекції юзерів
@@ -58,76 +66,84 @@ export const getUser = async function () {
   return userRef;
 };
 
-
-const q = query(collection(db, "cities"), where("capital", "==", true));
+const q = query(collection(db, 'cities'), where('capital', '==', true));
 
 const querySnapshot = await getDocs(q);
 querySnapshot.forEach((doc) => {
   // doc.data() is never undefined for query doc snapshots
-  console.log(doc.id, " => ", doc.data());
+  console.log(doc.id, ' => ', doc.data());
 });
 
 export const addReferenseToUserEvents = async function () {
   //Створення посилання на юзера у Колекції Юзерів
   const userReference = doc(usersCollectionRef, auth.currentUser?.uid);
   console.log(userReference);
-  await setDoc(doc(db, "events", auth.currentUser?.uid), {userReference })
-}
+  await setDoc(doc(db, 'events', auth.currentUser?.uid), { userReference });
+};
 
 export const checkDoesUserHaveEvents = async function () {
   const arr = [];
-  const  eventsQuery = await getDocs(collection(db, 'events'));
+  const eventsQuery = await getDocs(collection(db, 'events'));
   console.log(eventsQuery);
   eventsQuery.forEach((docRef) => {
-    console.log(docRef)
-    if(docRef.id === auth.currentUser?.uid) {
-      console.log('User has events')
-      arr.push(docRef)
+    console.log(docRef);
+    if (docRef.id === auth.currentUser?.uid) {
+      console.log('User has events');
+      arr.push(docRef);
     }
   });
-  if(arr.length === 0) {
-    console.log('User has no events')
+  if (arr.length === 0) {
+    console.log('User has no events');
     await addReferenseToUserEvents();
+  }
+};
+
+// const setNewEvent = async function (year, mounth, day, data: NewEventData) {
+//   //Створення нової події
+//   console.log('створюємо подію')
+//   const taskRef = doc(collection(db, 'events'), year, mounth, day);
+//   console.log(taskRef)
+//   await setDoc(taskRef, {
+//     content: data.content,
+//     beggining: data.begin,
+//     end: data.end,
+//     owner: data.owner,
+//     title: data.title,
+//     type: data.type,
+//     priority: data.priority,
+//   });
+// }
+
+
+//Функція створення нового івенту
+export const setNewEvent = async function (data: NewEventData) {
+  const docRef = doc(
+    collection(db, 'events'),
+    auth.currentUser?.uid,
+    data.date.year,
+    data.date.mounth
+  );
+
+  const docSnap = await getDoc(docRef);
+  const docData = docSnap.data();
+  if (!docData) {
+    await setDoc(docRef, { [data.date.day]: { taskList: [data] } });
+  } else {
+    docData[data.date.day].taskList.push(data);
+    await setDoc(docRef, docData)
+  }
+};
+
+// Функція отримання івентів користувача конкретного дня (повертає масив івентів конкретного дня)
+export const getEventsByDay = async function (date: DatePattern) {
+  const docRef = doc(eventsCollectionRef, auth.currentUser?.uid, date.year, date.mounth);
+  const docSnap = await getDoc(docRef);
+  const docData = docSnap.data();
+  if (!docData) {
+    return [];
+  } else {
+    return docData[date.day].taskList;
   }
 }
 
-const setNewEvent = async function (year, mounth, day, data: NewEventData) {
-  //Створення нової події
-  console.log('створюємо подію')
-  const taskRef = doc(collection(db, 'events'), year, mounth, day);
-  console.log(taskRef)
-  await setDoc(taskRef, {
-    content: data.content,
-    beggining: data.begin,
-    end: data.end,
-    owner: data.owner,
-    title: data.title,
-    type: data.type,
-    priority: data.priority,
-  });
-}
-
-const setNewEvent = async function (year, mounth, day, data: NewEventData) {
-const docRef = doc(collection(db, 'events'), auth.currentUser.uid);
-
-
-  await setDoc(docRef, {
-    content: data.content,
-    beginning: data.begin,
-    end: data.end,
-    owner: data.owner,
-    title: data.title,
-    type: data.type,
-    priority: data.priority,
-  });
-}
-
-await setNewEvent('2024', 'Aug', '11', {
-  title: 'title',
-  begin: 'begin',
-  content: 'content',
-  end: 'end',
-  owner: 'owner',
-  type: 'type',
-  priority: PRIORITY.HIGH,
-})
+console.log( await getEventsByDay({ mounth: MOUNTHS.Aug, year: '2024', day: '14' }));

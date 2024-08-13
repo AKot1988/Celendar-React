@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+
 import classes from './Day.module.scss';
 
 type DayDataProps = {

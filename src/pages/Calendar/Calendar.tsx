@@ -9,7 +9,7 @@ import Calendar from "react-calendar"
 import classes from "./Calendar.module.scss";
 import 'react-calendar/dist/Calendar.css';
 
-checkDoesUserHaveEvents();
+// checkDoesUserHaveEvents();
 
 const CalendarPage: FC = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const CalendarPage: FC = () => {
       <Calendar
       onClickDay={(value, event) =>
           {
-            const dayURL = value.toString().split(' ').splice(1, 3).join('')
+            const dayURL = value.toString().split(' ').splice(1, 3).join('_')
             setDayContent(value.toString())
             setDayVisible(true)
             navigate(`${AUTH_USER_ROUTES.CALENDAR}/${auth.currentUser?.uid}/${dayURL}`)

@@ -43,7 +43,7 @@ export const authType = async ({ request }: ActionFunctionArgs) => {
     }
   };
 
-  await checkDoesUserHaveEvents();
+  // await checkDoesUserHaveEvents();
   
 const LogIn: FC = () => {
   const [isOpenLogIn, setVisibleLogIn] = useState(false);
