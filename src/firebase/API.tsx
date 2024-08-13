@@ -8,7 +8,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { auth, db } from './firebase';
-import { NewUserFormData, NewEventData, DatePattern, MOUNTHS } from './types.tsx';
+import { NewUserFormData, NewEventData, DatePattern, MOUNTHS, PRIORITY } from './types.tsx';
 import { ROLES } from '../router/types';
 
 export const usersCollectionRef = collection(db, 'users'); //отримання колекції юзерів
@@ -126,24 +126,42 @@ export const setNewEvent = async function (data: NewEventData) {
 
   const docSnap = await getDoc(docRef);
   const docData = docSnap.data();
-  if (!docData) {
-    await setDoc(docRef, { [data.date.day]: { taskList: [data] } });
+  if (!docData[data.date.day] && docData!==undefined) {
+    docData[data.date.day] = { taskList: [data] }
+    await setDoc(docRef, docData);
   } else {
     docData[data.date.day].taskList.push(data);
     await setDoc(docRef, docData)
   }
 };
 
+await setNewEvent({
+  date: {
+    mounth: MOUNTHS.Aug,
+    year: '2024',
+    day: '17',
+  },
+  title: 'Project Meeting',
+  begin: '10:00 AM',
+  end: '11:00 AM',
+  content: 'Discussion on the new project roadmap and milestones.',
+  owner: 'John Doe',
+  type: 'Meeting',
+  priority: PRIORITY.HIGH,
+  id: 'event-1234',
+})
+
 // Функція отримання івентів користувача конкретного дня (повертає масив івентів конкретного дня)
 export const getEventsByDay = async function (date: DatePattern) {
   const docRef = doc(eventsCollectionRef, auth.currentUser?.uid, date.year, date.mounth);
   const docSnap = await getDoc(docRef);
   const docData = docSnap.data();
-  if (!docData) {
+  console.log(docData);
+  if (!docData[date.day]) {
     return [];
   } else {
     return docData[date.day].taskList;
   }
 }
 
-console.log( await getEventsByDay({ mounth: MOUNTHS.Aug, year: '2024', day: '14' }));
+// console.log( await getEventsByDay({ mounth: MOUNTHS.Aug, year: '2024', day: '14' }));
