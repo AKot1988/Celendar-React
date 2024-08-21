@@ -42,8 +42,6 @@ export const authType = async ({ request }: ActionFunctionArgs) => {
       throw new Error('Unknown/empty form type');
     }
   };
-
-  // await checkDoesUserHaveEvents();
   
 const LogIn: FC = () => {
   const [isOpenLogIn, setVisibleLogIn] = useState(false);

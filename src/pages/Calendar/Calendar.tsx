@@ -18,7 +18,6 @@ let dayArg: DatePattern  = {
 }
 export const triggerGetDayEvents = async () => {
   const dayData = await getEventsByDay(dayArg);
-  console.log(dayData)
   return dayData;
 }
 
@@ -37,15 +36,13 @@ const CalendarPage: FC = () => {
           {
             const dayURL = value.toString().split(' ').splice(1, 3).join('_')
             setDayContent(value.toString())
-            setDayVisible(true)
+            setDayVisible(!dayVisible)
             const currentDayDatePatern: DatePattern = {
               year: dayURL?.split('_')[2] as string,
               mounth: dayURL?.split('_')[0] as MOUNTHS,
               day: dayURL?.split('_')[1] as string,
             }
             dayArg = currentDayDatePatern
-            console.log(dayArg)
-            // triggerGetDayEvents(currentDayDatePatern)
             navigate(`${AUTH_USER_ROUTES.CALENDAR}/${auth.currentUser?.uid}/${dayURL}`)
           }
         }

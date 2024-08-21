@@ -1,4 +1,6 @@
 import { FC, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { AUTH_USER_ROUTES } from "../../router/routesNames";
 import { setNewEvent } from '../../firebase/API';
 import { MOUNTHS, PRIORITY } from '../../firebase/types';
 import { AddButton } from '../index.tsx';
@@ -16,28 +18,32 @@ export type DayDataProps = {
 };
 
 const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
-  return content ? (
+  const { currentUser, day } = useParams();
+  console.log(day);
+  
+  return content.length > 0 ? (
     <div className={classes.day}>
       <AddButton
-        action={async() => {
+        action={async () => {
           await setNewEvent({
             date: {
-              mounth: MOUNTHS.Aug,
-              year: '2024',
-              day: '11',
+              mounth: day?.split('_')[0] as MOUNTHS,
+              year: day?.split('_')[2] as string,
+              day: day?.split('_')[1] as string,
             },
             title: 'Project Meeting',
             begin: '10:00 AM',
             end: '11:00 AM',
             content: 'Discussion on the new project roadmap and milestones.',
-            owner: 'John Doe',
+            owner: currentUser as string,
             type: 'Meeting',
             priority: PRIORITY.HIGH,
             id: new Date().getTime().toString(),
           });
           console.log('Шляпа');
         }}
-        to=""
+        // to={`${AUTH_USER_ROUTES.CALENDAR}/:currentUser/:day`}
+        to=''
       />
       {content.map((item: DayDataProps) => (
         <div key={item.id} className={classes.dayWrapper}>
@@ -54,7 +60,30 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
       ))}
     </div>
   ) : (
-    <p>Дані відсутні</p>
+    <>
+      <AddButton
+        action={async () => {
+          await setNewEvent({
+            date: {
+              mounth: day?.split('_')[0] as MOUNTHS,
+              year: day?.split('_')[2] as string,
+              day: day?.split('_')[1] as string,
+            },
+            title: 'Project Meeting',
+            begin: '10:00 AM',
+            end: '11:00 AM',
+            content: 'Discussion on the new project roadmap and milestones.',
+            owner: currentUser as string,
+            type: 'Meeting',
+            priority: PRIORITY.HIGH,
+            id: new Date().getTime().toString(),
+          });
+          console.log('Шляпа');
+        }}
+        to=""
+      />
+      <p>На цей день задачі відсутні</p>
+    </>
   );
 };
 

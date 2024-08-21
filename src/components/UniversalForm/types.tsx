@@ -10,7 +10,7 @@ export enum Method {
 
 export type FormProps = {
    title: string;
-   action: COMMON_ROUTES | AUTH_USER_ROUTES | ADMIN_ROUTES;
+   action: COMMON_ROUTES | AUTH_USER_ROUTES | ADMIN_ROUTES | string;
    method: Method;
    inputs: InputElementProps[];
    button: 

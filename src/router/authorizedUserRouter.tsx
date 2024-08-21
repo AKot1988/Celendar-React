@@ -1,7 +1,5 @@
-import { Calendar, DayPage, Task, Profile } from '../pages';
-import { AUTH_USER_ROUTES } from './routesNames';
-import { mockTimeOutFunction } from '../pages/DayPage/DayPage';
-import { getEventsByDay } from "../firebase/API";
+import { Calendar, DayPage, Task, Profile, NewTask } from "../pages";
+import { AUTH_USER_ROUTES } from "./routesNames";
 import { triggerGetDayEvents } from "../pages/Calendar/Calendar";
 
 export const authorizedUserRouter = [
@@ -14,6 +12,13 @@ export const authorizedUserRouter = [
         path: `${AUTH_USER_ROUTES.CALENDAR}/:currentUser/:day`,
         element: <DayPage />,
         loader: triggerGetDayEvents,
+        children: [
+          {
+            path: `${AUTH_USER_ROUTES.CALENDAR}/:currentUser/:day/newTask`,
+            action : () => console.log('Create task --> function directly on route'),
+            element: <NewTask />,
+          },
+        ],
       },
     ],
   },
