@@ -5,14 +5,21 @@ import { triggerGetDayEvents } from "../pages/Calendar/Calendar";
 export const authorizedUserRouter = [
   {
     path: AUTH_USER_ROUTES.CALENDAR,
-    element: <Calendar />,
+    // element: <Calendar />,
     // loader : mockTimeOutFunction
     children: [
       {
+        index: true,
+        element: <Calendar />,
+      },
+      {
         path: `${AUTH_USER_ROUTES.CALENDAR}/:currentUser/:day`,
-        element: <DayPage />,
-        loader: triggerGetDayEvents,
         children: [
+          {
+            index: true,
+            element: <DayPage />,
+            loader: triggerGetDayEvents,
+          },
           {
             path: `${AUTH_USER_ROUTES.CALENDAR}/:currentUser/:day/newTask`,
             action : () => console.log('Create task --> function directly on route'),

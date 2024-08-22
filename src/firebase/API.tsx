@@ -130,18 +130,39 @@ export const setNewEvent = async function (data: NewEventData) {
     data.date.year,
     data.date.mounth
   );
+  const day = data.date.day;
   const docSnap = await getDoc(docRef);
   const docData = docSnap.data();
   if (docData === undefined) {
     console.log("На цей день ще немає подій");
     // docData[data.date.day] = { taskList: [data] }
-    await setDoc(docRef, { taskList: [data] });
+    await setDoc(docRef, { [data.date.day]: {taskList: [data] }});
   } else {
     console.log("На цей день події існують, додаємо ще одну");
     docData[data.date.day].taskList.push(data);
     await setDoc(docRef, docData);
   }
 };
+
+export const getEventsByDay = async function (date: DatePattern) {
+  const docRefUserEvents = doc(eventsCollectionRef, auth.currentUser?.uid); //посилання на документ користувача у колекції подій
+  // console.log(docRefUserEvents);
+  const yearUserCollectionRef = collection(docRefUserEvents, date.year); //посилання на колекцію року
+  // console.log(yearUserCollectionRef);
+  const mounthUser = doc(yearUserCollectionRef, date.mounth); //посилання на документ місяця
+  console.log(mounthUser);
+  const mounthEventsSnapshot = await getDoc(mounthUser); //отримання знімку документа місяця ()
+  // console.log(mounthEventsSnapshot);
+  const mounthData = mounthEventsSnapshot.data(); //отримання даних з "знімку колекції" (це вже саме дані у вигляді обєкту на весь місяць)
+  // console.log(mounthData);
+  if (mounthData === undefined) {
+    // console.log("На цей місяць ще немає подій");
+    await setDoc(mounthUser, { [date.day]: { taskList: [] } });
+    return [];
+  } else {
+    // console.log("На цей місяць події існують");
+    return mounthData[date.day]?.taskList || [];
+  }
 
 // await setNewEvent({
 //   date: {
@@ -160,26 +181,40 @@ export const setNewEvent = async function (data: NewEventData) {
 // })
 
 // Функція отримання івентів користувача конкретного дня (повертає масив івентів конкретного дня)
-export const getEventsByDay = async function (date: DatePattern) {
-  console.log(date);
-  const docRef = doc(
-    eventsCollectionRef,
-    auth.currentUser?.uid,
-    date.year,
-    date.mounth
-  );
-  console.log(docRef);
-  const docSnap = await getDoc(docRef);
-  const docData = docSnap.data();
-  console.log(docSnap);
-  console.log(docData);
-  if (docData[date.day] === undefined) {
-    console.log("taskList is empty");
-    return { taskList: [] };
-  } else {
-    console.log("taskList is exist");
-    return docData[date.day].taskList;
-  }
-};
+// export const getEventsByDay = async function (date: DatePattern) {
+//   console.log(date);
+//   const docRef = doc(
+//     eventsCollectionRef,
+//     auth.currentUser?.uid,
+//     date.year,
+//     date.mounth
+//   );
+//   console.log(docRef);
+//   const docSnap = await getDoc(docRef);
+//   const docData = docSnap.data();
+//   console.log(docSnap);
+//   console.log(docData);
+//   if (docData[date.day] === undefined) {
+//     console.log("taskList is empty");
+//     return { taskList: [] };
+//   } else {
+//     console.log("taskList is exist");
+//     return docData[date.day].taskList;
+//   }
+// };
 
-// console.log( await getEventsByDay({ mounth: MOUNTHS.Aug, year: '2024', day: '15' })); // test getEventsByDay function
+
+
+  // await setDoc(doc(yearUserCollectionRef, date.mounth), {[date.day]: {taskList: []}}); //створення колекції року, якщо її ще немає
+
+
+  // const yearDocRef = await doc(yearUserCollectionRef, date.mounth); //посилання на документ місяця
+  // const mounthSnapshot = await getDoc(yearDocRef); //отримання знімку документа місяця
+  // const mounthData = await mounthSnapshot.data(); //отримання даних з "знімку документа" (це вже саме дані у вигляді обєкту на весь місяць)
+  // console.log(mounthData);
+
+  // const docSnapshot = await getDoc(docRef); //отримання даних документа (Це ще не дата, а просто "знімок документа"). Такий собі тіпа стан в конктерний моммент часу
+  // const docData = await docSnapshot.data(); //отримання даних з "знімку документа" (це вже саме дані у вигляді обєкту на весь місяць)
+  // console.log(docData);
+  // return docData[date.day]?.taskList || []; //повернення масиву івентів конкретного дня
+}

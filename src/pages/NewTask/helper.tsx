@@ -3,7 +3,6 @@ import { InputType } from '../../components/Input/type'
 import { AUTH_USER_ROUTES } from '../../router/routesNames'
 import { FormProps, Method } from '../../components/UniversalForm/types'
 
-
 export const NewTaskFormData: FormProps = {
     title: 'New Task',
     action: `${AUTH_USER_ROUTES.CALENDAR}/:currentUser/:day/newTask`,
