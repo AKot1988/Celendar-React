@@ -24,26 +24,7 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
       <div className={classes.day}>
         <AddButton
           type="link"
-          // action={async () => {
-          //   await setNewEvent({
-          //     date: {
-          //       mounth: day?.split("_")[0] as MOUNTHS,
-          //       year: day?.split("_")[2] as string,
-          //       day: day?.split("_")[1] as string,
-          //     },
-          //     title: "Project Meeting",
-          //     begin: "10:00 AM",
-          //     end: "11:00 AM",
-          //     content: "Discussion on the new project roadmap and milestones.",
-          //     owner: currentUser as string,
-          //     type: "Meeting",
-          //     priority: PRIORITY.HIGH,
-          //     id: new Date().getTime().toString(),
-          //   });
-          //   console.log("Створено подію на цей день");
-          // }}
           to={`${AUTH_USER_ROUTES.CALENDAR}/${currentUser}/${day}/newTask`}
-          // to=""
         />
         {content.map((item: DayDataProps) => (
           <div key={item.id} className={classes.dayWrapper}>
@@ -63,25 +44,8 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
   ) : (
     <>
       <AddButton
-        action={async () => {
-          await setNewEvent({
-            date: {
-              mounth: day?.split("_")[0] as MOUNTHS,
-              year: day?.split("_")[2] as string,
-              day: day?.split("_")[1] as string,
-            },
-            title: "Project Meeting",
-            begin: "10:00 AM",
-            end: "11:00 AM",
-            content: "Discussion on the new project roadmap and milestones.",
-            owner: currentUser as string,
-            type: "Meeting",
-            priority: PRIORITY.HIGH,
-            id: new Date().getTime().toString(),
-          });
-          console.log("Шляпа");
-        }}
-        to=""
+        type="link"
+        to={`${AUTH_USER_ROUTES.CALENDAR}/${currentUser}/${day}/newTask`}
       />
       <p>На цей день задачі відсутні</p>
     </>

@@ -11,7 +11,7 @@ import {
   BasicDateRangeCalendar,
   BasicStaticDateTimePicker,
 } from "../../components";
-import { checkDoesUserHaveEvents, getEventsByDay } from "../../firebase/API";
+import { checkDoesUserHaveEvents, getEventsByUser } from "../../firebase/API";
 import { UniversalModal, Day } from "../../components/";
 import { DatePattern, MOUNTHS } from "../../firebase/types";
 import { AUTH_USER_ROUTES } from "../../router/routesNames";
@@ -19,21 +19,9 @@ import Calendar from "react-calendar";
 import classes from "./Calendar.module.scss";
 import "react-calendar/dist/Calendar.css";
 
-// checkDoesUserHaveEvents();
-let dayArg: DatePattern = {
-  year: "" as string,
-  mounth: "" as MOUNTHS,
-  day: "" as string,
-};
-export const triggerGetDayEvents = async () => {
-  const dayData = await getEventsByDay(dayArg);
-  return dayData;
-};
 
 const CalendarPage: FC = () => {
   const navigate = useNavigate();
-  const [dayVisible, setDayVisible] = useState(false);
-  const [dayContent, setDayContent] = useState("");
 
   return (
     <div>
@@ -41,14 +29,11 @@ const CalendarPage: FC = () => {
       <Calendar
         onClickDay={(value, event) => {
           const dayURL = value.toString().split(" ").splice(1, 3).join("_");
-          setDayContent(value.toString());
-          setDayVisible(!dayVisible);
           const currentDayDatePatern: DatePattern = {
             year: dayURL?.split("_")[2] as string,
             mounth: dayURL?.split("_")[0] as MOUNTHS,
             day: dayURL?.split("_")[1] as string,
           };
-          dayArg = currentDayDatePatern;
           navigate(
             `${AUTH_USER_ROUTES.CALENDAR}/${auth.currentUser?.uid}/${dayURL}`
           );

@@ -9,26 +9,38 @@ export const NewTaskFormData: FormProps = {
     method: Method.POST,
     inputs: [
         {
-          id: 'taskName',
+          id: 'title',
           type: InputType.TEXT,
           placeHolder: 'Task name',
           value: '',
-          name: 'taskName',
+          name: 'title',
           required: true,
-          label: 'Task name'
+          label: 'Title',
+          onChange: () => console.log('Title changed')
         },
         {
           id: 'taskDescription',
-          type: InputType.TEXT,
+          type: InputType.TEXTAREA,
           placeHolder: 'Task description',
           value: '',
           name: 'taskDescription',
           required: true,
-          label: 'Task description'
+          label: 'Description',
+          onChange: () => console.log('Title changed')
+        },
+        {
+          id: 'begin',
+          type: InputType.TIME,
+          placeHolder: '',
+          value: '',
+          name: 'begin',
+          required: true,
+          label: 'Set begin date/time',
+          onChange: () => console.log('Title changed')
         },
     ],
     button: {
-        text: 'Create',
+        text: 'Add event',
         clickHandler: () => console.log('Create task')
     }
 }

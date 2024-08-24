@@ -1,9 +1,11 @@
 export enum InputType {
   TEXT = 'text',
+  TEXTAREA = 'textarea',
   PASSWORD = 'password',
   EMAIL = 'email',
   NUMBER = 'number',
   DATE = 'date',
+  DATEPICKER = 'datepicker',
   CHECKBOX = 'checkbox',
   RADIO = 'radio',
   FILE = 'file',
@@ -12,6 +14,7 @@ export enum InputType {
   BUTTON = 'button',
   SELECT = 'select',
   HIDDEN = 'hidden',
+  TIME = 'time',
 }
 
 export type SelectOption = {
@@ -32,6 +35,6 @@ export type InputElementProps = {
   required?: boolean | undefined;
   options?: SelectOption[];
   onChange?: () => void;
-  value?: string | FormType.LOGIN | FormType.SIGNUP;
+  value?: string | FormType.LOGIN | FormType.SIGNUP
   label?: string;
 }

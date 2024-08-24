@@ -6,7 +6,6 @@ import { NewTaskFormData } from "./helper";
 
 const NewTask: FC = () => {
   const { currentUser, day } = useParams();
-  console.log(currentUser, day);
   return (
     <>
       <UniversalForm data={NewTaskFormData} />

@@ -1,6 +1,6 @@
 import { Calendar, DayPage, Task, Profile, NewTask } from "../pages";
 import { AUTH_USER_ROUTES } from "./routesNames";
-import { triggerGetDayEvents } from "../pages/Calendar/Calendar";
+import { getEventsByUser, getEventsByUserAndDay } from "../firebase/API";
 
 export const authorizedUserRouter = [
   {
@@ -18,7 +18,7 @@ export const authorizedUserRouter = [
           {
             index: true,
             element: <DayPage />,
-            loader: triggerGetDayEvents,
+            loader: getEventsByUserAndDay,
           },
           {
             path: `${AUTH_USER_ROUTES.CALENDAR}/:currentUser/:day/newTask`,
