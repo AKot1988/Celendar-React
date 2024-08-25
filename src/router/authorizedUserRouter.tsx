@@ -1,6 +1,7 @@
 import { Calendar, DayPage, Task, Profile, NewTask } from "../pages";
 import { AUTH_USER_ROUTES } from "./routesNames";
-import { getEventsByUser, getEventsByUserAndDay } from "../firebase/API";
+import { getEventsByUserAndDay } from "../firebase/API";
+import { newTaskAction } from "../pages/NewTask/NewTask";
 
 export const authorizedUserRouter = [
   {
@@ -22,7 +23,7 @@ export const authorizedUserRouter = [
           },
           {
             path: `${AUTH_USER_ROUTES.CALENDAR}/:currentUser/:day/newTask`,
-            action : () => console.log('Create task --> function directly on route'),
+            action: newTaskAction,
             element: <NewTask />,
           },
         ],

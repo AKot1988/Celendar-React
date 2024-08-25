@@ -1,7 +1,7 @@
-// import { Input } from '../../components'
 import { InputType } from '../../components/Input/type'
 import { AUTH_USER_ROUTES } from '../../router/routesNames'
 import { FormProps, Method } from '../../components/UniversalForm/types'
+import { UniversalModal, BasicStaticDateTimePicker } from '../../components'
 
 export const NewTaskFormData: FormProps = {
     title: 'New Task',
@@ -30,13 +30,13 @@ export const NewTaskFormData: FormProps = {
         },
         {
           id: 'begin',
-          type: InputType.TIME,
+          type: InputType.DATEPICKER,
           placeHolder: '',
           value: '',
           name: 'begin',
           required: true,
           label: 'Set begin date/time',
-          onChange: () => console.log('Title changed')
+          content: <BasicStaticDateTimePicker/>
         },
     ],
     button: {
