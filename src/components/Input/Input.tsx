@@ -12,14 +12,10 @@ const Input: FC<InputElementProps> = ({
   options = [],
   value,
   label,
-  onFocus=()=>{},
+  onFocus = () => {},
 }: InputElementProps) => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [valueDate, setValueDate] = useState<string | number | undefined>("");
-  const [isFocused, setIsFocused] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(true);
-  console.log("isFocused", isFocused);
-  console.log("isModalVisible", isModalVisible);
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     const newValue = (e.target as HTMLInputElement).value;
@@ -32,32 +28,32 @@ const Input: FC<InputElementProps> = ({
       <span className={classes.inputLabel}>{label}</span>
       <p className={classes.error}>{errorMessage}</p>
       {type === InputType.SELECT ? (
-    <select name={name} className={classes.inputItem} required={required}>
-      <option className={classes.inputItem} disabled value={value}>
-        {placeHolder}
-      </option>
-      {options.map((option) => (
-        <option
-          key={`${id}${option.value}`}
+        <select name={name} className={classes.inputItem} required={required}>
+          <option className={classes.inputItem} disabled value={value}>
+            {placeHolder}
+          </option>
+          {options.map((option) => (
+            <option
+              key={`${id}${option.value}`}
+              className={classes.inputItem}
+              value={option.value}
+            >
+              {option.label}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <input
+          onFocus={type === InputType.DATEPICKER ? onFocus : undefined}
+          type={type}
+          placeholder={placeHolder}
+          name={name}
           className={classes.inputItem}
-          value={option.value}
-        >
-          {option.label}
-        </option>
-      ))}
-    </select>
-  ) : (
-    <input
-      onFocus={type === InputType.DATEPICKER ? onFocus : undefined}
-      type={type}
-      placeholder={placeHolder}
-      name={name}
-      className={classes.inputItem}
-      required={required}
-      value={valueDate}
-      onInput={handleOnChange}
-    />
-  )console.log()}
+          required={required}
+          value={valueDate}
+          onInput={handleOnChange}
+        />
+      )}
     </label>
   );
 };
