@@ -36,7 +36,7 @@ export const NewTaskFormData: FormProps = {
           name: 'begin',
           required: true,
           label: 'Set begin date/time',
-          content: <BasicStaticDateTimePicker/>
+          onFocus: ()=>{},
         },
     ],
     button: {

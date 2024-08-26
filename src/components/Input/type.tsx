@@ -1,5 +1,3 @@
-import { FC } from "react";
-
 export enum InputType {
   TEXT = "text",
   TEXTAREA = "textarea",

@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 import { InputType, InputElementProps } from "../Input/type";
 import classes from "./Input.module.scss";
-import { UniversalModal, BasicStaticDateTimePicker } from "../index";
 
 const Input: FC<InputElementProps> = ({
   type,
