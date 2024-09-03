@@ -38,28 +38,38 @@ export const addNewUserToBase = async function (
   });
 };
 
+// //Функція створення нового івенту
+// export const setNewEvent = async function (data: NewEventData) {
+//   console.log("call setNewEvent function");
+//   console.log(data);
+//   const docRef = doc(
+//     collection(db, "events"),
+//     auth.currentUser?.uid,
+//     data.date.year,
+//     data.date.mounth
+//   );
+//   const day = data.date.day;
+//   const docSnap = await getDoc(docRef);
+//   const docData = docSnap.data();
+//   if (docData === undefined) {
+//     console.log("На цей день ще немає подій");
+//     // docData[data.date.day] = { taskList: [data] }
+//     await setDoc(docRef, { [data.date.day]: { taskList: [data] } });
+//   } else {
+//     console.log("На цей день події існують, додаємо ще одну");
+//     docData[data.date.day].taskList.push(data);
+//     await setDoc(docRef, docData);
+//   }
+// };
+
 //Функція створення нового івенту
 export const setNewEvent = async function (data: NewEventData) {
   console.log("call setNewEvent function");
   console.log(data);
-  const docRef = doc(
-    collection(db, "events"),
-    auth.currentUser?.uid,
-    data.date.year,
-    data.date.mounth
-  );
-  const day = data.date.day;
+  const docRef = doc(collection(db, "events"), auth.currentUser?.uid);
   const docSnap = await getDoc(docRef);
   const docData = docSnap.data();
-  if (docData === undefined) {
-    console.log("На цей день ще немає подій");
-    // docData[data.date.day] = { taskList: [data] }
-    await setDoc(docRef, { [data.date.day]: { taskList: [data] } });
-  } else {
-    console.log("На цей день події існують, додаємо ще одну");
-    docData[data.date.day].taskList.push(data);
-    await setDoc(docRef, docData);
-  }
+  await setDoc(docRef, { data, ...docData.taskList });
 };
 
 export const getEventsByUser = async function ({ params }: LoaderFunctionArgs) {
@@ -84,12 +94,12 @@ export const getEventsByUserAndDay = async function ({
 }: LoaderFunctionArgs) {
   const { currentUser, day } = params;
   let checkDoesUserHaveEvents = false;
-  // const dayData = [day?.split("_")[0], day?.split("_")[1], day?.split("_")[2]];
   let userEvents: NewEventData[] | [] = [];
   const querySnapshot = await getDocs(collection(db, "events")); //формування квері для отримання всіх документів колекції подій
   querySnapshot.forEach((doc) => {
     if (doc.id === currentUser) {
-      (checkDoesUserHaveEvents = true), (userEvents = doc.data().taskList.filter((event: NewEventData) => event.begin === day));
+      (checkDoesUserHaveEvents = true),
+        (userEvents = doc.data().taskList.filter((event: NewEventData) => event.begin === day));
     }
   });
   if (!checkDoesUserHaveEvents) {

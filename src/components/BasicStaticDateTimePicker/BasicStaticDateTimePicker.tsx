@@ -6,7 +6,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticDateTimePicker } from "@mui/x-date-pickers/StaticDateTimePicker";
 
 type DatePickerProps = {
-  initDate: string; // similar to string "August 23, 2024"
+  initDate: string | Date// similar to string "August 23, 2024"
   onAccept: (value: DateRange<Dayjs>) => void;
 };
 

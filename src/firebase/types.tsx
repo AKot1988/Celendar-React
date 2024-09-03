@@ -30,7 +30,7 @@ export type DatePattern = {
 }
 
 export type NewEventData = {
-  date: DatePattern,
+  date?: DatePattern,
   title?: string,
   begin: string,
   end: string,

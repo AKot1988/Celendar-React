@@ -6,20 +6,22 @@ import {
 } from "../../components";
 import { FormProps } from "../../components/UniversalForm/types";
 import { useParams, ActionFunctionArgs, redirect } from "react-router-dom";
-import { NewTaskFormData } from "./helper";
+import { NewTaskFormData, dateMapper } from "./helper";
 import { auth } from "../../firebase/firebase";
+import { setNewEvent } from "../../firebase/API";
 
 export const newTaskAction = async function ({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const newTaskData = {
-    name: formData.get("name") as string,
+    title: formData.get("title") as string,
     description: formData.get("description") as string,
     begin: formData.get("begin") as string,
-    curentUser: "",
+    end: formData.get("end") as string,
+    priority: formData.get("priority") as string,
+    curentUser: auth.currentUser?.uid,
   };
-  // newTaskData.currentUser = auth.currentUser?.uid;
   console.log(newTaskData);
-  // тут повинен бути виклик фунції фаерБасе, яка покладе нову таску в базу
+  // setNewEvent(newTaskData);
 
   return redirect(
     `/calendar/${formData.get("currentUser")}/${formData.get("day")}`
@@ -27,23 +29,43 @@ export const newTaskAction = async function ({ request }: ActionFunctionArgs) {
 };
 
 const NewTask: FC = () => {
-  // const { currentUser, day } = useParams();
-  const [vis, setVis] = useState(false);
-  NewTaskFormData.inputs[2].onFocus = () => setVis(!vis);
+  const { currentUser, day } = useParams();
+  const newInitDate = new Date(dateMapper(day as string));
+  console.log(newInitDate);
+  const [visBegin, setVisBegin] = useState(false);
+  const [visEnd, setVisEnd] = useState(false);
+  NewTaskFormData.inputs[2].onFocus = () => setVisBegin(!visBegin);
+  NewTaskFormData.inputs[3].onFocus = () => setVisEnd(!visEnd);
   return (
     <>
       <UniversalForm data={NewTaskFormData} />
-      {vis && (
+      {visBegin && (
         <UniversalModal
           title="Set begin date/time"
           content={
             <BasicStaticDateTimePicker
-              onAccept={(val) => {console.log(val), setVis(setVis)}}
-              initDate="August 23, 2024"
+              onAccept={(val) => {setVisBegin(!visBegin),
+                NewTaskFormData.inputs[2].value = visBegin.toString()
+              }
+            }
+              initDate={new Date(dateMapper(day as string))}
             />
           }
-          visible={vis}
-          setVisible={setVis}
+          visible={visBegin}
+          setVisible={setVisBegin}
+        />
+      )}
+      {visEnd && (
+        <UniversalModal
+          title="Set begin date/time"
+          content={
+            <BasicStaticDateTimePicker
+              onAccept={(val) => {setVisEnd(!visEnd)}}
+              initDate={new Date(dateMapper(day as string))}
+            />
+          }
+          visible={visEnd}
+          setVisible={setVisEnd}
         />
       )}
     </>
