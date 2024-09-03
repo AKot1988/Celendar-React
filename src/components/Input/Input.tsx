@@ -22,39 +22,64 @@ const Input: FC<InputElementProps> = ({
     setValueDate(newValue);
   };
 
-  return (
-    <label className={classes.inputContainer}>
-      <span className={classes.inputLabel}>{label}</span>
-      <p className={classes.error}>{errorMessage}</p>
-      {type === InputType.SELECT ? (
-        <select name={name} className={classes.inputItem} required={required}>
-          <option className={classes.inputItem} disabled value={value}>
-            {placeHolder}
-          </option>
-          {options.map((option) => (
-            <option
-              key={`${id}${option.value}`}
-              className={classes.inputItem}
-              value={option.value}
-            >
-              {option.label}
+  switch (type) {
+    case InputType.SELECT:
+      return (
+        <label className={classes.inputContainer}>
+          <span className={classes.inputLabel}>{label}</span>
+          <p className={classes.error}>{errorMessage}</p>
+          <select name={name} className={classes.inputItem} required={required}>
+            <option className={classes.inputItem} disabled value={value}>
+              {placeHolder}
             </option>
-          ))}
-        </select>
-      ) : (
-        <input
-          onFocus={type === InputType.DATEPICKER ? onFocus : undefined}
-          type={type}
-          placeholder={placeHolder}
-          name={name}
-          className={classes.inputItem}
-          required={required}
-          value={valueDate}
-          onInput={handleOnChange}
-        />
-      )}
-    </label>
-  );
+            {options.map((option) => (
+              <option
+                key={`${id}${option.value}`}
+                className={classes.inputItem}
+                value={option.value}
+              >
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </label>
+      );
+    case InputType.DATEPICKER:
+      return (
+        <label className={classes.inputContainer}>
+          <span className={classes.inputLabel}>{label}</span>
+          <p className={classes.error}>{errorMessage}</p>
+
+          <input
+            onFocus={onFocus}
+            type={type}
+            placeholder={placeHolder}
+            name={name}
+            className={classes.inputItem}
+            required={required}
+            value={valueDate}
+            onInput={handleOnChange}
+          />
+        </label>
+      );
+    default:
+      return (
+        <label className={classes.inputContainer}>
+          <span className={classes.inputLabel}>{label}</span>
+          <p className={classes.error}>{errorMessage}</p>
+
+          <input
+            type={type}
+            placeholder={placeHolder}
+            name={name}
+            className={classes.inputItem}
+            required={required}
+            value={valueDate}
+            onInput={handleOnChange}
+          />
+        </label>
+      );
+  }
 };
 export default Input;
 

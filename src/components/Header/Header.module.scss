@@ -8,18 +8,16 @@
   left: 0;
 }
 
-
 .header {
   padding: 0 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: $contentWidth;
+  max-width: $contentWidth;
   margin: 0 auto;
   height: 100px;
   background-color: $mainGray;
-
 
   &Logo {
     width: 70px;
@@ -41,7 +39,7 @@
       align-items: center;
       gap: 20px;
     }
-    
+
     &Item {
       color: #000000;
       transition: all 0.3s;
@@ -70,7 +68,6 @@
       border-radius: 50%;
     }
   }
-  
 
   &Title {
     font-weight: bold;
@@ -95,5 +92,12 @@
   &:hover {
     background-color: #ff0000;
     color: rgb(0, 0, 0);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    height: auto;
   }
 }
