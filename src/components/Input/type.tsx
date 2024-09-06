@@ -35,7 +35,8 @@ export type InputElementProps = {
   required?: boolean | undefined;
   options?: SelectOption[];
   onChange?: () => void;
-  value?: string | FormType.LOGIN | FormType.SIGNUP;
+  value?: string | FormType.LOGIN | FormType.SIGNUP | Date;
   label?: string;
   onFocus?: () => void;
+  autoComplete?: string;
 };

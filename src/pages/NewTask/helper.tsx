@@ -2,7 +2,7 @@ import { InputType } from "../../components/Input/type";
 import { AUTH_USER_ROUTES } from "../../router/routesNames";
 import { FormProps, Method } from "../../components/UniversalForm/types";
 
-export const NewTaskFormData: FormProps = {
+export const NewTaskFormConfig: FormProps = {
   title: "New Task",
   action: `${AUTH_USER_ROUTES.CALENDAR}/:currentUser/:day/newTask`,
   method: Method.POST,
@@ -25,7 +25,7 @@ export const NewTaskFormData: FormProps = {
       name: "taskDescription",
       required: true,
       label: "Description",
-      onChange: () => console.log("Title changed"),
+      onChange: () => console.log("Description changed"),
     },
     {
       id: "begin",
@@ -54,10 +54,10 @@ export const NewTaskFormData: FormProps = {
       value: "",
       name: "priority",
       options: [
-        {label: "Low", value: "low"},
-        {label: "Medium", value: "medium"},
-        {label: "High", value: "high"},
-        {label: "На вчора", value: "на вчора"},
+        { label: "Low", value: "low" },
+        { label: "Medium", value: "medium" },
+        { label: "High", value: "high" },
+        { label: "На вчора", value: "на вчора" },
       ],
       required: false,
       label: "Priority",
@@ -88,5 +88,6 @@ export const dateMapper = (date: string) => {
   const mounth = Mounth[date.split("_")[0] as keyof typeof Mounth];
   const day = date.split("_")[1];
   const year = date.split("_")[2];
-  return (mappedDate = `${mounth} ${day}, ${year}`);
+  mappedDate = `${mounth} ${day}, ${year}`;
+  return mappedDate;
 };

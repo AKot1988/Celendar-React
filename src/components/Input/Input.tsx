@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { InputType, InputElementProps } from "../Input/type";
 import classes from "./Input.module.scss";
 
@@ -14,14 +14,20 @@ const Input: FC<InputElementProps> = ({
   onFocus = () => {},
 }: InputElementProps) => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [valueDate, setValueDate] = useState<string | number | undefined>("");
+  const [valueData, setValueData] = useState<string | number | undefined>("");
+  // const [valueDate, setValueDate] = useState<string | number | undefined>("");
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const newValue = (e.target as HTMLInputElement).value;
+    let newValue: string
+    type === InputType.DATEPICKER? newValue = value: newValue = (e.target as HTMLInputElement).value;
     setErrorMessage(validation(type, newValue));
-    setValueDate(newValue);
+    setValueData(newValue);
   };
 
+  useEffect(() => {
+    setValueData(value);
+  }, [value]);
+  
   switch (type) {
     case InputType.SELECT:
       return (
@@ -49,7 +55,6 @@ const Input: FC<InputElementProps> = ({
         <label className={classes.inputContainer}>
           <span className={classes.inputLabel}>{label}</span>
           <p className={classes.error}>{errorMessage}</p>
-
           <input
             onFocus={onFocus}
             type={type}
@@ -57,8 +62,9 @@ const Input: FC<InputElementProps> = ({
             name={name}
             className={classes.inputItem}
             required={required}
-            value={valueDate}
+            value={valueData}
             onInput={handleOnChange}
+            autoComplete="off"
           />
         </label>
       );
@@ -67,14 +73,13 @@ const Input: FC<InputElementProps> = ({
         <label className={classes.inputContainer}>
           <span className={classes.inputLabel}>{label}</span>
           <p className={classes.error}>{errorMessage}</p>
-
           <input
             type={type}
             placeholder={placeHolder}
             name={name}
             className={classes.inputItem}
             required={required}
-            value={valueDate}
+            value={valueData}
             onInput={handleOnChange}
           />
         </label>

@@ -4,9 +4,8 @@ import {
   UniversalForm,
   UniversalModal,
 } from "../../components";
-import { FormProps } from "../../components/UniversalForm/types";
 import { useParams, ActionFunctionArgs, redirect } from "react-router-dom";
-import { NewTaskFormData, dateMapper } from "./helper";
+import { NewTaskFormConfig, dateMapper } from "./helper";
 import { auth } from "../../firebase/firebase";
 import { setNewEvent } from "../../firebase/API";
 
@@ -15,13 +14,15 @@ export const newTaskAction = async function ({ request }: ActionFunctionArgs) {
   const newTaskData = {
     title: formData.get("title") as string,
     description: formData.get("description") as string,
+    // begin: new Date(formData.get("begin") as string),
+    // end: new Date(formData.get("end") as string),
     begin: formData.get("begin") as string,
     end: formData.get("end") as string,
     priority: formData.get("priority") as string,
     curentUser: auth.currentUser?.uid,
   };
   console.log(newTaskData);
-  // setNewEvent(newTaskData);
+  setNewEvent(newTaskData);
 
   return redirect(
     `/calendar/${formData.get("currentUser")}/${formData.get("day")}`
@@ -30,25 +31,26 @@ export const newTaskAction = async function ({ request }: ActionFunctionArgs) {
 
 const NewTask: FC = () => {
   const { currentUser, day } = useParams();
-  const newInitDate = new Date(dateMapper(day as string));
-  console.log(newInitDate);
   const [visBegin, setVisBegin] = useState(false);
   const [visEnd, setVisEnd] = useState(false);
-  NewTaskFormData.inputs[2].onFocus = () => setVisBegin(!visBegin);
-  NewTaskFormData.inputs[3].onFocus = () => setVisEnd(!visEnd);
+  NewTaskFormConfig.inputs[2].onFocus = () => setVisBegin(!visBegin);
+  NewTaskFormConfig.inputs[3].onFocus = () => setVisEnd(!visEnd);
   return (
     <>
-      <UniversalForm data={NewTaskFormData} />
+      <UniversalForm data={NewTaskFormConfig} />
       {visBegin && (
         <UniversalModal
           title="Set begin date/time"
           content={
             <BasicStaticDateTimePicker
-              onAccept={(val) => {setVisBegin(!visBegin),
-                NewTaskFormData.inputs[2].value = visBegin.toString()
-              }
-            }
               initDate={new Date(dateMapper(day as string))}
+              onAccept={(val) => {
+                if(val){
+                  const date = new Date(val.toString())
+                  NewTaskFormConfig.inputs[2].value = date;
+                } else {throw new Error("Invalid date")}
+                setVisBegin(!visBegin);
+              }}
             />
           }
           visible={visBegin}
@@ -60,7 +62,13 @@ const NewTask: FC = () => {
           title="Set begin date/time"
           content={
             <BasicStaticDateTimePicker
-              onAccept={(val) => {setVisEnd(!visEnd)}}
+              onAccept={(val) => {
+                if(val){
+                  const date = new Date(val.toString())
+                  NewTaskFormConfig.inputs[3].value = date;
+                } else {throw new Error("Invalid date")}
+                setVisEnd(!visEnd);
+              }}
               initDate={new Date(dateMapper(day as string))}
             />
           }

@@ -69,7 +69,7 @@ export const setNewEvent = async function (data: NewEventData) {
   const docRef = doc(collection(db, "events"), auth.currentUser?.uid);
   const docSnap = await getDoc(docRef);
   const docData = docSnap.data();
-  await setDoc(docRef, { data, ...docData.taskList });
+  await setDoc(docRef, { taskList: [...docData?.taskList, data] });
 };
 
 export const getEventsByUser = async function ({ params }: LoaderFunctionArgs) {

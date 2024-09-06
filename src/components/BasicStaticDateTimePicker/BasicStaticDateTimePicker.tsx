@@ -1,29 +1,28 @@
-import { FC, useState, useEffect } from "react";
+import { FC } from "react";
 import dayjs, { Dayjs } from "dayjs";
-import { DateRange } from "@mui/x-date-pickers-pro/models";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticDateTimePicker } from "@mui/x-date-pickers/StaticDateTimePicker";
 
 type DatePickerProps = {
-  initDate: string | Date// similar to string "August 23, 2024"
-  onAccept: (value: DateRange<Dayjs>) => void;
+  initDate: string | Date; // similar to string "August 23, 2024"
+  onAccept: (value: Dayjs | null) => void;
 };
 
-
-const BasicStaticDateTimePicker: FC<DatePickerProps> = ({onAccept=()=> {}, initDate=''}) => {
-  // const [value, setValue] = useState<DateRange<Dayjs>>([
-  //   dayjs(date),
-  //   dayjs(date),
-  // ]);
+const BasicStaticDateTimePicker: FC<DatePickerProps> = ({
+  onAccept = () => {},
+  initDate = "",
+}) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <StaticDateTimePicker
         defaultValue={dayjs(initDate)}
-        // onChange={(value) => setValue(value)}
         orientation="portrait"
         ampm={false}
-        onAccept={(val) => {onAccept(val)}}
+        onAccept={(val) => {
+          onAccept(val);
+        }}
+        timezone="system"
       />
     </LocalizationProvider>
   );
