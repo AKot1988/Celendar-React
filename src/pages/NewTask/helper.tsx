@@ -85,9 +85,9 @@ enum Mounth {
 }
 export const dateMapper = (date: string) => {
   let mappedDate = "";
-  const mounth = Mounth[date.split("_")[0] as keyof typeof Mounth];
-  const day = date.split("_")[1];
-  const year = date.split("_")[2];
+  const mounth = Mounth[date.split("_")[1] as keyof typeof Mounth];
+  const day = date.split("_")[2];
+  const year = date.split("_")[3];
   mappedDate = `${mounth} ${day}, ${year}`;
   return mappedDate;
 };

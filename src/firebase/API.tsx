@@ -16,6 +16,7 @@ import {
   PRIORITY,
 } from "./types.tsx";
 import { ROLES } from "../router/types";
+import {dateUniMapper} from "../pages/Calendar/helper"
 import { LoaderFunctionArgs } from "react-router-dom";
 
 export const usersCollectionRef = collection(db, "users"); //отримання колекції юзерів
@@ -99,7 +100,7 @@ export const getEventsByUserAndDay = async function ({
   querySnapshot.forEach((doc) => {
     if (doc.id === currentUser) {
       (checkDoesUserHaveEvents = true),
-        (userEvents = doc.data().taskList.filter((event: NewEventData) => event.begin === day));
+        (userEvents = doc.data().taskList.filter((event: NewEventData) => dateUniMapper(event.begin) === day));
     }
   });
   if (!checkDoesUserHaveEvents) {

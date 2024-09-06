@@ -8,22 +8,22 @@ import { useParams, ActionFunctionArgs, redirect } from "react-router-dom";
 import { NewTaskFormConfig, dateMapper } from "./helper";
 import { auth } from "../../firebase/firebase";
 import { setNewEvent } from "../../firebase/API";
+import { NewEventData, PRIORITY } from "../../firebase/types";
 
 export const newTaskAction = async function ({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
-  const newTaskData = {
+  const newTaskData: NewEventData = {
     title: formData.get("title") as string,
     description: formData.get("description") as string,
-    // begin: new Date(formData.get("begin") as string),
-    // end: new Date(formData.get("end") as string),
     begin: formData.get("begin") as string,
     end: formData.get("end") as string,
-    priority: formData.get("priority") as string,
-    curentUser: auth.currentUser?.uid,
+    priority: formData.get("priority") as PRIORITY | undefined,
+    owner: auth.currentUser?.uid,
+    id: Date.now().toString(36) + Math.random().toString(36) as string
   };
-  console.log(newTaskData);
   setNewEvent(newTaskData);
 
+  console.log(formData.get("currentUser"), formData.get("day"));
   return redirect(
     `/calendar/${formData.get("currentUser")}/${formData.get("day")}`
   );

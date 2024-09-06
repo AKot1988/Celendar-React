@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
 import { AUTH_USER_ROUTES } from "../../router/routesNames";
 import Calendar from "react-calendar";
+import { dateUniMapper } from "./helper";
 import classes from "./Calendar.module.scss";
 import "react-calendar/dist/Calendar.css";
 
@@ -14,7 +15,8 @@ const CalendarPage: FC = () => {
       <h1>Calendar</h1>
       <Calendar
         onClickDay={(value, event) => {
-          const dayURL = value.toString().split(" ").splice(1, 3).join("_");
+          console.log(value);
+          const dayURL = dateUniMapper(value);
           navigate(
             `${AUTH_USER_ROUTES.CALENDAR}/${auth.currentUser?.uid}/${dayURL}`
           );
@@ -23,7 +25,16 @@ const CalendarPage: FC = () => {
         tileClassName={classes.calendarTile}
         tileContent={({ date, view }) =>
           view === "month" && date.getDay() === 0 ? (
-            <div style={{ backgroundColor: "red" }}>It's Sunday!</div>
+            console.log(date),
+            <div
+              style={{
+                color: "red",
+                width: "90%",
+                height: "5px",
+                backgroundColor: "red",
+                borderRadius: "2px",
+              }}
+            />
           ) : null
         }
       />
