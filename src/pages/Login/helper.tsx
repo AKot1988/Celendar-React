@@ -72,7 +72,7 @@ export const newUserFormData: FormProps = {
   ],
   button: {
     text: 'Зарееструватись',
-    clickHandler: () => console.log('Submit button clicked'),
+    clickHandler: () => {},
   },
 };
 
@@ -103,6 +103,6 @@ export const logInData: FormProps = {
   ],
   button: {
     text: 'Увійти',
-    clickHandler: () => console.log('Submit button clicked'),
+    clickHandler: () => {},
   },
 };

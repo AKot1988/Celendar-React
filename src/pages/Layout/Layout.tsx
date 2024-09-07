@@ -18,7 +18,9 @@ const Layout: FC = () => {
     <>
       {state === 'loading' ? <Loader/> : null}
       <Header logo={headerData.logo} navMenu={headerData.navMenu} onClick={handleAuthClick} />
+      <div className={classes.container}>
       <Outlet />
+    </div>
       <Footer title="Київ 2024 червень" />
     </>
   );

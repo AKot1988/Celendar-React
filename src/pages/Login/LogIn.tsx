@@ -27,7 +27,6 @@ export const authType = async ({ request }: ActionFunctionArgs) => {
     gender: formData.get('gender') as string,
     formType: formData.get('formType') as string,
   };
-  console.log(newUserData);
   
   switch (formData.get('formType')) {
     case 'signUp': {

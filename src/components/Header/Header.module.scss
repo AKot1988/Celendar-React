@@ -2,7 +2,7 @@
 
 .container {
   width: 100vw;
-  background-color: $mainGray;
+  // background: $mainBackground;
   position: fixed;
   top: 0;
   left: 0;
@@ -17,7 +17,7 @@
   max-width: $contentWidth;
   margin: 0 auto;
   height: 100px;
-  background-color: $mainGray;
+  background: $mainGrayGradient;
 
   &Logo {
     width: 70px;

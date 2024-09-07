@@ -5,19 +5,18 @@ import { NewEventData } from "../../firebase/types";
 import { AUTH_USER_ROUTES } from "../../router/routesNames";
 import Calendar from "react-calendar";
 import { dateUniMapper, dayTaskColor } from "./helper";
-import classes from "./Calendar.module.scss";
 import "react-calendar/dist/Calendar.css";
+import classes from "./Calendar.module.scss";
 
 const CalendarPage: FC = () => {
   const navigate = useNavigate();
   const userEvents: NewEventData[] = useLoaderData();
 
   return (
-    <div>
-      <h1>Calendar</h1>
+    <div className={classes.calendarPage}>
+      <h1>My calendar</h1>
       <Calendar
         onClickDay={(value, event) => {
-          console.log(value);
           const dayURL = dateUniMapper(value);
           navigate(
             `${AUTH_USER_ROUTES.CALENDAR}/${auth.currentUser?.uid}/${dayURL}`
@@ -38,7 +37,7 @@ const CalendarPage: FC = () => {
                   style={{
                     width: "90%",
                     height: "6px",
-                    backgroundColor: dayTaskColor(ev.priority),
+                    background: dayTaskColor(ev.priority),
                     borderRadius: "3px",
                     margin: "1px",
                   }}

@@ -1,18 +1,27 @@
 @import "../../app/variables.scss";
 
-.footer {
+.container {
+  width: 100vw;
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
+}
+
+.footer {
+  & h4 {
+    margin: 0px;
+  }
+
+  max-width: $contentWidth;
+  margin: 0 auto;
   height: 100px;
-  background-color: $mainGray;
-  
+  background: $mainGrayGradient;
 
   &Title {
     font-weight: thin;
     color: #000000;
     text-align: center;
+    padding-top: 10px;
     // line-height: 50px;
   }
 }

@@ -22,8 +22,6 @@ export const newTaskAction = async function ({ request }: ActionFunctionArgs) {
     id: Date.now().toString(36) + Math.random().toString(36) as string
   };
   setNewEvent(newTaskData);
-
-  console.log(formData.get("currentUser"), formData.get("day"));
   return redirect(
     `/calendar/${formData.get("currentUser")}/${formData.get("day")}`
   );

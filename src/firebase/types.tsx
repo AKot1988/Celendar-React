@@ -6,6 +6,7 @@ export enum PRIORITY {
   LOW = 'low',
   MEDIUM = 'medium',
   HIGH = 'high',
+  POSSIBLE = 'possible',
 }
 
 export enum MOUNTHS {

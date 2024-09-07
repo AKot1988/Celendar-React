@@ -15,7 +15,7 @@ export const NewTaskFormConfig: FormProps = {
       name: "title",
       required: true,
       label: "Title",
-      onChange: () => console.log("Title changed"),
+      onChange: () => {},
     },
     {
       id: "taskDescription",
@@ -25,7 +25,7 @@ export const NewTaskFormConfig: FormProps = {
       name: "taskDescription",
       required: true,
       label: "Description",
-      onChange: () => console.log("Description changed"),
+      onChange: () => {},
     },
     {
       id: "begin",
@@ -57,7 +57,7 @@ export const NewTaskFormConfig: FormProps = {
         { label: "Low", value: "low" },
         { label: "Medium", value: "medium" },
         { label: "High", value: "high" },
-        { label: "На вчора", value: "на вчора" },
+        { label: "Draft", value: "draft" },
       ],
       required: false,
       label: "Priority",
@@ -65,7 +65,7 @@ export const NewTaskFormConfig: FormProps = {
   ],
   button: {
     text: "Add event",
-    clickHandler: () => console.log("Create task"),
+    clickHandler: () => {},
   },
 };
 

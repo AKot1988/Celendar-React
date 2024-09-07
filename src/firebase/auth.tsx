@@ -16,16 +16,12 @@ import { NewUserFormData } from './types.tsx'
 export const signUpWithEmailAndPassword = (newUserData: NewUserFormData) => {
   return createUserWithEmailAndPassword(auth, newUserData.email, newUserData.password) // This is the function that creates a new user
     .then((userCredential) => {
-      console.log(newUserData, userCredential.user.uid, 'Юзер зареєструвався за допомогою email та пароля')
       addNewUserToBase(userCredential.user.uid, newUserData)
       // Signed up
       const user = userCredential.user;
-      // ...
     })
     .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
+      throw new Error ("Сталась помилка аутентифікації" + error.code + error.message)
     });
 }
 
@@ -33,14 +29,10 @@ export const signUpWithEmailAndPassword = (newUserData: NewUserFormData) => {
 export const logInWithEmailAndPassword = (email: string, password: string) => {
   signInWithEmailAndPassword(auth, email, password) // This is the function that signs in a user
     .then((userCredential) => {
-      console.log(userCredential, 'Юзер зайшов за допомогою email та пароля')
       const user = userCredential.user;
-      // ...
     })
     .catch((error) => {
-      const errorCode = error.code;
-      console.log("Сталась помилка аутентифікації", errorCode)
-      const errorMessage = error.message;
+      throw new Error ("Сталась помилка аутентифікації" + error.code + error.message)
     });
 }
 
