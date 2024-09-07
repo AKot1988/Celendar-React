@@ -73,22 +73,22 @@ export const setNewEvent = async function (data: NewEventData) {
   await setDoc(docRef, { taskList: [...docData?.taskList, data] });
 };
 
-export const getEventsByUser = async function ({ params }: LoaderFunctionArgs) {
-  const { currentUser } = params;
-  let checkDoesUserHaveEvents = false;
-  let userEvents: NewEventData[] | [] = [];
-  const querySnapshot = await getDocs(collection(db, "events")); //формування квері для отримання всіх документів колекції подій
-  querySnapshot.forEach((doc) => {
-    if (doc.id === currentUser) {
-      (checkDoesUserHaveEvents = true), (userEvents = doc.data().taskList);
-    }
-  }); //перевірка чи юзер взагалі має події
-  if (!checkDoesUserHaveEvents) {
-    console.log("У користувача немає подій");
-  }
+// export const getEventsByUser = async function ({ params }: LoaderFunctionArgs) {
+//   const { currentUser } = params;
+//   let checkDoesUserHaveEvents = false;
+//   let userEvents: NewEventData[] | [] = [];
+//   const querySnapshot = await getDocs(collection(db, "events")); //формування квері для отримання всіх документів колекції подій
+//   querySnapshot.forEach((doc) => {
+//     if (doc.id === currentUser) {
+//       (checkDoesUserHaveEvents = true), (userEvents = doc.data().taskList);
+//     }
+//   }); //перевірка чи юзер взагалі має події
+//   if (!checkDoesUserHaveEvents) {
+//     console.log("У користувача немає подій");
+//   }
 
-  return userEvents; //повернення подій користувача у вигляді масиву
-};
+//   return userEvents; //повернення подій користувача у вигляді масиву
+// };
 
 export const getEventsByUserAndDay = async function ({
   params,
@@ -96,11 +96,29 @@ export const getEventsByUserAndDay = async function ({
   const { currentUser, day } = params;
   let checkDoesUserHaveEvents = false;
   let userEvents: NewEventData[] | [] = [];
-  const querySnapshot = await getDocs(collection(db, "events")); //формування квері для отримання всіх документів колекції подій
+  const querySnapshot = await getDocs(collection(db, "events")); //формування квері для отримання всіх документів в колекції подій
   querySnapshot.forEach((doc) => {
     if (doc.id === currentUser) {
       (checkDoesUserHaveEvents = true),
         (userEvents = doc.data().taskList.filter((event: NewEventData) => dateUniMapper(event.begin) === day));
+    }
+  });
+  if (!checkDoesUserHaveEvents) {
+    console.log("У користувача немає подій");
+  }
+
+  return userEvents; //повернення подій користувача за конкретний день у вигляді масиву
+};
+
+export const getEventsByUser = async function () {
+  const currentUser = auth.currentUser?.uid;
+  let checkDoesUserHaveEvents = false;
+  let userEvents: NewEventData[] | [] = [];
+  const querySnapshot = await getDocs(collection(db, "events")); //формування квері для отримання всіх документів в колекції подій
+  querySnapshot.forEach((doc) => {
+    if (doc.id === currentUser) {
+      (checkDoesUserHaveEvents = true),
+        (userEvents = doc.data().taskList);
     }
   });
   if (!checkDoesUserHaveEvents) {
