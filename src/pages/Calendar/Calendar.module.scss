@@ -7,14 +7,14 @@
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  box-sizing: border-box;
 }
 
 .calendarPage {
+  box-sizing: border-box;
+  width: 100%;
   max-width: $contentWidth;
   background: $mainBackground;
-  border: 5px solid $mainGray;
-  border-radius: 5px;
+  border: 0px solid $mainGray;
   padding: 10px;
   margin: 0 auto;
 }

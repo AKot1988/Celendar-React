@@ -3,10 +3,11 @@ import { useNavigate, useLoaderData } from 'react-router-dom';
 import { Day } from '../../components';
 import { AUTH_USER_ROUTES } from '../../router/routesNames';
 
-import { DayDataProps } from '../../components/Day/Day';
+import DayDataProps from "../../components/Day/Day";
+import classes from './DayPage.module.scss';
 
 const DayPage: FC = () => {
-  const loderData = useLoaderData();
+  const loderData: DayDataProps = useLoaderData();
   const navigate = useNavigate();
   const [dayVisible, setDayVisible] = useState(true);
   if (!dayVisible) {
@@ -14,7 +15,7 @@ const DayPage: FC = () => {
   }
 
   return (
-    <Day content={loderData as DayDataProps} />
+    <Day content={loderData} />
   );
 };
 

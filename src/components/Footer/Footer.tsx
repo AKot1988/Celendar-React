@@ -6,7 +6,7 @@ type FooterProps = {
   className?: string | undefined;
 };
 
-const Footer: FC<FooterProps> = ({ title, className = "header" }) => {
+const Footer: FC<FooterProps> = ({ title }) => {
   return (
     <div className={classes.container}>
       <footer className={classes.footer}>

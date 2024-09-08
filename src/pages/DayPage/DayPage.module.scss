@@ -1,0 +1,10 @@
+@import "../../app/variables.scss";
+
+.dayPage {
+    max-width: $contentWidth;
+    background: $mainBackground;
+    border: 5px solid $mainGray;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0 auto;
+}

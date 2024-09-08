@@ -22,7 +22,7 @@ export const NewTaskFormConfig: FormProps = {
       type: InputType.TEXTAREA,
       placeHolder: "Task description",
       value: "",
-      name: "taskDescription",
+      name: "description",
       required: true,
       label: "Description",
       onChange: () => {},

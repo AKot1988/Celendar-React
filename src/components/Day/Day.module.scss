@@ -1,0 +1,23 @@
+@import "../../app/variables.scss";
+
+.day {
+  box-sizing: border-box;
+  max-width: $contentWidth;
+  background: $mainBackground;
+  border: 5px solid $mainGray;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 0 auto;
+
+  & button {
+    border: 5px solid $main;
+  }
+
+  &Item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+  }
+}

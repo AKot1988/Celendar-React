@@ -8,10 +8,11 @@
 }
 
 .footer {
+  box-sizing: border-box;
   & h4 {
-    margin: 0px;
+    margin: 0;
+    padding: 0;
   }
-
   max-width: $contentWidth;
   margin: 0 auto;
   height: 100px;
@@ -22,6 +23,6 @@
     color: #000000;
     text-align: center;
     padding-top: 10px;
-    // line-height: 50px;
+    line-height: 50px;
   }
 }
