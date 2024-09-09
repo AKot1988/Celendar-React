@@ -16,18 +16,26 @@ function getMonthByNumber(monthNumber: number): string | undefined {
   return monthsArray[monthNumber]; // Індексування з 0, тому віднімаємо 1
 }
 
+function formattedMinutes(minutes: number) {
+  if (minutes <= 0) {
+    return `0${minutes}`;
+  } else {
+    return `${minutes}`;
+  }
+}
+
 export const dateToDisplay = (date: string) => {
   const newDate = new Date(date);
   return `${newDate.getDate()} ${getMonthByNumber(
     newDate.getMonth()
-  )} ${newDate.getFullYear()} ${newDate.getHours()}:${newDate.getMinutes()}`;
+  )} ${newDate.getFullYear()} ${newDate.getHours()}:${formattedMinutes(
+    newDate.getMinutes()
+  )}`;
 };
 
 export const dateMapper = (date: string) => {
-  console.log(date)
   const [day, mounth, clear, year] = date.split("_");
-  return `${WEEKDAYS[day] as string} ${clear} ${UKRMOUNTS[mounth] as string}  ${year}`;
+  return `${WEEKDAYS[day as keyof typeof WEEKDAYS]} ${clear} ${
+    UKRMOUNTS[mounth as keyof typeof UKRMOUNTS]
+  }  ${year}`;
 };
-
-
-
