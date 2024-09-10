@@ -20,7 +20,7 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
             type="link"
             to={`${AUTH_USER_ROUTES.CALENDAR}/${currentUser}/${day}/newTask`}
           />
-          <p>{`Задачі на ${dateMapper(day)}`}</p>
+          <p>{`Задачі на ${dateMapper(day as string)}`}</p>
         </div>
         {content.map((item: DayDataProps) => (
           <div key={item.id} className={classes.dayWrapper}>

@@ -25,6 +25,11 @@ export const authorizedUserRouter = [
             action: newTaskAction,
             element: <NewTask />,
           },
+          {
+            path: `${AUTH_USER_ROUTES.CALENDAR}/:currentUser/:day/:id`,
+            action: newTaskAction,
+            element: <Task />,
+          },
         ],
       },
     ],

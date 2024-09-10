@@ -1,22 +1,20 @@
 @import "../../app/variables.scss";
 
 .container {
-  width: 100vw;
-  position: fixed;
-  bottom: 0;
-  left: 0;
+  flex-shrink: 0;
+  background: $mainBackground;
 }
 
 .footer {
   box-sizing: border-box;
   & h4 {
     margin: 0;
-    padding: 0;
+    padding: 0
   }
   max-width: $contentWidth;
   margin: 0 auto;
   height: 100px;
-  background: $mainGrayGradient;
+  background: $mainGradient;
 
   &Title {
     font-weight: thin;

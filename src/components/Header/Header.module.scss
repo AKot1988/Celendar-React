@@ -1,11 +1,8 @@
 @import "../../app/variables.scss";
 
 .container {
-  width: 100vw;
-  // background: $mainBackground;
-  position: fixed;
-  top: 0;
-  left: 0;
+  flex-shrink: 0;
+  background-color: $mainBackground;
 }
 
 .header {
@@ -18,7 +15,7 @@
   max-width: $contentWidth;
   margin: 0 auto;
   height: 100px;
-  background: $mainGrayGradient;
+  background: $mainGradient;
 
   &Logo {
     width: 70px;

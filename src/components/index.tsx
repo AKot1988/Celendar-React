@@ -1,13 +1,14 @@
-export {default as Header} from './Header/Header'
-export {default as Footer} from './Footer/Footer'
-export {default as CustomNavLink} from './CustomNavLink/CustomNavLink'
-export {default as UniversalModal} from './UniversalModal/UniversalModal'
-export {default as UniversalForm} from './UniversalForm/UniversalForm'
-export {default as Input} from './Input/Input.tsx'
-export {default as Day} from './Day/Day.tsx'
-export {default as AddButton} from './AddButton/AddButton.tsx'
-export {default as Loader} from './Loader/Loader.tsx'
-export {default as BasicDateDayCalendar} from './BasicDateDayCalendar/BasicDateDayCalendar.tsx'
-export {default as BasicDateRangeCalendar} from './BasicDateRangeCalendar/BasicDateRangeCalendar.tsx'
-export {default as BasicStaticDateTimePicker} from './BasicStaticDateTimePicker/BasicStaticDateTimePicker.tsx'
-export {default as MuiXLicense} from './MUILisense/MUILisense.tsx'
+export { default as Header } from "./Header/Header";
+export { default as Footer } from "./Footer/Footer";
+export { default as CustomNavLink } from "./CustomNavLink/CustomNavLink";
+export { default as UniversalModal } from "./UniversalModal/UniversalModal";
+export { default as UniversalForm } from "./UniversalForm/UniversalForm";
+export { default as Input } from "./Input/Input.tsx";
+export { default as Day } from "./Day/Day.tsx";
+export { default as AddButton } from "./AddButton/AddButton.tsx";
+export { default as Loader } from "./Loader/Loader.tsx";
+export { default as Task } from "./Task/Task.tsx";
+export { default as BasicDateDayCalendar } from "./BasicDateDayCalendar/BasicDateDayCalendar.tsx";
+export { default as BasicDateRangeCalendar } from "./BasicDateRangeCalendar/BasicDateRangeCalendar.tsx";
+export { default as BasicStaticDateTimePicker } from "./BasicStaticDateTimePicker/BasicStaticDateTimePicker.tsx";
+export { default as MuiXLicense } from "./MUILisense/MUILisense.tsx";

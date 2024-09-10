@@ -12,9 +12,15 @@
 .calendarPage {
   box-sizing: border-box;
   width: 100%;
+  height: 100%;
   max-width: $contentWidth;
-  background: $mainBackground;
+  background: $mainGradient;
   border: 0px solid $mainGray;
   padding: 10px;
   margin: 0 auto;
+}
+
+.calendarWrapper {
+  width: 100%;
+  background-color: $mainBackground;
 }
