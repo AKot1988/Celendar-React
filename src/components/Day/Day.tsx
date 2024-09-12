@@ -1,11 +1,13 @@
 import { FC } from "react";
-import { useParams, Outlet } from "react-router-dom";
+import { Navigate, useParams, useNavigate } from "react-router-dom";
 import { AUTH_USER_ROUTES } from "../../router/routesNames";
-import { dateToDisplay, DayDataProps, dateMapper} from "./helper";
+import { dateToDisplay, DayDataProps, dateMapper, SVG } from "./helper";
 import { AddButton } from "../index.tsx";
+import { dayTaskColor } from "../../pages/Calendar/helper";
 import classes from "./Day.module.scss";
 
 const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
+  const navigate = useNavigate();
   const { currentUser, day } = useParams();
   content.sort((a, b) => {
     const dateA = new Date(a.begin);
@@ -20,21 +22,45 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
             type="link"
             to={`${AUTH_USER_ROUTES.CALENDAR}/${currentUser}/${day}/newTask`}
           />
-          <p>{`Задачі на ${dateMapper(day as string)}`}</p>
+          <h2>{`Задачі на ${dateMapper(day as string)}`}</h2>
         </div>
-        {content.map((item: DayDataProps) => (
-          <div key={item.id} className={classes.dayWrapper}>
-            <div className={classes.dayItem}>
+        <div className={classes.dayWrapper}>
+          {content.map((item: DayDataProps) => (
+            <div
+              key={item.id}
+              className={classes.dayItem}
+              style={{
+                background: dayTaskColor(item.priority),
+              }}
+              onClick={() => {
+                console.log("open page with extended info");
+              }}
+            >
               <h3>{item.title}</h3>
-              <p>{item.description}</p>
               <p>{`Початок:  ${dateToDisplay(item.begin)}`}</p>
-              <p>{`Завершення:  ${dateToDisplay(item.end)}`}</p>
-              <p>{item.owner}</p>
-              <p>{item.type}</p>
+
               <p>{item.priority}</p>
+              <div className={classes.dayEditToolsContainer}>
+                <SVG
+                  onClick={(ev: Event) => {
+                    ev.stopPropagation();
+                    navigate(`${AUTH_USER_ROUTES.CALENDAR}/${currentUser}/${day}/${item.id}/edit`);
+                  }}
+                  className={classes.dayEditTools}
+                  type="edit"
+                />
+                <SVG
+                  onClick={(ev: Event) => {
+                    ev.stopPropagation();
+                    console.log("delete " + item.id);
+                  }}
+                  className={classes.dayEditTools}
+                  type="trash"
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </>
   ) : (

@@ -16,6 +16,7 @@ export { default as DayPage } from "./DayPage/DayPage.tsx";
 export { default as Task } from "./Task/Task.tsx";
 export { default as Profile } from "./Profile/Profile.tsx";
 export { default as NewTask } from "./NewTask/NewTask.tsx";
+export { default as Edit } from "./Edit/Edit.tsx";
 
 //Layout
 export { default as Layout } from "./Layout/Layout.tsx";

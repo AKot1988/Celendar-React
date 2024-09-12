@@ -48,11 +48,28 @@ export const getEventsByUserAndDay = async function ({
     }
   });
   if (!checkDoesUserHaveEvents) {
-    console.log("У користувача немає подій");
   }
 
   return userEvents; //повернення подій користувача за конкретний день у вигляді масиву
 };
+
+
+
+export const editEventAction = async function (
+  editedEvent: NewEventData
+) {
+  const docRef = doc(collection(db, "events"), auth.currentUser?.uid);
+  const allEvents = await getEventsByUser();
+  const updatedEventsArray = allEvents.map((event: NewEventData) => {
+    if (event.id === editedEvent.id) {
+      return editedEvent;
+    } else {
+      return event;
+    }
+  });
+  await setDoc(docRef, { taskList: [...updatedEventsArray] });
+};
+
 
 export const getEventsByUser = async function () {
   const currentUser = auth.currentUser?.uid;
@@ -69,4 +86,23 @@ export const getEventsByUser = async function () {
   }
 
   return userEvents; //повернення подій користувача у вигляді масиву
+};
+
+export const getEventsByUserDayId = async function ({
+  params,
+}: LoaderFunctionArgs) {
+  const { currentUser, day, id } = params;
+  const querySnapshot = await getDocs(collection(db, "events"));
+  let eventToEdit: NewEventData | null = null;
+  querySnapshot.forEach((doc) => {
+    if (doc.id === currentUser) {
+      const taskToEdit = doc
+        .data()
+        .taskList.find((event: NewEventData) => event.id === id);
+      eventToEdit = taskToEdit;
+    } else {
+      throw new Error("Подія не знайдена");
+    }
+  });
+  return eventToEdit;
 };

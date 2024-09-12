@@ -1,6 +1,7 @@
-import { Calendar, DayPage, Task, Profile, NewTask } from "../pages";
+import { Calendar, DayPage, Task, Profile, NewTask, Edit } from "../pages";
 import { AUTH_USER_ROUTES } from "./routesNames";
-import { getEventsByUserAndDay, getEventsByUser } from "../firebase/API";
+import { getEventsByUserAndDay, getEventsByUser, editEventAction, getEventsByUserDayId } from "../firebase/API";
+import { EditAction } from "../pages/Edit/Edit";
 import { newTaskAction } from "../pages/NewTask/NewTask";
 
 export const authorizedUserRouter = [
@@ -26,9 +27,10 @@ export const authorizedUserRouter = [
             element: <NewTask />,
           },
           {
-            path: `${AUTH_USER_ROUTES.CALENDAR}/:currentUser/:day/:id`,
-            action: newTaskAction,
-            element: <Task />,
+            path: `${AUTH_USER_ROUTES.CALENDAR}/:currentUser/:day/:id/edit`,
+            action: EditAction,
+            loader: getEventsByUserDayId,
+            element: <Edit/>,
           },
         ],
       },

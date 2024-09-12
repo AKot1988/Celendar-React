@@ -15,11 +15,12 @@ const Input: FC<InputElementProps> = ({
 }: InputElementProps) => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [valueData, setValueData] = useState<string | number | undefined>("");
-  // const [valueDate, setValueDate] = useState<string | number | undefined>("");
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
-    let newValue: string
-    type === InputType.DATEPICKER? newValue = value: newValue = (e.target as HTMLInputElement).value;
+    let newValue: string;
+    type === InputType.DATEPICKER
+      ? (newValue = value)
+      : (newValue = (e.target as HTMLInputElement).value);
     setErrorMessage(validation(type, newValue));
     setValueData(newValue);
   };
@@ -27,7 +28,7 @@ const Input: FC<InputElementProps> = ({
   useEffect(() => {
     setValueData(value);
   }, [value]);
-  
+
   switch (type) {
     case InputType.SELECT:
       return (
