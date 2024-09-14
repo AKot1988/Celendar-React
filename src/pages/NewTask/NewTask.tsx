@@ -28,7 +28,8 @@ export const newTaskAction = async function ({ request }: ActionFunctionArgs) {
 };
 
 const NewTask: FC = () => {
-  const { currentUser, day } = useParams();
+  const { day } = useParams();
+  console.log(day)
   const [visBegin, setVisBegin] = useState(false);
   const [visEnd, setVisEnd] = useState(false);
   NewTaskFormConfig.inputs[2].onFocus = () => setVisBegin(!visBegin);

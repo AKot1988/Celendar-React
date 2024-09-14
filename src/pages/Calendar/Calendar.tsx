@@ -10,7 +10,7 @@ import classes from "./Calendar.module.scss";
 
 const CalendarPage: FC = () => {
   const navigate = useNavigate();
-  const userEvents: NewEventData[] = useLoaderData();
+  const userEvents = useLoaderData() as NewEventData[];
 
   return (
     <div className={classes.calendarPage}>

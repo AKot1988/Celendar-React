@@ -74,7 +74,7 @@ export const EditTaskFormConfig: FormProps = {
       },
     ],
     button: {
-      text: "Add event",
+      text: "Edit event",
       clickHandler: () => {},
     },
   };
