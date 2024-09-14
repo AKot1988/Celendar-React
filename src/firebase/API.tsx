@@ -1,4 +1,11 @@
-import { collection, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  setDoc,
+  DocumentReference,
+} from "firebase/firestore";
 import { auth, db } from "./firebase";
 import { NewUserFormData, NewEventData } from "./types.tsx";
 import { ROLES } from "../router/types";
@@ -53,11 +60,27 @@ export const getEventsByUserAndDay = async function ({
   return userEvents; //повернення подій користувача за конкретний день у вигляді масиву
 };
 
+export const deleteEventAction = async function (eventToDelete: NewEventData) {
+  const currentUser = auth.currentUser?.uid;
+  if (!currentUser) {
+    throw new Error("User not authenticated");
+  }
 
+  const docRef = doc(db, "events", currentUser);
+  const docSnapshot = await getDoc(docRef);
 
-export const editEventAction = async function (
-  editedEvent: NewEventData
-) {
+  if (!docSnapshot.exists()) {
+    throw new Error("User events document does not exist");
+  }
+
+  const userEvents = (docSnapshot.data()?.taskList as NewEventData[]) || [];
+
+  const updatedEvents = userEvents.filter((el) => el.id !== eventToDelete.id);
+
+  await setDoc(docRef, { taskList: updatedEvents });
+};
+
+export const editEventAction = async function (editedEvent: NewEventData) {
   const docRef = doc(collection(db, "events"), auth.currentUser?.uid);
   const allEvents = await getEventsByUser();
   const updatedEventsArray = allEvents.map((event: NewEventData) => {
@@ -69,7 +92,6 @@ export const editEventAction = async function (
   });
   await setDoc(docRef, { taskList: [...updatedEventsArray] });
 };
-
 
 export const getEventsByUser = async function () {
   const currentUser = auth.currentUser?.uid;

@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Navigate, useParams, useNavigate } from "react-router-dom";
 import { AUTH_USER_ROUTES } from "../../router/routesNames";
 import { dateToDisplay, DayDataProps, dateMapper, SVG } from "./helper";
+import { deleteEventAction } from "../../firebase/API";
 import { AddButton } from "../index.tsx";
 import { dayTaskColor } from "../../pages/Calendar/helper";
 import classes from "./Day.module.scss";
@@ -44,7 +45,9 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
                 <SVG
                   onClick={(ev: Event) => {
                     ev.stopPropagation();
-                    navigate(`${AUTH_USER_ROUTES.CALENDAR}/${currentUser}/${day}/${item.id}/edit`);
+                    navigate(
+                      `${AUTH_USER_ROUTES.CALENDAR}/${currentUser}/${day}/${item.id}/edit`
+                    );
                   }}
                   className={classes.dayEditTools}
                   type="edit"
@@ -53,6 +56,13 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
                   onClick={(ev: Event) => {
                     ev.stopPropagation();
                     console.log("delete " + item.id);
+                    const confirmation = confirm(`"Видалити " ${item.title}`);
+                    if (confirmation) {
+                      deleteEventAction(item);
+                    }
+                    navigate(
+                      `${AUTH_USER_ROUTES.CALENDAR}/${currentUser}/${day}`
+                    );
                   }}
                   className={classes.dayEditTools}
                   type="trash"

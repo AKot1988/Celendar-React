@@ -6,11 +6,11 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: start;
+    justify-content: start;
     max-width: $contentWidth;
     background: $mainGradient;
     border: 0px solid $mainGray;
-    padding: 10px;
+    padding: 50px;
     margin: 0 auto;
   }

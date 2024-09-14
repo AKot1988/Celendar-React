@@ -23,6 +23,7 @@ const BasicStaticDateTimePicker: FC<DatePickerProps> = ({
           onAccept(val);
         }}
         timezone="system"
+        displayWeekNumber={true}
       />
     </LocalizationProvider>
   );
