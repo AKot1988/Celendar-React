@@ -10,6 +10,7 @@ import { editEventAction } from "../../firebase/API";
 import { NewEventData, PRIORITY } from "../../firebase/types.tsx";
 import { EditTaskFormConfig } from "./helper.tsx";
 import classes from "./Edit.module.scss";
+import { dateUniMapper } from "../Calendar/helper";
 
 export const EditAction = async function ({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
@@ -24,8 +25,9 @@ export const EditAction = async function ({ request }: ActionFunctionArgs) {
   };
 
   await editEventAction(editedTaskData);
+  console.log(`/calendar/${editedTaskData.owner}/${dateUniMapper(editedTaskData.begin)}`);
   return redirect(
-    `/calendar/${formData.get("currentUser")}/${formData.get("day")}`
+    `/calendar/${editedTaskData.owner}/${dateUniMapper(editedTaskData.begin)}`
   );
 };
 
@@ -43,7 +45,6 @@ const Edit: FC = () => {
       }
     });
   }, []);
-  console.log(EditTaskFormConfig)
   EditTaskFormConfig.inputs[2].onFocus = () =>
     setBeginModalState(!beginModalState);
   EditTaskFormConfig.inputs[3].onFocus = () => setEndModalState(!endModalState);
@@ -59,10 +60,8 @@ const Edit: FC = () => {
             onAccept={(value) => {
               if (value) {
                 const dateBegin = new Date(value.toString());
-                console.log(dateBegin);
                 EditTaskFormConfig.inputs[2].value = dateBegin;
               }
-              console.log(EditTaskFormConfig);
               setBeginModalState(!beginModalState);
             }}
           />
