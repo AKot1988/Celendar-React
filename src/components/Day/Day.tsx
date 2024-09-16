@@ -1,11 +1,12 @@
 import { FC } from "react";
-import { Navigate, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { AUTH_USER_ROUTES } from "../../router/routesNames";
 import { dateToDisplay, DayDataProps, dateMapper, SVG } from "./helper";
 import { deleteEventAction } from "../../firebase/API";
 import { AddButton } from "../index.tsx";
 import { dayTaskColor } from "../../pages/Calendar/helper";
 import classes from "./Day.module.scss";
+import { NewEventData } from "../../firebase/types.tsx";
 
 const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
               <p>{item.priority}</p>
               <div className={classes.dayEditToolsContainer}>
                 <SVG
-                  onClick={(ev: Event) => {
+                  onClick={(ev) => {
                     ev.stopPropagation();
                     navigate(
                       `${AUTH_USER_ROUTES.CALENDAR}/${currentUser}/${day}/${item.id}/edit`
@@ -53,12 +54,12 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
                   type="edit"
                 />
                 <SVG
-                  onClick={(ev: Event) => {
+                  onClick={(ev) => {
                     ev.stopPropagation();
                     console.log("delete " + item.id);
                     const confirmation = confirm(`"Видалити " ${item.title}`);
                     if (confirmation) {
-                      deleteEventAction(item);
+                      deleteEventAction(item as NewEventData);
                     }
                     navigate(
                       `${AUTH_USER_ROUTES.CALENDAR}/${currentUser}/${day}`

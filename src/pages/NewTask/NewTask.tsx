@@ -9,6 +9,7 @@ import { NewTaskFormConfig, dateMapper } from "./helper";
 import { auth } from "../../firebase/firebase";
 import { setNewEvent } from "../../firebase/API";
 import { NewEventData, PRIORITY } from "../../firebase/types";
+import {dateUniMapper} from "../Calendar/helper";
 
 export const newTaskAction = async function ({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
@@ -23,13 +24,12 @@ export const newTaskAction = async function ({ request }: ActionFunctionArgs) {
   };
   setNewEvent(newTaskData);
   return redirect(
-    `/calendar/${formData.get("currentUser")}/${formData.get("day")}`
+    `/calendar/${newTaskData.owner}/${dateUniMapper(newTaskData.begin)}`
   );
 };
 
 const NewTask: FC = () => {
   const { day } = useParams();
-  console.log(day)
   const [visBegin, setVisBegin] = useState(false);
   const [visEnd, setVisEnd] = useState(false);
   NewTaskFormConfig.inputs[2].onFocus = () => setVisBegin(!visBegin);

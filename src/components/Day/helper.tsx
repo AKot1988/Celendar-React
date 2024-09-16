@@ -51,7 +51,7 @@ export const SVG = ({ onClick, className, type }: svgProps) => {
     case "edit": {
       return (
         <svg
-          onClick={onClick}
+          onClick={()=>onClick}
           className={className}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 512 512"
@@ -63,7 +63,7 @@ export const SVG = ({ onClick, className, type }: svgProps) => {
     case "trash": {
       return (
         <svg
-          onClick={onClick}
+          onClick={()=>onClick}
           className={className}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 448 512"

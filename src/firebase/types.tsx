@@ -56,11 +56,10 @@ export type DatePattern = {
 };
 
 export type NewEventData = {
-  date?: DatePattern;
   title?: string;
+  description?: string;
   begin: string;
   end: string;
-  description?: string;
   owner: string | undefined;
   type?: string;
   priority?: PRIORITY;
