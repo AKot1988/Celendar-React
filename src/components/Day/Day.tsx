@@ -1,14 +1,45 @@
 import { FC } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AUTH_USER_ROUTES } from "../../router/routesNames";
-import { dateToDisplay, DayDataProps, dateMapper, SVG } from "./helper";
+import { dateToDisplay, DayDataProps, dateMapper, MSVG } from "./helper";
 import { deleteEventAction } from "../../firebase/API";
 import { AddButton } from "../index.tsx";
 import { dayTaskColor } from "../../pages/Calendar/helper";
 import classes from "./Day.module.scss";
 import { NewEventData } from "../../firebase/types.tsx";
 
+import { motion } from "framer-motion";
 
+const textAnimation = {
+  hidden: {
+    opacity: 0,
+    x: -100,
+  },
+  visible: (custom: number) => ({
+    transition: { delay: custom * 0.2 },
+    opacity: 1,
+    x: 0,
+  }),
+};
+
+const rotateSVGs = {
+  hidden: {
+    opacity: 1,
+    x: 0,
+  },
+  whileHover: {
+    rotate: 360,
+    transition: {
+      duration: 1,
+      repeat: Infinity,
+    },
+  },
+  whileTap: {
+    scale: 0.8,
+    rotate: -90,
+    borderRadius: "100%",
+  },
+};
 
 const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
   const navigate = useNavigate();
@@ -30,7 +61,9 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
         </div>
         <div className={classes.dayWrapper}>
           {content.map((item: DayDataProps) => (
-            <div
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
               key={item.id}
               className={classes.dayItem}
               style={{
@@ -40,12 +73,22 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
                 console.log("open page with extended info");
               }}
             >
-              <h3>{item.title}</h3>
-              <p>{`Початок:  ${dateToDisplay(item.begin)}`}</p>
+              <motion.h3 custom={1} variants={textAnimation}>
+                {item.title}
+              </motion.h3>
+              <motion.p
+                custom={2}
+                variants={textAnimation}
+              >{`Початок:  ${dateToDisplay(item.begin)}`}</motion.p>
 
-              <p>{item.priority}</p>
+              <motion.p custom={3} variants={textAnimation}>
+                {item.priority}
+              </motion.p>
               <div className={classes.dayEditToolsContainer}>
-                <SVG
+                <MSVG
+                  custom={4}
+                  variants={rotateSVGs}
+                  whileHover={{ scale: 1.2, rotate: 360 }}
                   onClick={(ev) => {
                     ev.stopPropagation();
                     navigate(
@@ -55,7 +98,10 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
                   className={classes.dayEditTools}
                   type="edit"
                 />
-                <SVG
+                <MSVG
+                  custom={4}
+                  variants={rotateSVGs}
+                  whileHover={{ scale: 1.2, rotate: 360 }}
                   onClick={(ev) => {
                     ev.stopPropagation();
                     const confirmation = confirm(`"Видалити " ${item.title}`);
@@ -70,7 +116,7 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
                   type="trash"
                 />
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

@@ -4,6 +4,8 @@ import { auth } from "../../firebase/firebase";
 import { NewEventData } from "../../firebase/types";
 import { AUTH_USER_ROUTES } from "../../router/routesNames";
 import Calendar from "react-calendar";
+import { motion } from "framer-motion";
+import { textAnimation, calendarAnimation } from "../../components/Animations/Animations.tsx";
 import { dateUniMapper, dayTaskColor } from "./helper";
 import "react-calendar/dist/Calendar.css";
 import classes from "./Calendar.module.scss";
@@ -13,10 +15,12 @@ const CalendarPage: FC = () => {
   const userEvents = useLoaderData() as NewEventData[];
 
   return (
-    <div className={classes.calendarPage}>
-      <h1>My calendar</h1>
+    <motion.div initial="hidden" whileInView="visible" className={classes.calendarPage}>
+      <motion.h1 custom={1.5} variants={textAnimation}>My calendar</motion.h1>
+      <motion.div custom={1} variants={calendarAnimation} className={classes.calendarWrapper}>
+
       <Calendar
-        onClickDay={(value, event) => {
+        onClickDay={(value) => {
           const dayURL = dateUniMapper(value);
           navigate(
             `${AUTH_USER_ROUTES.CALENDAR}/${auth.currentUser?.uid}/${dayURL}`
@@ -46,7 +50,8 @@ const CalendarPage: FC = () => {
           </>
         )}
       />
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

@@ -1,4 +1,6 @@
 import { MOUNTHS, WEEKDAYS, UKRMOUNTS } from "../../firebase/types";
+import { forwardRef } from "react";
+import { motion } from "framer-motion";
 
 export type DayDataProps = {
   title: string;
@@ -46,11 +48,12 @@ type svgProps = {
   type: string;
 };
 
-export const SVG = ({ onClick, className, type }: svgProps) => {
+export const SVG = forwardRef(({ onClick, className, type }: svgProps, ref) => {
   switch (type) {
     case "edit": {
       return (
         <svg
+          ref={ref}
           onClick={onClick}
           className={className}
           xmlns="http://www.w3.org/2000/svg"
@@ -63,6 +66,7 @@ export const SVG = ({ onClick, className, type }: svgProps) => {
     case "trash": {
       return (
         <svg
+          ref={ref}
           onClick={onClick}
           className={className}
           xmlns="http://www.w3.org/2000/svg"
@@ -76,4 +80,6 @@ export const SVG = ({ onClick, className, type }: svgProps) => {
       return null;
     }
   }
-};
+});
+
+export const MSVG = motion(SVG);
