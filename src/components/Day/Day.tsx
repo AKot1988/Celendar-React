@@ -8,6 +8,8 @@ import { dayTaskColor } from "../../pages/Calendar/helper";
 import classes from "./Day.module.scss";
 import { NewEventData } from "../../firebase/types.tsx";
 
+
+
 const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
   const navigate = useNavigate();
   const { currentUser, day } = useParams();
@@ -56,7 +58,6 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
                 <SVG
                   onClick={(ev) => {
                     ev.stopPropagation();
-                    console.log("delete " + item.id);
                     const confirmation = confirm(`"Видалити " ${item.title}`);
                     if (confirmation) {
                       deleteEventAction(item as NewEventData);
