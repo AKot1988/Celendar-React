@@ -1,6 +1,11 @@
 import { collection, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
-import { auth, db } from "./firebase";
-import { NewEventData, USERCREATETYPE } from "./types.tsx";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { auth, db, firebaseApp } from "./firebase";
+import {
+  NewEventData,
+  USERCREATETYPE,
+  addFileToStorageProps,
+} from "./types.tsx";
 import { ROLES } from "../router/types";
 import { dateUniMapper } from "../pages/Calendar/helper";
 import { LoaderFunctionArgs } from "react-router-dom";
@@ -9,6 +14,34 @@ import { userDataProps } from "./types.tsx";
 export const usersCollectionRef = collection(db, "users");
 export const eventsCollectionRef = collection(db, "events");
 
+export const storage = getStorage(
+  firebaseApp,
+  "gs://calendar-react-85cff.appspot.com"
+);
+export const storageRef = ref(storage);
+
+//storage operations
+export const addFileToStorage = async ({
+  element,
+  userId,
+}: addFileToStorageProps) => {
+  const file = element.files?.[0];
+  if (!file) {
+    console.error("No file selected");
+    return;
+  }
+
+  const fileRef = ref(storage, `UsersAvatars/${file.name}_${userId}`);
+  try {
+    const snapshot = await uploadBytes(fileRef, file);
+    console.log("Uploaded a blob or file!", snapshot);
+    console.log("Type of snapshot:", typeof snapshot);
+  } catch (error) {
+    console.error("Error uploading file:", error);
+  }
+};
+
+//real time database operations
 export const getUserData = async function () {
   const UID = auth.currentUser?.uid;
   const docRef = doc(usersCollectionRef, UID);
@@ -28,8 +61,7 @@ export const writeUserData = async function (
   userData: userDataProps,
   type: string
 ) {
-
-  const userEventsRef = doc(db, 'events', `${UID}`);
+  const userEventsRef = doc(db, "events", `${UID}`);
   switch (type) {
     case USERCREATETYPE.CREATE: {
       await setDoc(doc(usersCollectionRef, UID), {

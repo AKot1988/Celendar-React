@@ -87,3 +87,8 @@ export type NewEventData = {
   priority?: PRIORITY;
   id: string;
 };
+
+export type addFileToStorageProps = {
+  element: HTMLInputElement;
+  userId: string | undefined;
+}

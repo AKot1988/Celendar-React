@@ -1,6 +1,7 @@
 import { Method, FormProps } from "../../components/UniversalForm/types";
 import { InputType, FormType } from "../../components/Input/type";
 import { COMMON_ROUTES } from "../../router/routesNames";
+import { addFileToStorage } from "../../firebase/firebase";
 
 export type LoginProps = {
   closeModal: () => void;
@@ -81,6 +82,16 @@ export const newUserFormData: FormProps = {
           label: "Неоприділився",
         },
       ],
+    },
+    {
+      id: "file",
+      label: "Add your photo",
+      type: InputType.FILE,
+      placeHolder: "tap to add photo",
+      name: "photo",
+      value: "",
+      required: false,
+      onChange: () => {},
     },
     {
       id: "formType",

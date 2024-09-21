@@ -43,7 +43,7 @@ const ProfileEdit: FC = () => {
     const dataKeys = Object.keys(data);
     profileEditProps.inputs.forEach((input) => {
       if (dataKeys.includes(input.name)) {
-        input.value = data[input.name];
+        input.value = data[input.name as keyof userDataProps] as string;
       }
     });
   }, []);
