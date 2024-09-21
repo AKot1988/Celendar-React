@@ -19,12 +19,14 @@ export const newUserFormData: FormProps = {
   inputs: [
     {
       id: '1',
+      label: "Name",
       type: InputType.TEXT,
       placeHolder: 'Enter your username',
       name: 'name',
     },
     {
       id: '2',
+      label: "Password",
       type: InputType.PASSWORD,
       placeHolder: 'Enter your password',
       name: 'password',
@@ -32,18 +34,28 @@ export const newUserFormData: FormProps = {
     },
     {
       id: '3',
+      label: "E-mail",
       type: InputType.EMAIL,
       placeHolder: 'Enter your email',
       name: 'email',
     },
     {
       id: '4',
+      label: "Birthdate",
       type: InputType.DATE,
       placeHolder: 'Select your birthdate',
       name: 'birthdate',
     },
     {
       id: '5',
+      label: "Smth about yourself",
+      type: InputType.TEXTAREA,
+      placeHolder: 'leave smth about yourself',
+      name: 'about',
+    },
+    {
+      id: '6',
+      label: "Ім'я",
       type: InputType.SELECT,
       placeHolder: 'Оберіть стать',
       value: 'Оберіть стать',
@@ -64,7 +76,7 @@ export const newUserFormData: FormProps = {
       ],
     },
     {
-      id: '6',
+      id: '7',
       type: InputType.HIDDEN,
       value: FormType.SIGNUP,
       name: 'formType',

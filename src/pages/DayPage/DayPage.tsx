@@ -7,7 +7,7 @@ import DayDataProps from "../../components/Day/Day";
 import classes from './DayPage.module.scss';
 
 const DayPage: FC = () => {
-  const loderData: DayDataProps = useLoaderData();
+  const loderData = useLoaderData() as DayDataProps;
   const navigate = useNavigate();
   const [dayVisible, setDayVisible] = useState(true);
   if (!dayVisible) {

@@ -9,7 +9,10 @@ import { NewTaskFormConfig, dateMapper } from "./helper";
 import { auth } from "../../firebase/firebase";
 import { setNewEvent } from "../../firebase/API";
 import { NewEventData, PRIORITY } from "../../firebase/types";
-import {dateUniMapper} from "../Calendar/helper";
+import { dateUniMapper } from "../Calendar/helper";
+import { motion } from "framer-motion";
+import { textAnimation } from "../../components/Animations/Animations";
+import classes from "./NewTask.module.scss";
 
 export const newTaskAction = async function ({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
@@ -20,7 +23,7 @@ export const newTaskAction = async function ({ request }: ActionFunctionArgs) {
     end: formData.get("end") as string,
     priority: formData.get("priority") as PRIORITY | undefined,
     owner: auth.currentUser?.uid,
-    id: Date.now().toString(36) + Math.random().toString(36) as string
+    id: (Date.now().toString(36) + Math.random().toString(36)) as string,
   };
   setNewEvent(newTaskData);
   return redirect(
@@ -35,47 +38,53 @@ const NewTask: FC = () => {
   NewTaskFormConfig.inputs[2].onFocus = () => setVisBegin(!visBegin);
   NewTaskFormConfig.inputs[3].onFocus = () => setVisEnd(!visEnd);
   return (
-    <>
-      <UniversalForm data={NewTaskFormConfig} />
-      {visBegin && (
-        <UniversalModal
-          title="Set begin date/time"
-          content={
-            <BasicStaticDateTimePicker
-              initDate={new Date(dateMapper(day as string))}
-              onAccept={(val) => {
-                if(val){
-                  const date = new Date(val.toString())
-                  NewTaskFormConfig.inputs[2].value = date;
-                } else {throw new Error("Invalid date")}
-                setVisBegin(!visBegin);
-              }}
-            />
-          }
-          visible={visBegin}
-          setVisible={setVisBegin}
-        />
-      )}
-      {visEnd && (
-        <UniversalModal
-          title="Set begin date/time"
-          content={
-            <BasicStaticDateTimePicker
-              onAccept={(val) => {
-                if(val){
-                  const date = new Date(val.toString())
-                  NewTaskFormConfig.inputs[3].value = date;
-                } else {throw new Error("Invalid date")}
-                setVisEnd(!visEnd);
-              }}
-              initDate={new Date(dateMapper(day as string))}
-            />
-          }
-          visible={visEnd}
-          setVisible={setVisEnd}
-        />
-      )}
-    </>
+    <div className={classes.newTaskWrapper}>
+      <motion.div initial="hidden" whileInView="visible" custom={2} variants={textAnimation}>
+        <UniversalForm data={NewTaskFormConfig} />
+        {visBegin && (
+          <UniversalModal
+            title="Set begin date/time"
+            content={
+              <BasicStaticDateTimePicker
+                initDate={new Date(dateMapper(day as string))}
+                onAccept={(val) => {
+                  if (val) {
+                    const date = new Date(val.toString());
+                    NewTaskFormConfig.inputs[2].value = date;
+                  } else {
+                    throw new Error("Invalid date");
+                  }
+                  setVisBegin(!visBegin);
+                }}
+              />
+            }
+            visible={visBegin}
+            setVisible={setVisBegin}
+          />
+        )}
+        {visEnd && (
+          <UniversalModal
+            title="Set begin date/time"
+            content={
+              <BasicStaticDateTimePicker
+                onAccept={(val) => {
+                  if (val) {
+                    const date = new Date(val.toString());
+                    NewTaskFormConfig.inputs[3].value = date;
+                  } else {
+                    throw new Error("Invalid date");
+                  }
+                  setVisEnd(!visEnd);
+                }}
+                initDate={new Date(dateMapper(day as string))}
+              />
+            }
+            visible={visEnd}
+            setVisible={setVisEnd}
+          />
+        )}
+      </motion.div>
+    </div>
   );
 };
 

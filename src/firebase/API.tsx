@@ -1,16 +1,11 @@
-import {
-  collection,
-  getDocs,
-  doc,
-  getDoc,
-  setDoc,
-  DocumentReference,
-} from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "./firebase";
-import { NewUserFormData, NewEventData } from "./types.tsx";
+import { NewEventData, USERCREATETYPE } from "./types.tsx";
 import { ROLES } from "../router/types";
 import { dateUniMapper } from "../pages/Calendar/helper";
 import { LoaderFunctionArgs } from "react-router-dom";
+import { userDataProps } from './types.tsx'
+import { getDatabase } from "firebase/database";
 
 export const usersCollectionRef = collection(db, "users");
 export const eventsCollectionRef = collection(db, "events");
@@ -20,21 +15,60 @@ export const getUserData = async function () {
   const docRef = doc(usersCollectionRef, UID);
   const docSnap = await getDoc(docRef);
   return docSnap.data();
+};
+
+export const createUserEvCollection = async function (UID: string) {
+  await setDoc(doc(eventsCollectionRef, UID), {
+    taskList: [],
+  });
 }
 
-export const addNewUserToBase = async function (
+// can use for update user data
+export const writeUserData = async function (
   UID: string,
-  userData: NewUserFormData
+  userData: userDataProps,
+  type: string
 ) {
-  await setDoc(doc(usersCollectionRef, UID), {
-    created_at: new Date(),
-    name: userData.name,
-    birthdate: userData.birthdate,
-    gender: userData.gender,
-    role: ROLES.AUTHORIZED_USER,
-    updated_at: new Date(),
-  });
+  const userEventsCollectionRef = collection(db, "events", UID);
+  console.log("userEv    ", userEventsCollectionRef);
+  switch (type) {
+    case USERCREATETYPE.CREATE: {
+      await setDoc(doc(usersCollectionRef, UID), {
+        created_at: new Date(),
+        name: userData.name,
+        birthdate: userData.birthdate,
+        gender: userData.gender,
+        role: ROLES.AUTHORIZED_USER,
+        updated_at: new Date(),
+        about: userData.about,
+        password: userData.password,
+        email: userData.email,
+        // eventsCollectionRef: collection(db, "events", UID),
+      });
+      break;
+    }
+    case USERCREATETYPE.EDIT: {
+      const docRef = doc(collection(db, "users"), auth.currentUser?.uid);
+      await setDoc(docRef, {
+        created_at: userData.created_at,
+        name: userData.name,
+        birthdate: userData.birthdate,
+        gender: userData.gender,
+        role: userData.role,
+        updated_at: new Date(),
+        about: userData.about,
+        password: userData.password,
+        email: userData.email,
+        // eventsCollectionRef: collection(db, "events", UID),
+      });
+      break;
+    }
+    default: {
+      throw new Error("Unknown user creation type");
+    }
+  }
 };
+
 
 //Функція створення нового івенту
 export const setNewEvent = async function (data: NewEventData) {

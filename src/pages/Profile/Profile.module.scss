@@ -12,5 +12,28 @@
     background: $mainGradient;
     border: 0px solid $mainGray;
     padding: 10px;
+    padding-left: 100px;
     margin: 0 auto;
+
+    &Photo{
+        width: 100px;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+    }
+
+    &EditButton {
+        display: block;
+        margin-top: 15px;
+        width: 100px;
+        padding: 10px 15px;
+        background-color: $lightGray;
+        border-radius: 5px;
+        color: #000000;
+        text-align: center;
+  
+        &:hover {
+          color: $main;
+          background-color: $mainBackground;
+        }
+    }
 }

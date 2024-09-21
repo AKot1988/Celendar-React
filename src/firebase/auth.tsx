@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
 import { googleAuthProvider, auth } from './firebase'
-import { addNewUserToBase } from './API'
-import { NewUserFormData } from './types.tsx'
+import { writeUserData, createUserEvCollection } from './API'
+import { userDataProps } from './types.tsx'
 
 /**
  * Function creates a new user and automatically signs in with new user credentials.
@@ -13,10 +13,11 @@ import { NewUserFormData } from './types.tsx'
 * @param {string} password - new user's password;
 */
 
-export const signUpWithEmailAndPassword = (newUserData: NewUserFormData) => {
-  return createUserWithEmailAndPassword(auth, newUserData.email, newUserData.password) // This is the function that creates a new user
+export const signUpWithEmailAndPassword = (newUserData: userDataProps) => {
+  return createUserWithEmailAndPassword(auth, newUserData.email as string, newUserData.password as string) // This is the function that creates a new user
     .then((userCredential) => {
-      addNewUserToBase(userCredential.user.uid, newUserData)
+      writeUserData(userCredential.user.uid, newUserData, "create")
+      createUserEvCollection(userCredential.user.uid)
       // Signed up
       const user = userCredential.user;
     })
@@ -74,8 +75,6 @@ export const googleSignOut = async () => {
   });
 
 }
-
-
 
 /**
  * Function signs out current user.

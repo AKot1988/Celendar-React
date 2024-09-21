@@ -1,15 +1,6 @@
 @import "../../app/variables.scss";
 
-.calendarTile {
-  height: 100px;
-  width: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-}
-
-.calendarPage {
+.profileEditPage {
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -21,10 +12,6 @@
   background: $mainGradient;
   border: 0px solid $mainGray;
   padding: 10px;
+  padding-left: 100px;
   margin: 0 auto;
-}
-
-.calendarWrapper {
-  width: 100%;
-  background-color: $mainBackground;
 }

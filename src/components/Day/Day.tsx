@@ -5,41 +5,14 @@ import { dateToDisplay, DayDataProps, dateMapper, MSVG } from "./helper";
 import { deleteEventAction } from "../../firebase/API";
 import { AddButton } from "../index.tsx";
 import { dayTaskColor } from "../../pages/Calendar/helper";
+import {
+  textAnimation,
+  rotateSVGs,
+} from "../../components/Animations/Animations";
 import classes from "./Day.module.scss";
 import { NewEventData } from "../../firebase/types.tsx";
 
 import { motion } from "framer-motion";
-
-const textAnimation = {
-  hidden: {
-    opacity: 0,
-    x: -100,
-  },
-  visible: (custom: number) => ({
-    transition: { delay: custom * 0.2 },
-    opacity: 1,
-    x: 0,
-  }),
-};
-
-const rotateSVGs = {
-  hidden: {
-    opacity: 1,
-    x: 0,
-  },
-  whileHover: {
-    rotate: 360,
-    transition: {
-      duration: 1,
-      repeat: Infinity,
-    },
-  },
-  whileTap: {
-    scale: 0.8,
-    rotate: -90,
-    borderRadius: "100%",
-  },
-};
 
 const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
   const navigate = useNavigate();
@@ -99,7 +72,7 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
                   type="edit"
                 />
                 <MSVG
-                  custom={4}
+                  custom={1}
                   variants={rotateSVGs}
                   whileHover={{ scale: 1.2, rotate: 360 }}
                   onClick={(ev) => {

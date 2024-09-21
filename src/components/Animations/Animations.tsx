@@ -1,7 +1,8 @@
-import { duration } from "@mui/material";
+import { teal } from "@mui/material/colors";
+import { style } from "framer-motion/client";
 
 export const textAnimation = {
-    hidden: { opacity: 0, x: -100 },
+    hidden: { opacity: 0, x: -100, style: { color: "teal" } },
     visible: (custom: number) => ({
       opacity: 1,
       x: 0,
@@ -22,3 +23,24 @@ export const calendarAnimation = {
       },
     }),
 }
+
+export const rotateSVGs = {
+  hidden: {
+    opacity: 1,
+    x: 0,
+    fill: teal,
+  },
+  whileHover: {
+    rotate: 360,
+    fill: "teal",
+    transition: {
+      duration: 1,
+      repeat: Infinity,
+    },
+  },
+  whileTap: {
+    scale: 0.8,
+    rotate: -90,
+    borderRadius: "100%",
+  },
+};

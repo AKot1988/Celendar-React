@@ -1,6 +1,28 @@
+import { Timestamp } from "firebase/firestore";
+
 export type NewUserFormData = {
-  [key: string]: string;
+  [key: string]: string | undefined | number;
 };
+
+export type userDataProps = {
+  name: string;
+  birthdate: string;
+  about?: string;
+  email: string;
+  password: string;
+  updated_at: string | Timestamp | number;
+  created_at: string | Timestamp | number;
+  role: string;
+  gender: string;
+  events: string;
+  photoURL?: string;
+  avatar?: string;
+};
+
+export enum USERCREATETYPE {
+  CREATE = "create",
+  EDIT = "edit",
+}
 
 export enum PRIORITY {
   LOW = "low",

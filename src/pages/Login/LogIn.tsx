@@ -4,7 +4,6 @@ import {
   logInWithEmailAndPassword,
   signUpWithEmailAndPassword,
 } from "../../firebase/auth";
-import { checkDoesUserHaveEvents } from "../../firebase/API";
 import { ActionFunctionArgs, redirect } from "react-router-dom";
 import {
   CustomNavLink,
@@ -12,19 +11,23 @@ import {
   UniversalForm,
 } from "../../components/index.tsx";
 import { logInData, newUserFormData } from "./helper";
-import { COMMON_ROUTES } from "../../router/routesNames";
+import { COMMON_ROUTES, AUTH_USER_ROUTES } from "../../router/routesNames";
 import classes from "./LogIn.module.scss";
-import { auth } from "../../firebase/firebase.tsx";
 
 export const authType = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const newUserData = {
     name: formData.get("name") as string,
+    birthdate: formData.get("birthdate") as string,
+    about: formData.get("about") as string,
     email: formData.get("email") as string,
     password: formData.get("password") as string,
-    birthdate: formData.get("birthdate") as string,
+    updated_at: new Date().getTime(),
+    created_at: new Date().getTime(),
+    role: "authorizedUser",
     gender: formData.get("gender") as string,
-    formType: formData.get("formType") as string,
+    events: "",
+    // formType: formData.get("formType") as string,
   };
 
   switch (formData.get("formType")) {
@@ -34,7 +37,7 @@ export const authType = async ({ request }: ActionFunctionArgs) => {
     }
     case "logIn": {
       logInWithEmailAndPassword(newUserData.email, newUserData.password);
-      return redirect(COMMON_ROUTES.HOME);
+      return redirect(AUTH_USER_ROUTES.CALENDAR);
     }
     default:
       throw new Error("Unknown/empty form type");

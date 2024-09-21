@@ -1,14 +1,8 @@
-import { Timestamp } from "firebase/firestore";
+import { CustomNavLinkProps } from "../../components/CustomNavLink/CustomNavLink.tsx";
+import { AUTH_USER_ROUTES } from "../../router/routesNames.tsx";
 
-export type userDataProps = {
-birthdate: string,
-created_at: string | Timestamp,
-email: string,
-events: string,
-gender: string,
-name: string,
-password: string,
-role: string,
-updated_at: string | Timestamp,
-photoURL?: string,
-}
+export const navlinkEditProfProp: CustomNavLinkProps = {
+  title: "Редагувати",
+  path: `${AUTH_USER_ROUTES.PROFILE}/edit`,
+  className: "editProfile",
+};
