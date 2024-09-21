@@ -31,17 +31,14 @@ export const profileEditAction = async function ({
     events: userData?.events as string,
   };
 
-  console.log("editedProfileData ", editedProfileData);
 
   await writeUserData(auth.currentUser?.uid as string, editedProfileData, "edit");
-  console.log(formData);
   return redirect(`${AUTH_USER_ROUTES.PROFILE}`);
 };
 
 const ProfileEdit: FC = () => {
   const data = useLoaderData() as userDataProps;
   userData = data;
-  console.log("userData ", userData);
   useEffect(() => {
     const dataKeys = Object.keys(data);
     profileEditProps.inputs.forEach((input) => {

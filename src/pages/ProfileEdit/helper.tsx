@@ -63,7 +63,6 @@ export const profileEditProps: FormProps = {
     ],
     button: {
         text: 'Save',
-        clickHandler: () => console.log('Profile updated'),
     },
     redirect: AUTH_USER_ROUTES.PROFILE,
 }

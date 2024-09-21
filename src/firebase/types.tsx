@@ -1,4 +1,4 @@
-import { Timestamp } from "firebase/firestore";
+import { Timestamp, DocumentReference } from "firebase/firestore";
 
 export type NewUserFormData = {
   [key: string]: string | undefined | number;
@@ -14,7 +14,7 @@ export type userDataProps = {
   created_at: string | Timestamp | number;
   role: string;
   gender: string;
-  events: string;
+  events: string | DocumentReference;
   photoURL?: string;
   avatar?: string;
 };

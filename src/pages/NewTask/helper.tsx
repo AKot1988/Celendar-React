@@ -65,7 +65,6 @@ export const NewTaskFormConfig: FormProps = {
   ],
   button: {
     text: "Add event",
-    clickHandler: () => {},
   },
 };
 

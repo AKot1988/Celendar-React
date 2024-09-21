@@ -1,120 +1,125 @@
-import {
-  googleSignIn,
-  googleSignOut,
-  logInWithEmailAndPassword,
-  signUpWithEmailAndPassword,
-} from '../../firebase/auth';
-import { Method, FormProps } from '../../components/UniversalForm/types';
-import { InputType, FormType } from '../../components/Input/type';
-import { AUTH_USER_ROUTES, COMMON_ROUTES } from '../../router/routesNames';
+import { Method, FormProps } from "../../components/UniversalForm/types";
+import { InputType, FormType } from "../../components/Input/type";
+import { COMMON_ROUTES } from "../../router/routesNames";
 
 export type LoginProps = {
   closeModal: () => void;
 };
 
 export const newUserFormData: FormProps = {
-  title: 'Новий користувач',
+  title: "Новий користувач",
   action: COMMON_ROUTES.LOGIN,
   method: Method.POST,
   inputs: [
-    {
-      id: '1',
+    { 
+      id: "name",
       label: "Name",
       type: InputType.TEXT,
-      placeHolder: 'Enter your username',
-      name: 'name',
+      placeHolder: "Enter your username",
+      name: "name",
+      value: "",
+      required: true,
+      onChange: () => {},
     },
     {
-      id: '2',
+      id: "password",
       label: "Password",
       type: InputType.PASSWORD,
-      placeHolder: 'Enter your password',
-      name: 'password',
+      placeHolder: "Enter your password",
+      name: "password",
+      value: "",
       required: true,
+      onChange: () => {},
     },
     {
-      id: '3',
+      id: "email",
       label: "E-mail",
       type: InputType.EMAIL,
-      placeHolder: 'Enter your email',
-      name: 'email',
+      placeHolder: "Enter your email",
+      name: "email",
+      required: true,
+      onChange: () => {},
     },
     {
-      id: '4',
+      id: "birthdate",
       label: "Birthdate",
       type: InputType.DATE,
-      placeHolder: 'Select your birthdate',
-      name: 'birthdate',
+      placeHolder: "Select your birthdate",
+      name: "birthdate",
+      value: "",
+      required: true,
+      onChange: () => {},
     },
     {
-      id: '5',
+      id: "about",
       label: "Smth about yourself",
       type: InputType.TEXTAREA,
-      placeHolder: 'leave smth about yourself',
-      name: 'about',
+      placeHolder: "leave smth about yourself",
+      name: "about",
+      value: "",
+      required: true,
+      onChange: () => {},
     },
     {
-      id: '6',
-      label: "Ім'я",
+      id: "gender",
+      label: "Gender",
       type: InputType.SELECT,
-      placeHolder: 'Оберіть стать',
-      value: 'Оберіть стать',
-      name: 'gender',
+      placeHolder: "Оберіть стать",
+      value: "Оберіть стать",
+      name: "gender",
       options: [
         {
-          value: 'Чоловік',
-          label: 'Чоловік',
+          value: "Чоловік",
+          label: "Чоловік",
         },
         {
-          value: 'Жінка',
-          label: 'Жінка',
+          value: "Жінка",
+          label: "Жінка",
         },
         {
-          value: 'Неоприділився',
-          label: 'Неоприділився',
+          value: "Неоприділився",
+          label: "Неоприділився",
         },
       ],
     },
     {
-      id: '7',
+      id: "formType",
       type: InputType.HIDDEN,
       value: FormType.SIGNUP,
-      name: 'formType',
+      name: "formType",
     },
   ],
   button: {
-    text: 'Зарееструватись',
-    clickHandler: () => {},
+    text: "Зарееструватись",
   },
 };
 
 export const logInData: FormProps = {
-  title: 'Введіть дані для входу',
+  title: "Введіть дані для входу",
   action: COMMON_ROUTES.LOGIN,
   method: Method.POST,
   inputs: [
     {
-      id: '1',
+      id: "email",
       type: InputType.EMAIL,
-      placeHolder: 'Enter your email',
-      name: 'email',
+      placeHolder: "Enter your email",
+      name: "email",
     },
     {
-      id: '2',
+      id: "password",
       type: InputType.PASSWORD,
-      placeHolder: 'Enter your password',
-      name: 'password',
+      placeHolder: "Enter your password",
+      name: "password",
       required: true,
     },
     {
-      id: '3',
+      id: "formType",
       type: InputType.HIDDEN,
       value: FormType.LOGIN,
-      name: 'formType',
+      name: "formType",
     },
   ],
   button: {
-    text: 'Увійти',
-    clickHandler: () => {},
+    text: "Увійти",
   },
 };

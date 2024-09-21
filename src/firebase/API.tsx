@@ -4,8 +4,7 @@ import { NewEventData, USERCREATETYPE } from "./types.tsx";
 import { ROLES } from "../router/types";
 import { dateUniMapper } from "../pages/Calendar/helper";
 import { LoaderFunctionArgs } from "react-router-dom";
-import { userDataProps } from './types.tsx'
-import { getDatabase } from "firebase/database";
+import { userDataProps } from "./types.tsx";
 
 export const usersCollectionRef = collection(db, "users");
 export const eventsCollectionRef = collection(db, "events");
@@ -21,7 +20,7 @@ export const createUserEvCollection = async function (UID: string) {
   await setDoc(doc(eventsCollectionRef, UID), {
     taskList: [],
   });
-}
+};
 
 // can use for update user data
 export const writeUserData = async function (
@@ -29,8 +28,8 @@ export const writeUserData = async function (
   userData: userDataProps,
   type: string
 ) {
-  const userEventsCollectionRef = collection(db, "events", UID);
-  console.log("userEv    ", userEventsCollectionRef);
+
+  const userEventsRef = doc(db, 'events', `${UID}`);
   switch (type) {
     case USERCREATETYPE.CREATE: {
       await setDoc(doc(usersCollectionRef, UID), {
@@ -43,7 +42,7 @@ export const writeUserData = async function (
         about: userData.about,
         password: userData.password,
         email: userData.email,
-        // eventsCollectionRef: collection(db, "events", UID),
+        eventsCollectionRef: userEventsRef,
       });
       break;
     }
@@ -59,7 +58,7 @@ export const writeUserData = async function (
         about: userData.about,
         password: userData.password,
         email: userData.email,
-        // eventsCollectionRef: collection(db, "events", UID),
+        eventsCollectionRef: userEventsRef,
       });
       break;
     }
@@ -68,7 +67,6 @@ export const writeUserData = async function (
     }
   }
 };
-
 
 //Функція створення нового івенту
 export const setNewEvent = async function (data: NewEventData) {
