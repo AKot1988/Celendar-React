@@ -1,8 +1,10 @@
 import { FC, useState, useEffect } from "react";
-import { auth } from '../../firebase/firebase'
 import { InputType, InputElementProps } from "../Input/type";
 import classes from "./Input.module.scss";
+
+import { auth } from "../../firebase/firebase";
 import { addFileToStorage } from "../../firebase/API";
+import { imageDestination } from "../../firebase/types";
 
 const Input: FC<InputElementProps> = ({
   type,
@@ -19,17 +21,20 @@ const Input: FC<InputElementProps> = ({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [valueData, setValueData] = useState<string | number | undefined>("");
 
-  const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleOnChange = async (e: React.FormEvent<HTMLInputElement>) => {
     let newValue: string;
     switch (type) {
       case InputType.FILE: {
-        newValue = (e.target as HTMLInputElement).value;
-        console.dir(e.target);
-        addFileToStorage({element: e.target as HTMLInputElement, userId: auth.currentUser?.uid});
+        // newValue = await addFileToStorage({
+        //   element: e.target as HTMLInputElement,
+        //   userId: auth.currentUser?.uid,
+        //   imagePurpose: imageDestination.AVATAR,
+        // });
+        newValue = onChange(ev);
         break;
       }
       case InputType.DATEPICKER: {
-        newValue = value;
+        newValue = value as string;
         break;
       }
       default: {
@@ -41,20 +46,29 @@ const Input: FC<InputElementProps> = ({
     setValueData(newValue);
   };
 
-  // const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
-  //   let newValue: string;
-  //   type === InputType.DATEPICKER
-  //     ? (newValue = value)
-  //     : (newValue = (e.target as HTMLInputElement).value);
-  //   setErrorMessage(validation(type, newValue));
-  //   setValueData(newValue);
-  // };
-
   useEffect(() => {
-    setValueData(value);
+    setValueData(value as string);
   }, [value]);
-
+  
   switch (type) {
+    case InputType.FILE:
+      return (
+        <label className={classes.inputContainer}>
+          <span className={classes.inputLabel}>{label}</span>
+          <p className={classes.error}>{errorMessage}</p>
+          <input
+            onChange={handleOnChange}
+            type={type}
+            placeholder={placeHolder}
+            name={name}
+            className={classes.inputItem}
+            required={required}
+            autoComplete="off"
+            data-URL={valueData}
+          />
+          <input type="hidden" name={"loadedImageURL"} value={valueData} />
+        </label>
+      );
     case InputType.SELECT:
       return (
         <label className={classes.inputContainer}>
@@ -94,24 +108,6 @@ const Input: FC<InputElementProps> = ({
           />
         </label>
       );
-      case InputType.FILE:
-        return (
-          <label className={classes.inputContainer}>
-            <span className={classes.inputLabel}>{label}</span>
-            <p className={classes.error}>{errorMessage}</p>
-            <input
-              onChange={handleOnChange}
-              type={type}
-              placeholder={placeHolder}
-              name={name}
-              className={classes.inputItem}
-              required={required}
-              value={valueData}
-              // onInput={handleOnChange}
-              autoComplete="off"
-            />
-          </label>
-        );
     default:
       return (
         <label className={classes.inputContainer}>
@@ -124,7 +120,7 @@ const Input: FC<InputElementProps> = ({
             className={classes.inputItem}
             required={required}
             value={valueData}
-            onInput={handleOnChange}
+            onInput={onChange}
           />
         </label>
       );

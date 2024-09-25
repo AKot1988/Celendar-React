@@ -39,4 +39,5 @@ export type InputElementProps = {
   label?: string;
   onFocus?: () => void;
   autoComplete?: string;
+  className?: string;
 };

@@ -82,4 +82,4 @@ export const SVG = forwardRef(({ onClick, className, type }: svgProps, ref) => {
   }
 });
 
-export const MSVG = motion(SVG);
+export const MSVG = motion.create(SVG);

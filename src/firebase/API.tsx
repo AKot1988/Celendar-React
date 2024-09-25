@@ -1,44 +1,52 @@
 import { collection, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
-import { auth, db, firebaseApp } from "./firebase";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { auth, db, storage, firebaseApp } from "./firebase";
 import {
   NewEventData,
   USERCREATETYPE,
   addFileToStorageProps,
+  imageDestination,
 } from "./types.tsx";
 import { ROLES } from "../router/types";
 import { dateUniMapper } from "../pages/Calendar/helper";
 import { LoaderFunctionArgs } from "react-router-dom";
 import { userDataProps } from "./types.tsx";
+import { image } from "framer-motion/client";
 
 export const usersCollectionRef = collection(db, "users");
 export const eventsCollectionRef = collection(db, "events");
 
-export const storage = getStorage(
-  firebaseApp,
-  "gs://calendar-react-85cff.appspot.com"
-);
-export const storageRef = ref(storage);
+//створення посилавння на сзовище
+const storageRef = ref(storage);
+//створення посилання на папку з аватарками користувачів
+const usersAvatarsRef = ref(storage, "UsersAvatars");
+//створення посилання на аватарку користувача
+const myAvatarRef = ref(storage, "UsersAvatars/Аватарка.jpg");
 
-//storage operations
 export const addFileToStorage = async ({
   element,
   userId,
+  imagePurpose,
 }: addFileToStorageProps) => {
   const file = element.files?.[0];
   if (!file) {
     console.error("No file selected");
     return;
   }
+  const stringPatern =
+    imagePurpose === imageDestination.AVATAR
+      ? `UsersAvatars/`
+      : `EventsImages/`;
 
-  const fileRef = ref(storage, `UsersAvatars/${file.name}_${userId}`);
+  const fileRef = ref(storage, `${stringPatern}${file.name}_${userId}`);
   try {
-    const snapshot = await uploadBytes(fileRef, file);
-    console.log("Uploaded a blob or file!", snapshot);
-    console.log("Type of snapshot:", typeof snapshot);
+    await uploadBytes(fileRef, file);
   } catch (error) {
     console.error("Error uploading file:", error);
   }
+  const downloadURL = await getDownloadURL(fileRef);
+  console.log("Download URL:", downloadURL);
+  return downloadURL;
 };
 
 //real time database operations
@@ -75,6 +83,7 @@ export const writeUserData = async function (
         password: userData.password,
         email: userData.email,
         eventsCollectionRef: userEventsRef,
+        avatar: userData.avatar,
       });
       break;
     }
@@ -91,6 +100,7 @@ export const writeUserData = async function (
         password: userData.password,
         email: userData.email,
         eventsCollectionRef: userEventsRef,
+        avatar: userData.avatar,
       });
       break;
     }

@@ -1,7 +1,9 @@
 import { FormProps, Method } from '../../components/UniversalForm/types.tsx';
 import { InputType } from '../../components/Input/type.tsx';
-
 import { AUTH_USER_ROUTES } from '../../router/routesNames';
+import { auth } from "../../firebase/firebase";
+import { addFileToStorage } from "../../firebase/API";
+import { imageDestination } from "../../firebase/types";
 
 export const profileEditProps: FormProps = {
     title: 'Edit Profile',
@@ -9,37 +11,50 @@ export const profileEditProps: FormProps = {
     method: Method.POST,
     inputs: [
         {
-            id: '1',
+            id: 'name',
             type: InputType.TEXT,
             placeHolder: 'Name',
             value: '',
             name: 'name',
             required: true,
             label: 'Name',
-            onFocus: () => console.log('Name field focused'),
         },
         {
-            id: '2',
+            id: 'birthdate',
             type: InputType.DATE,
             placeHolder: 'select your birthdate',
             value: '',
             name: 'birthdate',
             required: true,
             label: 'Birthday',
-            onFocus: () => console.log('Name field focused'),
         },
         {
-            id: '3',
+            id: 'about',
             type: InputType.TEXTAREA,
             placeHolder: 'Smth about you',
             value: '',
             name: 'about',
             required: true,
             label: 'Leave smth about you',
-            onFocus: () => console.log('Name field focused'),
         },
         {
-            id: '4',
+          id: "photo",
+          label: "Add your photo",
+          type: InputType.FILE,
+          placeHolder: "tap to add photo",
+          name: "photo",
+          value: "",
+          required: false,
+          onChange: async (ev) => {
+            await addFileToStorage({
+              element: ev.target as HTMLInputElement,
+              userId: auth.currentUser?.uid,
+              imagePurpose: imageDestination.AVATAR,
+            });
+          },
+        },
+        {
+            id: 'gender',
             type: InputType.SELECT,
             placeHolder: 'Оберіть стать',
             value: 'Оберіть стать',

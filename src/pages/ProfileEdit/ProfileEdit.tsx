@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { useLoaderData, redirect, ActionFunctionArgs } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
-import { addNewUserToBase, writeUserData } from "../../firebase/API";
+import { writeUserData } from "../../firebase/API";
 import { userDataProps } from "../../firebase/types.tsx";
 import { UniversalForm } from "../../components";
 import { AUTH_USER_ROUTES } from "../../router/routesNames";
@@ -10,9 +10,8 @@ import { profileEditProps } from "./helper";
 import { motion } from "framer-motion";
 import { textAnimation } from "../../components/Animations/Animations";
 import classes from "./ProfileEdit.module.scss";
-import { use } from "framer-motion/client";
 
-let userData: userDataProps | null
+let userData: userDataProps | null;
 
 export const profileEditAction = async function ({
   request,
@@ -29,12 +28,17 @@ export const profileEditAction = async function ({
     role: userData?.role as ROLES,
     gender: formData.get("gender") as string,
     events: userData?.events as string,
+    avatar: formData.get("loadedImageURL") as string,
   };
+  console.log(editedProfileData);
 
-
-  await writeUserData(auth.currentUser?.uid as string, editedProfileData, "edit");
-  return redirect(`${AUTH_USER_ROUTES.PROFILE}`);
-};
+  await writeUserData(
+    auth.currentUser?.uid as string,
+    editedProfileData,
+    "edit"
+  );
+    return redirect(`${AUTH_USER_ROUTES.PROFILE}`);
+  };
 
 const ProfileEdit: FC = () => {
   const data = useLoaderData() as userDataProps;

@@ -25,13 +25,13 @@ const Profile: FC = () => {
         <motion.p custom={3} variants={textAnimation}>
           Прізвище: {userData.name.split(" ")[1]}
         </motion.p>
-        <motion.p custom={3} variants={textAnimation}>
+        <motion.p custom={4} variants={textAnimation}>
           Додаткова інформація: {userData.about}
         </motion.p>
-        <motion.p custom={4}variants={textAnimation}>
+        <motion.p custom={5}variants={textAnimation}>
           День народження: {userData.birthdate}
         </motion.p>
-        <motion.p custom={5} variants={textAnimation}>Стать: {userData.gender}</motion.p>
+        <motion.p custom={6} variants={textAnimation}>Стать: {userData.gender}</motion.p>
         <CustomNavLink {...navlinkEditProfProp} className={classes.profilePageEditButton}></CustomNavLink>
       </motion.div>
     </motion.div>
