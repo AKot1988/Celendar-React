@@ -1,3 +1,6 @@
+import { FormEvent } from "react";
+import { imageDestination } from "../../firebase/types";
+
 export enum InputType {
   TEXT = "text",
   TEXTAREA = "textarea",
@@ -34,10 +37,11 @@ export type InputElementProps = {
   name: string;
   required?: boolean | undefined;
   options?: SelectOption[];
-  onChange?: () => void;
   value?: string | FormType.LOGIN | FormType.SIGNUP | Date | undefined | number;
   label?: string;
-  onFocus?: () => void;
   autoComplete?: string;
   className?: string;
+  onFocus?: () => void;
+  onChange?: (ev: Event | FormEvent<HTMLInputElement>) => void;
+  imagePurpose?: imageDestination;
 };

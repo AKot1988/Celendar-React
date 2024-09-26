@@ -20,6 +20,7 @@ const UniversalForm: FC<{ data: FormProps }> = ({ data }) => {
           options={input.options}
           label={input.label}
           onFocus={input.onFocus}
+          imagePurpose={input.imagePurpose}
         />
       ))}
       <button

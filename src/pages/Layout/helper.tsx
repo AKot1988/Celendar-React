@@ -1,6 +1,6 @@
 import { COMMON_ROUTES, AUTH_USER_ROUTES } from "../../router/routesNames"
-const authorizedUserLogo = 'https://img.freepik.com/free-vector/hand-drawn-cat-logo-template_23-2150503762.jpg?w=1800&t=st=1719493737~exp=1719494337~hmac=53ba09b81355b3d035c3fdbad0dec82eaebfa85bd7a78fa1f8499cfe119065f5'
-const guestLogo = 'https://img.freepik.com/free-vector/cat-logo-design-template_23-2150438262.jpg?w=1800&t=st=1719485426~exp=1719486026~hmac=691139a947e7dbfbe8e46ef5c00f2ff671722545677a5a9ac28115e79db62a7b'
+const authorizedUserLogo = 'https://firebasestorage.googleapis.com/v0/b/calendar-react-85cff.appspot.com/o/commonImages%2F%D0%9A%D1%83%D1%81%D1%8F%20%D0%B1%D0%B0%D1%82%D1%8C%D0%BA%D0%BE%D0%B2%D0%BD%D0%B0%20%23b5b5b5.jpg?alt=media&token=3ba6dbf5-6101-4e22-a4ee-5a27f10ca864'
+const guestLogo = 'https://firebasestorage.googleapis.com/v0/b/calendar-react-85cff.appspot.com/o/commonImages%2F%D0%9A%D1%83%D1%81%D1%8F%20%D0%B1%D0%B0%D1%82%D1%8C%D0%BA%D0%BE%D0%B2%D0%BD%D0%B0%20%23b5b5b5.jpg?alt=media&token=3ba6dbf5-6101-4e22-a4ee-5a27f10ca864'
 export const headerProps = {
   authorizedUser: {
     logo: authorizedUserLogo,

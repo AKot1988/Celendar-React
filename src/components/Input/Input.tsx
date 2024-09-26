@@ -5,6 +5,7 @@ import classes from "./Input.module.scss";
 import { auth } from "../../firebase/firebase";
 import { addFileToStorage } from "../../firebase/API";
 import { imageDestination } from "../../firebase/types";
+import { th } from "framer-motion/client";
 
 const Input: FC<InputElementProps> = ({
   type,
@@ -17,20 +18,25 @@ const Input: FC<InputElementProps> = ({
   label,
   onFocus = () => {},
   onChange = () => {},
+  imagePurpose,
 }: InputElementProps) => {
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null | undefined>(
+    null
+  );
   const [valueData, setValueData] = useState<string | number | undefined>("");
 
   const handleOnChange = async (e: React.FormEvent<HTMLInputElement>) => {
-    let newValue: string;
+    let newValue: string | undefined;
     switch (type) {
       case InputType.FILE: {
-        // newValue = await addFileToStorage({
-        //   element: e.target as HTMLInputElement,
-        //   userId: auth.currentUser?.uid,
-        //   imagePurpose: imageDestination.AVATAR,
-        // });
-        newValue = onChange(ev);
+        if (!imagePurpose) {
+          throw new Error("imagePurpose is required for file input");
+        }
+        newValue = await addFileToStorage({
+          element: e.target as HTMLInputElement,
+          userId: auth.currentUser?.uid,
+          imagePurpose: imagePurpose as imageDestination,
+        });
         break;
       }
       case InputType.DATEPICKER: {
@@ -49,7 +55,7 @@ const Input: FC<InputElementProps> = ({
   useEffect(() => {
     setValueData(value as string);
   }, [value]);
-  
+
   switch (type) {
     case InputType.FILE:
       return (
@@ -60,13 +66,11 @@ const Input: FC<InputElementProps> = ({
             onChange={handleOnChange}
             type={type}
             placeholder={placeHolder}
-            name={name}
             className={classes.inputItem}
             required={required}
             autoComplete="off"
-            data-URL={valueData}
           />
-          <input type="hidden" name={"loadedImageURL"} value={valueData} />
+          <input type="hidden" name={name} value={valueData} />
         </label>
       );
     case InputType.SELECT:
@@ -75,7 +79,7 @@ const Input: FC<InputElementProps> = ({
           <span className={classes.inputLabel}>{label}</span>
           <p className={classes.error}>{errorMessage}</p>
           <select name={name} className={classes.inputItem} required={required}>
-            <option className={classes.inputItem} disabled value={value}>
+            <option className={classes.inputItem} disabled value={valueData}>
               {placeHolder}
             </option>
             {options.map((option) => (
@@ -128,7 +132,7 @@ const Input: FC<InputElementProps> = ({
 };
 export default Input;
 
-const validation = (type: InputType, value: string): string => {
+const validation = (type: InputType, value: string): string | undefined => {
   switch (type) {
     case InputType.TEXT:
       return value.length <= 3 ? "Введіть більше 3-x символів" : "";

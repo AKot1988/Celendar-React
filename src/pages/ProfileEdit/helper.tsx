@@ -1,8 +1,6 @@
 import { FormProps, Method } from '../../components/UniversalForm/types.tsx';
 import { InputType } from '../../components/Input/type.tsx';
 import { AUTH_USER_ROUTES } from '../../router/routesNames';
-import { auth } from "../../firebase/firebase";
-import { addFileToStorage } from "../../firebase/API";
 import { imageDestination } from "../../firebase/types";
 
 export const profileEditProps: FormProps = {
@@ -45,13 +43,7 @@ export const profileEditProps: FormProps = {
           name: "photo",
           value: "",
           required: false,
-          onChange: async (ev) => {
-            await addFileToStorage({
-              element: ev.target as HTMLInputElement,
-              userId: auth.currentUser?.uid,
-              imagePurpose: imageDestination.AVATAR,
-            });
-          },
+          imagePurpose: imageDestination.AVATAR,
         },
         {
             id: 'gender',

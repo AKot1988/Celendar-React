@@ -1,6 +1,6 @@
 import { collection, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { auth, db, storage, firebaseApp } from "./firebase";
+import { auth, db, storage } from "./firebase";
 import {
   NewEventData,
   USERCREATETYPE,
@@ -11,7 +11,6 @@ import { ROLES } from "../router/types";
 import { dateUniMapper } from "../pages/Calendar/helper";
 import { LoaderFunctionArgs } from "react-router-dom";
 import { userDataProps } from "./types.tsx";
-import { image } from "framer-motion/client";
 
 export const usersCollectionRef = collection(db, "users");
 export const eventsCollectionRef = collection(db, "events");
@@ -33,11 +32,19 @@ export const addFileToStorage = async ({
     console.error("No file selected");
     return;
   }
-  const stringPatern =
-    imagePurpose === imageDestination.AVATAR
-      ? `UsersAvatars/`
-      : `EventsImages/`;
+  let stringPatern = ''
+  switch (imagePurpose) {
+    case imageDestination.AVATAR:
+      stringPatern = imageDestination.AVATAR;
+      break
+    case imageDestination.EVENT:
+      stringPatern = imageDestination.EVENT;
+      break
+    default:
+      throw new Error("Unknown image purpose");
+  };
 
+  console.log(stringPatern);
   const fileRef = ref(storage, `${stringPatern}${file.name}_${userId}`);
   try {
     await uploadBytes(fileRef, file);

@@ -89,13 +89,12 @@ export type NewEventData = {
 };
 
 export enum imageDestination {
-  AVATAR = "UsersAvatars",
-  EVENT = "EventsImages",
-  DEFAULT = "default",
+  AVATAR = "UsersAvatars/",
+  EVENT = "EventsImages/",
 }
 
 export type addFileToStorageProps = {
   element: HTMLInputElement;
   userId: string | undefined;
-  imagePurpose: imageDestination
-}
+  imagePurpose: imageDestination;
+};

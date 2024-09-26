@@ -28,7 +28,7 @@ export const profileEditAction = async function ({
     role: userData?.role as ROLES,
     gender: formData.get("gender") as string,
     events: userData?.events as string,
-    avatar: formData.get("loadedImageURL") as string,
+    avatar: formData.get("photo") as string,
   };
   console.log(editedProfileData);
 
@@ -37,8 +37,8 @@ export const profileEditAction = async function ({
     editedProfileData,
     "edit"
   );
-    return redirect(`${AUTH_USER_ROUTES.PROFILE}`);
-  };
+  return redirect(`${AUTH_USER_ROUTES.PROFILE}`);
+};
 
 const ProfileEdit: FC = () => {
   const data = useLoaderData() as userDataProps;
