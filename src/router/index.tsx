@@ -7,6 +7,7 @@ import { Layout, Not_Found } from "../pages";
 import { ROLES } from "./types";
 import { auth } from '../firebase/firebase';
 import { onAuthStateChanged } from "firebase/auth"
+import { getUserData } from "../firebase/API";
 
 
 const createRouterByRole = (role: ROLES) => {
@@ -32,6 +33,7 @@ const AppRouter = () => {
     element: <Layout/>,
     errorElement: <Not_Found/>,
     children: createRouterByRole(currentRole),
+    loader: getUserData,
     },
   ]);
   return (

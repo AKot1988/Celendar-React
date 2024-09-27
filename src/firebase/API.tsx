@@ -58,7 +58,13 @@ export const getUserData = async function () {
   const UID = auth.currentUser?.uid;
   const docRef = doc(usersCollectionRef, UID);
   const docSnap = await getDoc(docRef);
-  return docSnap.data();
+  let data = null;
+  if (!docSnap) {
+    data = null;
+  } else {
+    data = docSnap.data();
+  }
+  return data;
 };
 
 export const createUserEvCollection = async function (UID: string) {
@@ -194,7 +200,7 @@ export const getEventsByUser = async function () {
 export const getEventsByUserDayId = async function ({
   params,
 }: LoaderFunctionArgs) {
-  const { currentUser, day, id } = params;
+  const { currentUser, id } = params;
   const querySnapshot = await getDocs(collection(db, "events"));
   let eventToEdit: NewEventData | null = null;
   querySnapshot.forEach((doc) => {
@@ -206,4 +212,10 @@ export const getEventsByUserDayId = async function ({
     }
   });
   return eventToEdit;
+};
+
+export const loaderToHeader = async function () {
+  return {
+    userData: await getUserData(),
+  };
 };
