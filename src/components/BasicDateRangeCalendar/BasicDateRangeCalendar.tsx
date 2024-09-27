@@ -13,9 +13,7 @@ const BasicDateRangeCalendar: FC = () => {
     dayjs(date),
     dayjs(date),
   ]);
-  useEffect(() => {
-    console.log('value', value);
-  }, [value]);
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DateRangeCalendar']}>

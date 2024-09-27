@@ -32,17 +32,17 @@ export const addFileToStorage = async ({
     console.error("No file selected");
     return;
   }
-  let stringPatern = ''
+  let stringPatern = "";
   switch (imagePurpose) {
     case imageDestination.AVATAR:
       stringPatern = imageDestination.AVATAR;
-      break
+      break;
     case imageDestination.EVENT:
       stringPatern = imageDestination.EVENT;
-      break
+      break;
     default:
       throw new Error("Unknown image purpose");
-  };
+  }
   const fileRef = ref(storage, `${stringPatern}${file.name}_${userId}`);
   try {
     await uploadBytes(fileRef, file);
@@ -50,7 +50,6 @@ export const addFileToStorage = async ({
     console.error("Error uploading file:", error);
   }
   const downloadURL = await getDownloadURL(fileRef);
-  console.log("Download URL:", downloadURL);
   return downloadURL;
 };
 
@@ -186,7 +185,7 @@ export const getEventsByUser = async function () {
     }
   });
   if (!checkDoesUserHaveEvents) {
-    console.log("У користувача немає подій");
+    throw new Error("У користувача немає подій");
   }
 
   return userEvents;
@@ -204,8 +203,6 @@ export const getEventsByUserDayId = async function ({
         .data()
         .taskList.find((event: NewEventData) => event.id === id);
       eventToEdit = taskToEdit;
-    } else {
-      throw new Error("Подія не знайдена");
     }
   });
   return eventToEdit;

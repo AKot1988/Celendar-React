@@ -54,7 +54,6 @@ export const profileEditProps: FormProps = {
               userId: auth.currentUser?.uid,
               imagePurpose: imageDestination.AVATAR,
             });
-            console.log(`download URL from profileEditProps: ${downloadURL}`);
             return downloadURL;
           },
         },

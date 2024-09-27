@@ -25,7 +25,7 @@ export const EditAction = async function ({ request }: ActionFunctionArgs) {
   };
 
   await editEventAction(editedTaskData);
-  console.log(`/calendar/${editedTaskData.owner}/${dateUniMapper(editedTaskData.begin)}`);
+
   return redirect(
     `/calendar/${editedTaskData.owner}/${dateUniMapper(editedTaskData.begin)}`
   );

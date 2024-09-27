@@ -30,8 +30,6 @@ export const profileEditAction = async function ({
     events: userData?.events as string,
     avatar: formData.get("photo") as string,
   };
-  console.log(editedProfileData);
-
   await writeUserData(
     auth.currentUser?.uid as string,
     editedProfileData,

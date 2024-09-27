@@ -40,9 +40,9 @@ const Input: FC<InputElementProps> = ({
       }
       default: {
         newValue = (e.target as HTMLInputElement).value;
+        break
       }
     }
-    console.log(`Downloaded URL in Input ${newValue}`)
     setErrorMessage(validation(type, newValue));
     setValueData(newValue);
   };
@@ -119,7 +119,7 @@ const Input: FC<InputElementProps> = ({
             className={classes.inputItem}
             required={required}
             value={valueData}
-            onInput={onChange}
+            onInput={handleOnChange}
           />
         </label>
       );
