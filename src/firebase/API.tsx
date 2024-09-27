@@ -43,8 +43,6 @@ export const addFileToStorage = async ({
     default:
       throw new Error("Unknown image purpose");
   };
-
-  console.log(stringPatern);
   const fileRef = ref(storage, `${stringPatern}${file.name}_${userId}`);
   try {
     await uploadBytes(fileRef, file);

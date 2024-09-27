@@ -3,6 +3,10 @@ import { InputType } from '../../components/Input/type.tsx';
 import { AUTH_USER_ROUTES } from '../../router/routesNames';
 import { imageDestination } from "../../firebase/types";
 
+
+import { auth } from "../../firebase/firebase";
+import { addFileToStorage } from "../../firebase/API";
+
 export const profileEditProps: FormProps = {
     title: 'Edit Profile',
     action: `${AUTH_USER_ROUTES.PROFILE}/edit`,
@@ -44,6 +48,15 @@ export const profileEditProps: FormProps = {
           value: "",
           required: false,
           imagePurpose: imageDestination.AVATAR,
+          onChange: async (e) => {
+            const downloadURL = await addFileToStorage({
+              element: e.target as HTMLInputElement,
+              userId: auth.currentUser?.uid,
+              imagePurpose: imageDestination.AVATAR,
+            });
+            console.log(`download URL from profileEditProps: ${downloadURL}`);
+            return downloadURL;
+          },
         },
         {
             id: 'gender',

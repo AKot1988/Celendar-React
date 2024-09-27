@@ -42,6 +42,6 @@ export type InputElementProps = {
   autoComplete?: string;
   className?: string;
   onFocus?: () => void;
-  onChange?: (ev: Event | FormEvent<HTMLInputElement>) => void;
+  onChange?: (ev: Event | FormEvent<HTMLInputElement>) => string | undefined;
   imagePurpose?: imageDestination;
 };

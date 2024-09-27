@@ -2,10 +2,9 @@ import { FC, useState, useEffect } from "react";
 import { InputType, InputElementProps } from "../Input/type";
 import classes from "./Input.module.scss";
 
-import { auth } from "../../firebase/firebase";
-import { addFileToStorage } from "../../firebase/API";
-import { imageDestination } from "../../firebase/types";
-import { th } from "framer-motion/client";
+// import { auth } from "../../firebase/firebase";
+// import { addFileToStorage } from "../../firebase/API";
+// import { imageDestination } from "../../firebase/types";
 
 const Input: FC<InputElementProps> = ({
   type,
@@ -32,11 +31,7 @@ const Input: FC<InputElementProps> = ({
         if (!imagePurpose) {
           throw new Error("imagePurpose is required for file input");
         }
-        newValue = await addFileToStorage({
-          element: e.target as HTMLInputElement,
-          userId: auth.currentUser?.uid,
-          imagePurpose: imagePurpose as imageDestination,
-        });
+        newValue = await onChange(e);
         break;
       }
       case InputType.DATEPICKER: {
@@ -47,7 +42,7 @@ const Input: FC<InputElementProps> = ({
         newValue = (e.target as HTMLInputElement).value;
       }
     }
-
+    console.log(`Downloaded URL in Input ${newValue}`)
     setErrorMessage(validation(type, newValue));
     setValueData(newValue);
   };
