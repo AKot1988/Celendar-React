@@ -60,7 +60,7 @@ export const NewTaskFormConfig: FormProps = {
         const downloadURL = await addFileToStorage({
           element: e.target as HTMLInputElement,
           userId: auth.currentUser?.uid,
-          imagePurpose: imageDestination.AVATAR,
+          imagePurpose: imageDestination.EVENT,
         });
         return downloadURL;
       },
