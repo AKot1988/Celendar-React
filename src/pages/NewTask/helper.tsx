@@ -1,6 +1,9 @@
 import { InputType } from "../../components/Input/type";
 import { AUTH_USER_ROUTES } from "../../router/routesNames";
 import { FormProps, Method } from "../../components/UniversalForm/types";
+import { imageDestination } from "../../firebase/types";
+import { addFileToStorage } from "../../firebase/API";
+import { auth } from "../../firebase/firebase";
 
 export const NewTaskFormConfig: FormProps = {
   title: "New Task",
@@ -15,7 +18,6 @@ export const NewTaskFormConfig: FormProps = {
       name: "title",
       required: true,
       label: "Title",
-      onChange: () => {},
     },
     {
       id: "taskDescription",
@@ -25,7 +27,6 @@ export const NewTaskFormConfig: FormProps = {
       name: "description",
       required: true,
       label: "Description",
-      onChange: () => {},
     },
     {
       id: "begin",
@@ -46,6 +47,24 @@ export const NewTaskFormConfig: FormProps = {
       required: true,
       label: "Set end date/time",
       onFocus: () => {},
+    },
+    {
+      id: "photo",
+      type: InputType.FILE,
+      placeHolder: "Choose file",
+      value: "",
+      name: "photo",
+      required: false,
+      label: "Chose photo",
+      onChange: async (e) => {
+        const downloadURL = await addFileToStorage({
+          element: e.target as HTMLInputElement,
+          userId: auth.currentUser?.uid,
+          imagePurpose: imageDestination.AVATAR,
+        });
+        return downloadURL;
+      },
+      imagePurpose: imageDestination.EVENT,
     },
     {
       id: "priority",

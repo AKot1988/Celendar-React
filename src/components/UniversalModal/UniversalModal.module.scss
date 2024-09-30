@@ -1,6 +1,7 @@
 @import "../../app/variables.scss";
 
 .modal{
+    box-sizing: border-box;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -28,6 +29,7 @@
         color: black;
     }
     &Content{
+        box-sizing: border-box;
         padding: 20px;
         border: 1px solid $white;
         background-color: $lightGray;
@@ -36,6 +38,7 @@
         cursor: initial;
     }
     &.active{
+        box-sizing: border-box;
         display: flex;
         justify-content: center;
         align-items: center;

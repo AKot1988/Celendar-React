@@ -22,7 +22,9 @@ export const EditAction = async function ({ request }: ActionFunctionArgs) {
     priority: formData.get("priority") as PRIORITY | undefined,
     owner: auth.currentUser?.uid,
     id: formData.get("id") as string,
+    photoURL: formData.get("photo") as string,
   };
+  console.log(editedTaskData);
 
   await editEventAction(editedTaskData);
 

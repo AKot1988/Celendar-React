@@ -15,7 +15,8 @@ import { NewEventData } from "../../firebase/types.tsx";
 
 import { motion } from "framer-motion";
 
-let extendedTask: DayDataProps 
+let extendedTask: DayDataProps;
+
 const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
   const [visibleExtendedTask, setVisibleExtendedTask] = useState(false);
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
     const dateB = new Date(b.begin);
     return dateA.getTime() - dateB.getTime();
   });
-  
+
   return content.length > 0 ? (
     <>
       <div className={classes.day}>
@@ -49,16 +50,17 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
               onClick={() => {
                 setVisibleExtendedTask(!visibleExtendedTask);
                 extendedTask = item;
+                console.log(extendedTask);
               }}
             >
-              {visibleExtendedTask && (
+              {/* {visibleExtendedTask && (
                 <UniversalModal
-                  content={<Task {...extendedTask}/>}
-                  title={"Інфо про таску розширене"}
+                  content={<Task {...extendedTask} />}
+                  title={"Деталі задачі"}
                   setVisible={setVisibleExtendedTask}
                   visible={visibleExtendedTask}
                 />
-              )}
+              )} */}
               <motion.h3 custom={1} variants={textAnimation}>
                 {item.title}
               </motion.h3>
@@ -105,6 +107,14 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
             </motion.div>
           ))}
         </div>
+        {visibleExtendedTask && (
+                <UniversalModal
+                  content={<Task {...extendedTask} />}
+                  title={"Деталі задачі"}
+                  setVisible={setVisibleExtendedTask}
+                  visible={visibleExtendedTask}
+                />
+              )}
       </div>
     </>
   ) : (

@@ -24,6 +24,7 @@ export const newTaskAction = async function ({ request }: ActionFunctionArgs) {
     priority: formData.get("priority") as PRIORITY | undefined,
     owner: auth.currentUser?.uid,
     id: (Date.now().toString(36) + Math.random().toString(36)) as string,
+    photoURL: formData.get("photo") as string,
   };
   setNewEvent(newTaskData);
   return redirect(

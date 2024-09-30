@@ -86,6 +86,7 @@ export type NewEventData = {
   type?: string;
   priority?: PRIORITY;
   id: string;
+  photoURL?: string;
 };
 
 export enum imageDestination {
