@@ -1,4 +1,5 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
+import { UniversalModal, Task } from "../../components";
 import { useParams, useNavigate } from "react-router-dom";
 import { AUTH_USER_ROUTES } from "../../router/routesNames";
 import { dateToDisplay, DayDataProps, dateMapper, MSVG } from "./helper";
@@ -14,7 +15,9 @@ import { NewEventData } from "../../firebase/types.tsx";
 
 import { motion } from "framer-motion";
 
+let extendedTask: DayDataProps 
 const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
+  const [visibleExtendedTask, setVisibleExtendedTask] = useState(false);
   const navigate = useNavigate();
   const { currentUser, day } = useParams();
   content.sort((a, b) => {
@@ -22,6 +25,7 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
     const dateB = new Date(b.begin);
     return dateA.getTime() - dateB.getTime();
   });
+  
   return content.length > 0 ? (
     <>
       <div className={classes.day}>
@@ -43,9 +47,18 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
                 background: dayTaskColor(item.priority),
               }}
               onClick={() => {
-                console.log("open page with extended info");
+                setVisibleExtendedTask(!visibleExtendedTask);
+                extendedTask = item;
               }}
             >
+              {visibleExtendedTask && (
+                <UniversalModal
+                  content={<Task {...extendedTask}/>}
+                  title={"Інфо про таску розширене"}
+                  setVisible={setVisibleExtendedTask}
+                  visible={visibleExtendedTask}
+                />
+              )}
               <motion.h3 custom={1} variants={textAnimation}>
                 {item.title}
               </motion.h3>

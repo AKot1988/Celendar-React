@@ -103,3 +103,27 @@
     height: auto;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .header {
+    padding: 20px;
+    flex-direction: column;
+    height: auto;
+
+    &Nav {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+
+      &Menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+      }
+    }
+  }
+}

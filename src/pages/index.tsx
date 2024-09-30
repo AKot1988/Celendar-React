@@ -13,7 +13,7 @@ export { default as Settings } from "./Settings/Settings.tsx";
 //AuthorizedUserPages
 export { default as Calendar } from "./Calendar/Calendar.tsx";
 export { default as DayPage } from "./DayPage/DayPage.tsx";
-export { default as Task } from "./Task/Task.tsx";
+export { default as TaskPage } from "./TaskPage/TaskPage.tsx";
 export { default as Profile } from "./Profile/Profile.tsx";
 export { default as ProfileEdit } from "./ProfileEdit/ProfileEdit.tsx";
 export { default as NewTask } from "./NewTask/NewTask.tsx";

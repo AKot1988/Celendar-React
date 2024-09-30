@@ -56,6 +56,9 @@ export const addFileToStorage = async ({
 //real time database operations
 export const getUserData = async function () {
   const UID = auth.currentUser?.uid;
+  if (UID === null || UID === undefined) {
+    return null;
+  }
   const docRef = doc(usersCollectionRef, UID);
   const docSnap = await getDoc(docRef);
   let data = null;

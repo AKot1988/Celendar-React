@@ -11,6 +11,7 @@ export type DayDataProps = {
   type: string;
   priority: string;
   id: string;
+  photoURL?: string;
 };
 
 function getMonthByNumber(monthNumber: number): string | undefined {
