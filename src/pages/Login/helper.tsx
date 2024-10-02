@@ -93,6 +93,7 @@ export const newUserFormData: FormProps = {
       name: "photo",
       value: "",
       required: false,
+      imagePurpose: imageDestination.AVATAR,
       onChange: async (e) => {
         const downloadURL = await addFileToStorage({
           element: e.target as HTMLInputElement,
