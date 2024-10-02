@@ -1,6 +1,9 @@
 import { Method, FormProps } from "../../components/UniversalForm/types";
 import { InputType, FormType } from "../../components/Input/type";
 import { COMMON_ROUTES } from "../../router/routesNames";
+import { imageDestination } from "../../firebase/types";
+import { auth } from "../../firebase/firebase";
+import { addFileToStorage } from "../../firebase/API";
 
 export type LoginProps = {
   closeModal: () => void;
@@ -11,7 +14,7 @@ export const newUserFormData: FormProps = {
   action: COMMON_ROUTES.LOGIN,
   method: Method.POST,
   inputs: [
-    { 
+    {
       id: "name",
       label: "Name",
       type: InputType.TEXT,
@@ -19,7 +22,7 @@ export const newUserFormData: FormProps = {
       name: "name",
       value: "",
       required: true,
-      onChange: () => '',
+      onChange: () => "",
     },
     {
       id: "password",
@@ -29,7 +32,7 @@ export const newUserFormData: FormProps = {
       name: "password",
       value: "",
       required: true,
-      onChange: () => '',
+      onChange: () => "",
     },
     {
       id: "email",
@@ -38,7 +41,7 @@ export const newUserFormData: FormProps = {
       placeHolder: "Enter your email",
       name: "email",
       required: true,
-      onChange: () => '',
+      onChange: () => "",
     },
     {
       id: "birthdate",
@@ -48,7 +51,7 @@ export const newUserFormData: FormProps = {
       name: "birthdate",
       value: "",
       required: true,
-      onChange: () => '',
+      onChange: () => "",
     },
     {
       id: "about",
@@ -58,7 +61,7 @@ export const newUserFormData: FormProps = {
       name: "about",
       value: "",
       required: true,
-      onChange: () => '',
+      onChange: () => "",
     },
     {
       id: "gender",
@@ -90,7 +93,14 @@ export const newUserFormData: FormProps = {
       name: "photo",
       value: "",
       required: false,
-      onChange: () => '',
+      onChange: async (e) => {
+        const downloadURL = await addFileToStorage({
+          element: e.target as HTMLInputElement,
+          userId: auth.currentUser?.uid,
+          imagePurpose: imageDestination.AVATAR,
+        });
+        return downloadURL;
+      },
     },
     {
       id: "formType",
