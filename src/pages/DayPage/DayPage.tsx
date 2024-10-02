@@ -8,7 +8,7 @@ import { NewEventData } from "../../firebase/types.tsx";
 import classes from './DayPage.module.scss';
 
 const DayPage: FC = () => {
-  const loaderData = useLoaderData() as NewEventData;
+  const loaderData = useLoaderData() as NewEventData[];
   const navigate = useNavigate();
   const [dayVisible, setDayVisible] = useState(true);
   if (!dayVisible) {
