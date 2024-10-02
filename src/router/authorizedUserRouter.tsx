@@ -1,4 +1,4 @@
-import { Calendar, DayPage, TaskPage, Profile, NewTask, Edit, ProfileEdit } from "../pages";
+import { Calendar, DayPage, Profile, NewTask, Edit, ProfileEdit } from "../pages";
 import { AUTH_USER_ROUTES } from "./routesNames";
 import { getEventsByUserAndDay, getEventsByUser, getUserData, getEventsByUserDayId } from "../firebase/API";
 import { EditAction } from "../pages/Edit/Edit";
@@ -32,12 +32,6 @@ export const authorizedUserRouter = [
             action: EditAction,
             loader: getEventsByUserDayId,
             element: <Edit/>,
-          },
-          {
-            path: `${AUTH_USER_ROUTES.CALENDAR}/:currentUser/:day/:id/taskExtended`,
-            // action: EditAction,
-            // loader: getEventsByUserDayId,
-            element: <TaskPage/>,
           },
         ],
       },

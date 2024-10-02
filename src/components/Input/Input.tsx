@@ -43,7 +43,7 @@ const Input: FC<InputElementProps> = ({
         break
       }
     }
-    setErrorMessage(validation(type, newValue));
+    setErrorMessage(validation(type, newValue as string));
     setValueData(newValue);
   };
 

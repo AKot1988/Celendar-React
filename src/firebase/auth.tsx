@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth"
 import { googleAuthProvider, auth } from './firebase'
 import { writeUserData, createUserEvCollection } from './API'
 import { userDataProps } from './types.tsx'

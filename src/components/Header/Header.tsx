@@ -1,11 +1,9 @@
 import { FC, useState, useEffect } from "react";
-// import { googleSignIn, googleSignOut } from '../../firebase/auth';
 import { CustomNavLinkProps } from "../CustomNavLink/CustomNavLink.tsx";
 import { CustomNavLink } from "../index.tsx";
 import classes from "./Header.module.scss";
 import { auth } from "../../firebase/firebase.tsx";
 import { useNavigate } from "react-router-dom";
-import { getUserData } from "../../firebase/API.tsx";
 
 export type HeaderProps = {
   logo: string;
