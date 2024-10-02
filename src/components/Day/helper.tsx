@@ -3,12 +3,12 @@ import { forwardRef } from "react";
 import { motion } from "framer-motion";
 
 export type DayDataProps = {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   begin: string;
   end: string;
   owner: string;
-  type: string;
+  type?: string;
   priority: string;
   id: string;
   photoURL?: string;
@@ -43,13 +43,7 @@ export const dateMapper = (date: string) => {
   }  ${year}`;
 };
 
-type svgProps = {
-  onClick: (ev: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
-  className: string;
-  type: string;
-};
-
-export const SVG = forwardRef(({ onClick, className, type }: svgProps, ref) => {
+export const SVG = forwardRef<SVGSVGElement, React.SVGProps<SVGSVGElement>>(({ onClick, className, type }, ref) => {
   switch (type) {
     case "edit": {
       return (

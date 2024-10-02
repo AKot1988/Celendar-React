@@ -15,9 +15,9 @@ import { NewEventData } from "../../firebase/types.tsx";
 
 import { motion } from "framer-motion";
 
-let extendedTask: DayDataProps;
+let extendedTask: NewEventData;
 
-const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
+const Day: FC<{ content: NewEventData[] }> = ({ content }) => {
   const [visibleExtendedTask, setVisibleExtendedTask] = useState(false);
   const navigate = useNavigate();
   const { currentUser, day } = useParams();
@@ -38,7 +38,7 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
           <h2>{`Задачі на ${dateMapper(day as string)}`}</h2>
         </div>
         <div className={classes.dayWrapper}>
-          {content.map((item: DayDataProps) => (
+          {content.map((item: NewEventData) => (
             <motion.div
               initial="hidden"
               whileInView="visible"

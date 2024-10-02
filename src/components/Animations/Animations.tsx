@@ -1,5 +1,3 @@
-import { teal } from "@mui/material/colors";
-
 export const textAnimation = {
     hidden: { opacity: 0, x: -100},
     visible: (custom: number) => ({
