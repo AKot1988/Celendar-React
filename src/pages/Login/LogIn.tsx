@@ -27,7 +27,7 @@ export const authType = async ({ request }: ActionFunctionArgs) => {
     role: "authorizedUser",
     gender: formData.get("gender") as string,
     events: "",
-    // formType: formData.get("formType") as string,
+    avatar: formData.get("photo") as string,
   };
 
   switch (formData.get("formType")) {
