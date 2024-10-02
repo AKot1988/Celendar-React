@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { DayDataProps } from "../Day/helper";
+import { NewEventData } from "../../firebase/types.tsx";
 import classes from "./Task.module.scss";
 
-const Task: FC<DayDataProps> = ({
+const Task: FC<NewEventData> = ({
   title,
   begin,
   end,

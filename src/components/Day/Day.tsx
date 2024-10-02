@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { UniversalModal, Task } from "../../components";
 import { useParams, useNavigate } from "react-router-dom";
 import { AUTH_USER_ROUTES } from "../../router/routesNames";
-import { dateToDisplay, DayDataProps, dateMapper, MSVG } from "./helper";
+import { dateToDisplay, dateMapper, MSVG } from "./helper";
 import { deleteEventAction } from "../../firebase/API";
 import { AddButton } from "../index.tsx";
 import { dayTaskColor } from "../../pages/Calendar/helper";
