@@ -27,11 +27,9 @@ export const rotateSVGs = {
   hidden: {
     opacity: 1,
     x: 0,
-    fill: teal,
   },
   whileHover: {
     rotate: 360,
-    fill: "teal",
     transition: {
       duration: 1,
       repeat: Infinity,
