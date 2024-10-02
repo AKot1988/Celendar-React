@@ -50,7 +50,7 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
               onClick={() => {
                 setVisibleExtendedTask(!visibleExtendedTask);
                 extendedTask = item;
-                console.log(extendedTask);
+
               }}
             >
               {/* {visibleExtendedTask && (

@@ -29,11 +29,14 @@
         color: black;
     }
     &Content{
+        width: 80%;
+        height: 80%;
+        overflow-y: scroll;
+        align-items: center;
         box-sizing: border-box;
         padding: 20px;
         border: 1px solid $white;
         background-color: $lightGray;
-        overflow: hidden;
         color: black;
         cursor: initial;
     }
@@ -42,5 +45,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        overflow-y: scroll;
     }
 }

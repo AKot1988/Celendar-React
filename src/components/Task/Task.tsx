@@ -12,7 +12,7 @@ const Task: FC<DayDataProps> = ({
 }) => {
   return (
     <div className={classes.expandedDay}>
-      <h1 className={classes.expandedDayTitle}>{title}</h1>
+      <h3 className={classes.expandedDayTitle}>{title}</h3>
       <p className={classes.expandedDayBegin}>
         <span className={classes.expandedDayRowsHeaders}> Початок: </span>
         {begin}
