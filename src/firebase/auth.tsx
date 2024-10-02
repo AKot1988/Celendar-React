@@ -18,8 +18,6 @@ export const signUpWithEmailAndPassword = (newUserData: userDataProps) => {
     .then((userCredential) => {
       writeUserData(userCredential.user.uid, newUserData, "create")
       createUserEvCollection(userCredential.user.uid)
-      // Signed up
-      const user = userCredential.user;
     })
     .catch((error) => {
       throw new Error ("Сталась помилка аутентифікації" + error.code + error.message)
@@ -29,9 +27,9 @@ export const signUpWithEmailAndPassword = (newUserData: userDataProps) => {
 
 export const logInWithEmailAndPassword = (email: string, password: string) => {
   signInWithEmailAndPassword(auth, email, password) // This is the function that signs in a user
-    .then((userCredential) => {
-      const user = userCredential.user;
-    })
+    // .then((userCredential) => {
+    //   const user = userCredential.user;
+    // })
     .catch((error) => {
       throw new Error ("Сталась помилка аутентифікації" + error.code + error.message)
     });
@@ -51,27 +49,19 @@ onAuthStateChanged(auth, (user) => {
 export const googleSignIn = async ()=> {
   await signInWithPopup(auth, googleAuthProvider)
   .then((result) => {
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential?.accessToken;
+    // const credential = GoogleAuthProvider.credentialFromResult(result);
+    // const token = credential?.accessToken;
     const user = result.user;
     return user
   }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
+    throw new Error ("Сталась помилка аутентифікації" + error.code + error.message)
   });
 }
 
 export const googleSignOut = async () => {
   await signOut(auth).then(() => {
-    // Sign-out successful.
   }).catch((error) => {
-    // An error happened.
+    throw new Error ("Сталась помилка аутентифікації" + error.code + error.message)
   });
 
 }

@@ -28,7 +28,7 @@ const CalendarPage: FC = () => {
         }}
         className={classes.calendarWrapper}
         tileClassName={classes.calendarTile}
-        tileContent={({ date, view }) => (
+        tileContent={({ date }) => (
           <>
             {userEvents
               .filter(

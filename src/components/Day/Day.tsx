@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { UniversalModal, Task } from "../../components";
 import { useParams, useNavigate } from "react-router-dom";
 import { AUTH_USER_ROUTES } from "../../router/routesNames";
@@ -53,14 +53,6 @@ const Day: FC<{ content: DayDataProps[] }> = ({ content }) => {
 
               }}
             >
-              {/* {visibleExtendedTask && (
-                <UniversalModal
-                  content={<Task {...extendedTask} />}
-                  title={"Деталі задачі"}
-                  setVisible={setVisibleExtendedTask}
-                  visible={visibleExtendedTask}
-                />
-              )} */}
               <motion.h3 custom={1} variants={textAnimation}>
                 {item.title}
               </motion.h3>

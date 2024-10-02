@@ -1,8 +1,6 @@
 import {FC} from 'react';
 import { NavLink } from 'react-router-dom';
 
-import classes from './CustomNavLink.module.scss';
-
 export type CustomNavLinkProps = {
   title: string
   path: string

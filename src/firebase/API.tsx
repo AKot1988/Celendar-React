@@ -1,5 +1,5 @@
 import { collection, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { auth, db, storage } from "./firebase";
 import {
   NewEventData,
@@ -14,13 +14,6 @@ import { userDataProps } from "./types.tsx";
 
 export const usersCollectionRef = collection(db, "users");
 export const eventsCollectionRef = collection(db, "events");
-
-//створення посилавння на сзовище
-const storageRef = ref(storage);
-//створення посилання на папку з аватарками користувачів
-const usersAvatarsRef = ref(storage, "UsersAvatars");
-//створення посилання на аватарку користувача
-const myAvatarRef = ref(storage, "UsersAvatars/Аватарка.jpg");
 
 export const addFileToStorage = async ({
   element,

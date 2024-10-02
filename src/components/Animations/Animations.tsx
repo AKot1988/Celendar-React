@@ -1,5 +1,4 @@
 import { teal } from "@mui/material/colors";
-import { style } from "framer-motion/client";
 
 export const textAnimation = {
     hidden: { opacity: 0, x: -100, style: { color: "teal" } },

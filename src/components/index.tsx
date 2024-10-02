@@ -9,6 +9,5 @@ export { default as AddButton } from "./AddButton/AddButton.tsx";
 export { default as Loader } from "./Loader/Loader.tsx";
 export { default as Task } from "./Task/Task.tsx";
 export { default as BasicDateDayCalendar } from "./BasicDateDayCalendar/BasicDateDayCalendar.tsx";
-export { default as BasicDateRangeCalendar } from "./BasicDateRangeCalendar/BasicDateRangeCalendar.tsx";
 export { default as BasicStaticDateTimePicker } from "./BasicStaticDateTimePicker/BasicStaticDateTimePicker.tsx";
 export { default as MuiXLicense } from "./MUILisense/MUILisense.tsx";

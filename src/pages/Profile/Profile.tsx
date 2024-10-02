@@ -18,7 +18,7 @@ const Profile: FC = () => {
     >
       <motion.h1 custom={1}variants={textAnimation}>Profile</motion.h1>
       <motion.div className={classes.profileInfo}>
-      {userData.avatar? <motion.img custom={2}variants={textAnimation} src={userData.avatar} className={classes.profilePagePhoto}></motion.img>: <motion.img custom={2}variants={textAnimation} src={auth.currentUser?.photoURL} className={classes.profilePagePhoto}></motion.img>}
+      {userData.avatar ? <motion.img custom={2}variants={textAnimation} src={userData.avatar} className={classes.profilePagePhoto}></motion.img>: <motion.img custom={2}variants={textAnimation} src={auth.currentUser?.photoURL || ''} className={classes.profilePagePhoto}></motion.img>}
         <motion.p custom={2}variants={textAnimation}>
           Ім'я: {userData.name.split(" ")[0]}
         </motion.p>

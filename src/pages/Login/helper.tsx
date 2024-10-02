@@ -1,7 +1,6 @@
 import { Method, FormProps } from "../../components/UniversalForm/types";
 import { InputType, FormType } from "../../components/Input/type";
 import { COMMON_ROUTES } from "../../router/routesNames";
-import { addFileToStorage } from "../../firebase/firebase";
 
 export type LoginProps = {
   closeModal: () => void;
