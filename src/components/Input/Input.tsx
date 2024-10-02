@@ -16,7 +16,7 @@ const Input: FC<InputElementProps> = ({
   value,
   label,
   onFocus = () => {},
-  onChange = () => {},
+  onChange = () => '',
   imagePurpose,
 }: InputElementProps) => {
   const [errorMessage, setErrorMessage] = useState<string | null | undefined>(
