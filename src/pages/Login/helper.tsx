@@ -19,7 +19,7 @@ export const newUserFormData: FormProps = {
       name: "name",
       value: "",
       required: true,
-      onChange: () => {},
+      onChange: () => '',
     },
     {
       id: "password",
@@ -29,7 +29,7 @@ export const newUserFormData: FormProps = {
       name: "password",
       value: "",
       required: true,
-      onChange: () => {},
+      onChange: () => '',
     },
     {
       id: "email",
@@ -38,7 +38,7 @@ export const newUserFormData: FormProps = {
       placeHolder: "Enter your email",
       name: "email",
       required: true,
-      onChange: () => {},
+      onChange: () => '',
     },
     {
       id: "birthdate",
@@ -48,7 +48,7 @@ export const newUserFormData: FormProps = {
       name: "birthdate",
       value: "",
       required: true,
-      onChange: () => {},
+      onChange: () => '',
     },
     {
       id: "about",
@@ -58,7 +58,7 @@ export const newUserFormData: FormProps = {
       name: "about",
       value: "",
       required: true,
-      onChange: () => {},
+      onChange: () => '',
     },
     {
       id: "gender",
@@ -90,7 +90,7 @@ export const newUserFormData: FormProps = {
       name: "photo",
       value: "",
       required: false,
-      onChange: () => {},
+      onChange: () => '',
     },
     {
       id: "formType",

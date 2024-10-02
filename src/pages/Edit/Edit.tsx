@@ -40,13 +40,13 @@ const Edit: FC = () => {
   const data = useLoaderData() as NewEventData;
 
   useEffect(() => {
-    const dataKeys = Object.keys(data);
+    const dataKeys = Object.keys(data) as Array<keyof NewEventData>;
     EditTaskFormConfig.inputs.forEach((input) => {
-      if (dataKeys.includes(input.name)) {
-        input.value = data[input.name];
+      if (dataKeys.includes(input.name as keyof NewEventData)) {
+        input.value = data[input.name as keyof NewEventData]; // Використовуємо keyof для типізації
       }
     });
-  }, []);
+  }, [data]);
   EditTaskFormConfig.inputs[2].onFocus = () =>
     setBeginModalState(!beginModalState);
   EditTaskFormConfig.inputs[3].onFocus = () => setEndModalState(!endModalState);

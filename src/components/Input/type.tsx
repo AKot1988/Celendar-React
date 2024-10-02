@@ -43,6 +43,5 @@ export type InputElementProps = {
   className?: string;
   onFocus?: () => void;
   onChange?: (ev: Event | FormEvent<HTMLInputElement>) => string | undefined | Promise<string | undefined>;
-  // onChange?: () => void;
   imagePurpose?: imageDestination;
 };
