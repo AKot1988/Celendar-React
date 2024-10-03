@@ -39,12 +39,12 @@
     }
 
     &Item {
-      color: #000000;
+      color: $main;
       transition: all 0.3s;
     }
 
     &Item:hover {
-      color: #1e00ff;
+      color: #2d2d2d;
       scale: 1.1;
     }
 
@@ -53,12 +53,15 @@
       padding: 5px 10px;
       background-color: $lightGray;
       border-radius: 5px;
-      color: #000000;
+      color: $main;
       text-align: center;
+      transition: all 0.3s;
 
       &:hover {
         color: $main;
         background-color: $mainBackground;
+        color: #2d2d2d;
+        scale: 1.05;
       }
     }
 
@@ -106,23 +109,46 @@
 
 @media screen and (max-width: 600px) {
   .header {
-    padding: 20px;
     flex-direction: column;
     height: auto;
 
+    &Logo {
+      width: 70px;
+      height: 70px;
+      align-self: flex-start;
+    }
+
     &Nav {
+      margin-top: 10px;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: space-evenly;
       align-items: center;
-      gap: 20px;
+      gap: 5px;
+
+      &Item {
+        color: $main;
+        transition: all 0.3s;
+      }
+
+      &Button {
+        width: 50px;
+        padding: 5px 10px;
+        background-color: $lightGray;
+        border-radius: 5px;
+        color: $main;
+        text-align: center;
+      }
 
       &Menu {
+        margin-right: 5px;
+        padding-right: 5px;
+        border-right: 2px solid $mainBackground;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        align-items: center;
-        gap: 20px;
+        align-items: start;
+        gap: 5px;
       }
     }
   }

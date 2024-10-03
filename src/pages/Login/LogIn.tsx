@@ -33,7 +33,7 @@ export const authType = async ({ request }: ActionFunctionArgs) => {
   switch (formData.get("formType")) {
     case "signUp": {
       signUpWithEmailAndPassword(newUserData);
-      return redirect(COMMON_ROUTES.HOME);
+      return redirect(AUTH_USER_ROUTES.CALENDAR);
     }
     case "logIn": {
       logInWithEmailAndPassword(newUserData.email, newUserData.password);
