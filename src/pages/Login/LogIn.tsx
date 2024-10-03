@@ -11,7 +11,7 @@ import {
   UniversalForm,
 } from "../../components/index.tsx";
 import { logInData, newUserFormData } from "./helper";
-import { COMMON_ROUTES, AUTH_USER_ROUTES } from "../../router/routesNames";
+import { AUTH_USER_ROUTES } from "../../router/routesNames";
 import classes from "./LogIn.module.scss";
 
 export const authType = async ({ request }: ActionFunctionArgs) => {
