@@ -3,6 +3,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticDateTimePicker } from "@mui/x-date-pickers/StaticDateTimePicker";
+import classes from "./BasicStaticDateTimePicker.module.scss";
 
 type DatePickerProps = {
   initDate: string | Date; // similar to string "August 23, 2024"
@@ -15,7 +16,7 @@ const BasicStaticDateTimePicker: FC<DatePickerProps> = ({
 }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <StaticDateTimePicker
+      <StaticDateTimePicker className={classes.datePicker}
         defaultValue={dayjs(initDate)}
         orientation="portrait"
         ampm={false}
