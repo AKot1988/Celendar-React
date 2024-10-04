@@ -1,50 +1,55 @@
 @import "../../app/variables.scss";
 
-.modal{
-    box-sizing: border-box;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    display: none;
-    backdrop-filter: blur(1.5px);
+.modal {
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: none;
+  backdrop-filter: blur(1.5px);
 
-    &BtnClose{
-        position: relative;
-        margin-left: auto;
-        order: 2;
-        width: 1em;
-        height: 1em;
-        border-radius: 5px;
-        background-color: $lightGray;
-        cursor: pointer;
-    }
-    &Title {
-        text-align: center;
-        margin: 10px 0;
-        font-weight: 600;
-        font-size: 18px;
-        line-height: 20px;
-        color: black;
-    }
-    &Content{
-        width: 80%;
-        height: 80%;
-        // overflow-y: auto;
-        align-items: center;
-        box-sizing: border-box;
-        padding: 20px;
-        border: 1px solid $white;
-        background-color: $lightGray;
-        color: black;
-        cursor: initial;
-    }
-    &.active{
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow-y: scroll;
-    }
+  &Content {
+    border-radius: 10px;
+    max-width: 80%;
+    // max-height: 80%;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: $lightGray;
+    color: $main;
+    cursor: initial;
+    max-height: 80vh; // Встановлює максимальну висоту
+    overflow-y: auto; // Додає вертикальну прокрутку, якщо контент виходить за межі
+    padding: 20px;
+
+    overflow: hidden;
+  }
+  &.active {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+  }
+
+  &BtnClose {
+    position: relative;
+    margin-left: auto;
+    order: 2;
+    width: 1em;
+    height: 1em;
+    border-radius: 5px;
+    background-color: $lightGray;
+    cursor: pointer;
+  }
+  &Title {
+    text-align: center;
+    margin: 10px 0;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 20px;
+    color: black;
+  }
 }

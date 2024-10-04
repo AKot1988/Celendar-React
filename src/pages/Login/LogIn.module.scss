@@ -1,31 +1,28 @@
 @import "../../app/variables.scss";
 .content {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: $contentWidth;
+  background: $mainGradient;
+  margin: 0 auto;
+
   &Wrapper {
     width: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin: 0 auto;
-    padding: 20px;
   }
-
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: $contentWidth;
-  background: $mainGradient;
-  border: 0px solid $mainGray;
-  padding: 10px;
-  margin: 0 auto;
 
   &Header {
     font-size: 24px;
     margin-bottom: 20px;
-    color: black;
+    color: $main;
   }
 
   &Buttons {
@@ -33,8 +30,7 @@
     flex-direction: column;
     margin: 20px 20px;
     width: 100%;
-    color: black;
-    align-self: center;
+    color: $main;
 
     &ButtonGoogle,
     &ButtonEmailLogIn,
@@ -49,7 +45,7 @@
       padding: 10px 0px;
       border-radius: 10px;
       background-color: #4285f4;
-      color: rgb(0, 0, 255);
+      color: $main;
 
       &:hover {
         background-color: #3367d6;
@@ -62,7 +58,7 @@
       padding: 10px 0px;
       border-radius: 10px;
       background-color: #f50000;
-      color: rgb(56, 0, 0);
+      color: $main;
       &:hover {
         background-color: #cb0000;
       }
@@ -74,7 +70,7 @@
       padding: 10px 0px;
       border-radius: 10px;
       background-color: #f57c00;
-      color: rgb(56, 0, 0);
+      color: $main;
 
       &:hover {
         background-color: #d06800;
