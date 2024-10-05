@@ -8,7 +8,7 @@ import { auth } from "../../firebase/firebase";
 import { addFileToStorage } from "../../firebase/API";
 
 export const profileEditProps: FormProps = {
-    title: 'Edit Profile',
+    title: 'Edit your profile',
     action: `${AUTH_USER_ROUTES.PROFILE}/edit`,
     method: Method.POST,
     inputs: [

@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { useLoaderData, redirect, ActionFunctionArgs } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
 import { writeUserData } from "../../firebase/API";
@@ -30,7 +30,6 @@ export const profileEditAction = async function ({
     events: userData?.events as string,
     avatar: formData.get("avatar") as string,
   };
-
   await writeUserData(
     auth.currentUser?.uid as string,
     editedProfileData,
@@ -41,14 +40,17 @@ export const profileEditAction = async function ({
 
 const ProfileEdit: FC = () => {
   const data = useLoaderData() as userDataProps;
+  const [config, setConfig] = useState(profileEditProps);
   userData = data;
   useEffect(() => {
+    const updatedConfig = { ...profileEditProps };
     const dataKeys = Object.keys(data);
-    profileEditProps.inputs.forEach((input) => {
+    updatedConfig.inputs.forEach((input) => {
       if (dataKeys.includes(input.name)) {
         input.value = data[input.name as keyof userDataProps] as string;
       }
     });
+    setConfig(updatedConfig);
   }, []);
   return (
     <motion.div
@@ -63,7 +65,7 @@ const ProfileEdit: FC = () => {
       >
         ProfileEdit
       </motion.h1>
-      <UniversalForm data={profileEditProps} />
+      <UniversalForm data={config} />
     </motion.div>
   );
 };
