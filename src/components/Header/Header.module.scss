@@ -99,9 +99,17 @@
   }
 }
 
+.avatarLogButtonSection {
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-between;
+  // align-items: center;
+  gap: 10px;
+}
+
 @media screen and (max-width: 768px) {
   .header {
-    padding: 20px;
+    padding: 5px;
     flex-direction: column;
     height: auto;
   }
@@ -109,7 +117,7 @@
 
 @media screen and (max-width: 600px) {
   .header {
-    flex-direction: column;
+    flex-direction: row;
     height: auto;
 
     &Logo {

@@ -13,7 +13,7 @@ import { userDataProps } from './types.tsx'
 * @param {string} password - new user's password;
 */
 
-export const signUpWithEmailAndPassword = (newUserData: userDataProps) => {
+export const signUpWithEmailAndPassword = async (newUserData: userDataProps) => {
   return createUserWithEmailAndPassword(auth, newUserData.email as string, newUserData.password as string) // This is the function that creates a new user
     .then((userCredential) => {
       writeUserData(userCredential.user.uid, newUserData, "create")
@@ -25,8 +25,8 @@ export const signUpWithEmailAndPassword = (newUserData: userDataProps) => {
 }
 
 
-export const logInWithEmailAndPassword = (email: string, password: string) => {
-  signInWithEmailAndPassword(auth, email, password) // This is the function that signs in a user
+export const logInWithEmailAndPassword = async (email: string, password: string) => {
+  await signInWithEmailAndPassword(auth, email, password) // This is the function that signs in a user
     // .then((userCredential) => {
     //   const user = userCredential.user;
     // })

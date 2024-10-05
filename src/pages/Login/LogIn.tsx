@@ -11,7 +11,8 @@ import {
   UniversalForm,
 } from "../../components/index.tsx";
 import { logInData, newUserFormData } from "./helper";
-import { AUTH_USER_ROUTES } from "../../router/routesNames";
+import { AUTH_USER_ROUTES, COMMON_ROUTES } from "../../router/routesNames";
+import { auth } from "../../firebase/firebase";
 import classes from "./LogIn.module.scss";
 
 export const authType = async ({ request }: ActionFunctionArgs) => {
@@ -36,8 +37,13 @@ export const authType = async ({ request }: ActionFunctionArgs) => {
       return redirect(AUTH_USER_ROUTES.CALENDAR);
     }
     case "logIn": {
-      logInWithEmailAndPassword(newUserData.email, newUserData.password);
-      return redirect(AUTH_USER_ROUTES.CALENDAR);
+      await logInWithEmailAndPassword(newUserData.email, newUserData.password);
+      if (auth.currentUser) {
+        return redirect(AUTH_USER_ROUTES.CALENDAR);
+      } else {
+        alert("такий мейл уже є, або ви не правильно ввели пароль");
+        return redirect(COMMON_ROUTES.LOGIN);
+      }
     }
     default:
       throw new Error("Unknown/empty form type");

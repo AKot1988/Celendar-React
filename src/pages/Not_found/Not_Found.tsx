@@ -4,9 +4,10 @@ import classes from "./Not_Found.module.scss";
 
 const Not_Found: FC = () => {
   const error = useRouteError() as Error;
+  console.log(error);
   return (
     <div className={classes.container}>
-      <h1>Smth gone wrong</h1>
+      <h3>Smth gone wrong</h3>
       <p>{error.message}</p>
     </div>
   );
