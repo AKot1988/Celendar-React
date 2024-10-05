@@ -18,7 +18,7 @@ export const EditTaskFormConfig: FormProps = {
       name: "title",
       required: true,
       label: "Title",
-      onChange: () => '',
+      onChange: () => "",
     },
     {
       id: "taskDescription",
@@ -28,7 +28,7 @@ export const EditTaskFormConfig: FormProps = {
       name: "description",
       required: true,
       label: "Description",
-      onChange: () => '',
+      onChange: () => "",
     },
     {
       id: "begin",
@@ -55,7 +55,7 @@ export const EditTaskFormConfig: FormProps = {
       type: InputType.FILE,
       placeHolder: "Choose file",
       value: "",
-      name: "photo",
+      name: "photoURL",
       required: false,
       label: "Chose photo",
       onChange: async (e) => {

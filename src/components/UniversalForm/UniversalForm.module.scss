@@ -12,7 +12,7 @@
   }
 
   &Button {
-    width: 50%;
+    width: 80%;
     box-sizing:content-box;
     margin: 20px auto 20px;
     background-color: $mainGray;
@@ -23,7 +23,7 @@
     font-size: 16px;
     padding: 10px 20px;
     font-weight: 300;
-    border-radius: 0px;
+    border-radius: 10px;
     &:hover {
       background-color: #3e3d3d;;
       color: $lightGray;

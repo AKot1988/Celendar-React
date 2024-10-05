@@ -107,6 +107,25 @@ const Input: FC<InputElementProps> = ({
           />
         </label>
       );
+
+      case InputType.PASSWORD:
+      return (
+        <label className={classes.inputContainer}>
+          <span className={classes.inputLabel}>{label}</span>
+          <p className={classes.error}>{errorMessage}</p>
+          <input
+            onFocus={onFocus}
+            type={type}
+            placeholder={placeHolder}
+            name={name}
+            className={classes.inputItem}
+            required={required}
+            value={valueData}
+            onInput={handleOnChange}
+            autoComplete="off"
+          />
+        </label>
+      );
     default:
       return (
         <label className={classes.inputContainer}>

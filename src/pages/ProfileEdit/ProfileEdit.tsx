@@ -28,8 +28,9 @@ export const profileEditAction = async function ({
     role: userData?.role as ROLES,
     gender: formData.get("gender") as string,
     events: userData?.events as string,
-    avatar: formData.get("photo") as string,
+    avatar: formData.get("avatar") as string,
   };
+
   await writeUserData(
     auth.currentUser?.uid as string,
     editedProfileData,
@@ -49,7 +50,6 @@ const ProfileEdit: FC = () => {
       }
     });
   }, []);
-
   return (
     <motion.div
       initial="hidden"

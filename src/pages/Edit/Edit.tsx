@@ -22,7 +22,7 @@ export const EditAction = async function ({ request }: ActionFunctionArgs) {
     priority: formData.get("priority") as PRIORITY | undefined,
     owner: auth.currentUser?.uid,
     id: formData.get("id") as string,
-    photoURL: formData.get("photo") as string,
+    photoURL: formData.get("photoURL") as string,
   };
   console.log(editedTaskData);
 
@@ -36,24 +36,29 @@ export const EditAction = async function ({ request }: ActionFunctionArgs) {
 const Edit: FC = () => {
   const [beginModalState, setBeginModalState] = useState(false);
   const [endModalState, setEndModalState] = useState(false);
+  const [config, setUpdatedData] = useState(EditTaskFormConfig);
 
   const data = useLoaderData() as NewEventData;
 
   useEffect(() => {
-    const dataKeys = Object.keys(data) as Array<keyof NewEventData>;
-    EditTaskFormConfig.inputs.forEach((input) => {
-      if (dataKeys.includes(input.name as keyof NewEventData)) {
-        input.value = data[input.name as keyof NewEventData]; // Використовуємо keyof для типізації
+    const updatedConfig = { ...config };
+    const dataKeys = Object.keys(data);
+    updatedConfig.inputs.forEach((input) => {
+      if (dataKeys.includes(input.name)) {
+        input.value = data[input.name as keyof NewEventData] as string;
+        console.log(input.value);
+        console.log(EditTaskFormConfig);
       }
     });
-  }, [data]);
-  EditTaskFormConfig.inputs[2].onFocus = () =>
-    setBeginModalState(!beginModalState);
-  EditTaskFormConfig.inputs[3].onFocus = () => setEndModalState(!endModalState);
+    updatedConfig.inputs[2].onFocus = () =>
+      setBeginModalState(!beginModalState);
+    updatedConfig.inputs[3].onFocus = () => setEndModalState(!endModalState);
+    setUpdatedData(updatedConfig);
+  }, []);
 
   return (
     <div className={classes.edit}>
-      <UniversalForm data={EditTaskFormConfig} />
+      <UniversalForm data={config} />
       <UniversalModal
         title={"Початок"}
         content={

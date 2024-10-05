@@ -44,7 +44,7 @@ export const profileEditProps: FormProps = {
           label: "Add your photo",
           type: InputType.FILE,
           placeHolder: "tap to add photo",
-          name: "photo",
+          name: "avatar",
           value: "",
           required: false,
           imagePurpose: imageDestination.AVATAR,
