@@ -11,7 +11,9 @@ const Task: FC<NewEventData> = ({
   photoURL,
 }) => {
   return (
-    <div className={classes.expandedDay}>
+    <div
+      className={classes.expandedDay}
+    >
       <h3 className={classes.expandedDayTitle}>{title}</h3>
       <p className={classes.expandedDayBegin}>
         <span className={classes.expandedDayRowsHeaders}> Початок: </span>

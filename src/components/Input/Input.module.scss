@@ -19,6 +19,7 @@
 
   &Label {
     margin: 0 auto;
+    color: $main;
     text-align: start;
     width: 50%;
     font-size: 16px;
@@ -27,11 +28,12 @@
 
 
   &Item {
+    font-family: "Poppins", sans-serif;
     box-sizing: content-box;
     width: 80%;
     margin: 0px auto 10px;
     background-color: $mainGray;
-    color: $lightGray;
+    color: $main;
     border: none;
     outline: none;
     box-shadow: none;
@@ -43,7 +45,7 @@
   
   
     &::placeholder {
-      color: $lightGray;
+      color: $main;
       font-weight: 300;
     }
   

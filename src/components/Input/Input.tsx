@@ -2,10 +2,6 @@ import { FC, useState, useEffect } from "react";
 import { InputType, InputElementProps } from "../Input/type";
 import classes from "./Input.module.scss";
 
-// import { auth } from "../../firebase/firebase";
-// import { addFileToStorage } from "../../firebase/API";
-// import { imageDestination } from "../../firebase/types";
-
 const Input: FC<InputElementProps> = ({
   type,
   placeHolder,
@@ -16,7 +12,7 @@ const Input: FC<InputElementProps> = ({
   value,
   label,
   onFocus = () => {},
-  onChange = () => '',
+  onChange = () => "",
   imagePurpose,
 }: InputElementProps) => {
   const [errorMessage, setErrorMessage] = useState<string | null | undefined>(
@@ -40,12 +36,18 @@ const Input: FC<InputElementProps> = ({
       }
       default: {
         newValue = (e.target as HTMLInputElement).value;
-        break
+        break;
       }
     }
     setErrorMessage(validation(type, newValue as string));
     setValueData(newValue);
   };
+
+  const handleOnChangeTextarea = (e: React.FormEvent<HTMLTextAreaElement>) => {
+    const newValue = (e.target as HTMLTextAreaElement).value;
+    setErrorMessage(validation(type, newValue));
+    setValueData(newValue);
+  }
 
   useEffect(() => {
     setValueData(value as string);
@@ -108,7 +110,7 @@ const Input: FC<InputElementProps> = ({
         </label>
       );
 
-      case InputType.PASSWORD:
+    case InputType.PASSWORD:
       return (
         <label className={classes.inputContainer}>
           <span className={classes.inputLabel}>{label}</span>
@@ -123,6 +125,23 @@ const Input: FC<InputElementProps> = ({
             value={valueData}
             onInput={handleOnChange}
             autoComplete="off"
+          />
+        </label>
+      );
+    case InputType.TEXTAREA:
+      return (
+        <label className={classes.inputContainer}>
+          <span className={classes.inputLabel}>{label}</span>
+          <p className={classes.error}>{errorMessage}</p>
+          <textarea
+            onFocus={onFocus}
+            placeholder={placeHolder}
+            name={name}
+            className={classes.inputItem}
+            required={required}
+            value={valueData}
+            onInput={handleOnChangeTextarea}
+            style={{ height: 100 }}
           />
         </label>
       );
