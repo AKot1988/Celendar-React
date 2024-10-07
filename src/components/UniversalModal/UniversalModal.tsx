@@ -1,6 +1,8 @@
 import { FC } from 'react'
+import { motion } from "framer-motion";
 import { CloseBtn } from './CloseBtn'
 import { ModalProps } from './helper'
+import { fadeTransparentInAnimation } from '../Animations/Animations'
 import classes from './UniversalModal.module.scss'
 
 const UniversalModal:FC<ModalProps> = ({ content, title, visible, setVisible  }) => {
@@ -8,7 +10,7 @@ const UniversalModal:FC<ModalProps> = ({ content, title, visible, setVisible  })
     const rootClasses: string[] = [classes.modal, visible ? classes.active : '']
     
 	return (
-        <div className={rootClasses.join(' ')} onClick={() => setVisible(false)}>
+        <motion.div initial="hidden" whileInView='visible' variants={fadeTransparentInAnimation} className={rootClasses.join(' ')} onClick={() => setVisible(false)}>
             <div className={classes.modalContent} onClick={(e) => e.stopPropagation()}>
                 <div className={classes.modalBtnClose} onClick={() => setVisible(false)}>
                     {CloseBtn.closeIcon}
@@ -18,7 +20,7 @@ const UniversalModal:FC<ModalProps> = ({ content, title, visible, setVisible  })
                 </h2>
                 {content}
             </div>
-        </div>
+        </motion.div>
 	)
 }
 
