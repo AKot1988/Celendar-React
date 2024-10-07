@@ -1,7 +1,7 @@
 import { FC, useState, useEffect} from 'react';
 import { Outlet, useNavigation, useLoaderData } from 'react-router-dom';
 import { auth } from '../../firebase/firebase.tsx';
-import { headerProps } from './helper'
+import { headerProps, footerProps } from './helper'
 import { logOut } from '../../firebase/auth';
 import { userDataProps } from '../../firebase/types.tsx';
 import { Header, Footer, Loader} from '../../components';
@@ -23,7 +23,7 @@ const Layout: FC = () => {
       <div className={classes.container}>
       <Outlet />
     </div>
-      <Footer title="Київ 2024 червень" />
+      <Footer title={footerProps()}/>
     </>
   );
 }

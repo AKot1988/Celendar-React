@@ -18,7 +18,7 @@ const Home: FC = () => {
       </motion.h1>
       <div className={classes.homePageButtons}>
         <button className={classes.homePageSetLanguageButton} onClick={() => setWelcomeLanguage("eng")}>ENG</button>
-        <button className={classes.homePageSetLanguageButton} onClick={() => setWelcomeLanguage("ukr")}>UKR</button>
+        <button className={classes.homePageSetLanguageButton} onClick={() => setWelcomeLanguage("ukr")}>УКР</button>
       </div>
       {setHopageContent(welcomeLanguage)}
     </motion.div>
