@@ -51,9 +51,7 @@ export const logInWithEmailAndPassword = async (
   password: string
 ) => {
   await signInWithEmailAndPassword(auth, email, password) // This is the function that signs in a user
-    // .then((userCredential) => {
-    //   const user = userCredential.user;
-    // })
+
     .catch((error) => {
       throw new Error(
         "Сталась помилка аутентифікації" + error.code + error.message

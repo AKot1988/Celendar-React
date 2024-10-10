@@ -55,7 +55,7 @@ export const getUserData = async function () {
   const docRef = doc(usersCollectionRef, UID);
   const docSnap = await getDoc(docRef);
   let data = null;
-  if (!docSnap) {
+  if (!docSnap.data()) {
     data = null;
   } else {
     data = docSnap.data();
