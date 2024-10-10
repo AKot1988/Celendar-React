@@ -9,8 +9,6 @@ import { googleAuthProvider, auth } from "./firebase";
 import {
   writeUserData,
   createUserEvCollection,
-  getUserData,
-  getEventsByUser,
   checkDoesUserExist,
 } from "./API";
 import { userDataProps } from "./types.tsx";
@@ -51,7 +49,6 @@ export const logInWithEmailAndPassword = async (
   password: string
 ) => {
   await signInWithEmailAndPassword(auth, email, password) // This is the function that signs in a user
-
     .catch((error) => {
       throw new Error(
         "Сталась помилка аутентифікації" + error.code + error.message
