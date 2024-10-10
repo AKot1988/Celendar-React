@@ -60,10 +60,13 @@ const LogIn: FC = () => {
         <h1 className={classes.contentHeader}>Chose login option</h1>
         <div className={classes.contentButtons}>
           <CustomNavLink
-            title="Login by google"
+            title="SignIn by google"
             path=""
             className={classes.contentButtonsButtonGoogle}
-            onClick={googleSignIn}
+            onClick={() => {
+              googleSignIn();
+              redirect(AUTH_USER_ROUTES.CALENDAR);
+            }}
           />
           <CustomNavLink
             title="Login by e-mail"

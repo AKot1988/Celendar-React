@@ -70,6 +70,36 @@ export const createUserEvCollection = async function (UID: string) {
 };
 
 // can use for update user data
+export const checkDoesUserExist = async function (auth: any) {
+  // debugger;
+  const docRef = doc(db, "users", auth.currentUser?.uid);
+  // const docRef = doc(usersCollectionRef, auth.currentUser?.uid);
+  const userEventsRef = doc(db, "events", `${auth.currentUser?.uid}`);
+  const querySnapshot = await getDocs(collection(db, "users"));
+  let userMarker = false;
+  querySnapshot.docs.filter((doc) => {
+    if (doc.id === docRef.id) {
+      userMarker = true;
+      return;
+    }
+  });
+  if (!userMarker) {
+    await setDoc(doc(usersCollectionRef, auth.currentUser.uid), {
+      created_at: new Date(),
+      name: auth.currentUser.displayName,
+      birthdate: "",
+      gender: "",
+      role: ROLES.AUTHORIZED_USER,
+      updated_at: new Date(),
+      about: "",
+      password: "",
+      email: auth.currentUser.email,
+      eventsCollectionRef: userEventsRef,
+      avatar: auth.currentUser.photoURL,
+    });
+  }
+};
+
 export const writeUserData = async function (
   UID: string,
   userData: userDataProps,
@@ -142,6 +172,7 @@ export const getEventsByUserAndDay = async function ({
     }
   });
   if (!checkDoesUserHaveEvents) {
+    console.error("User has no events");
   }
   return userEvents;
 };
@@ -177,19 +208,20 @@ export const editEventAction = async function (editedEvent: NewEventData) {
 };
 
 export const getEventsByUser = async function () {
-  const currentUser = auth.currentUser?.uid;
+  const currentUser = auth.currentUser?.uid as string;
   let checkDoesUserHaveEvents = false;
   let userEvents: NewEventData[] | [] = [];
   const querySnapshot = await getDocs(collection(db, "events"));
   querySnapshot.forEach((doc) => {
     if (doc.id === currentUser) {
-      (checkDoesUserHaveEvents = true), (userEvents = doc.data().taskList);
+      checkDoesUserHaveEvents = true;
+      userEvents = doc.data().taskList || [];
     }
   });
   if (!checkDoesUserHaveEvents) {
-    throw new Error("У користувача немає подій");
+    createUserEvCollection(currentUser);
+    userEvents = [];
   }
-
   return userEvents;
 };
 

@@ -46,8 +46,6 @@ const Edit: FC = () => {
     updatedConfig.inputs.forEach((input) => {
       if (dataKeys.includes(input.name)) {
         input.value = data[input.name as keyof NewEventData] as string;
-        console.log(input.value);
-        console.log(EditTaskFormConfig);
       }
     });
     updatedConfig.inputs[2].onFocus = () =>

@@ -27,7 +27,26 @@ const createRouterByRole = (role: ROLES) => {
 const AppRouter = () => {
   const role = auth.currentUser ? ROLES.AUTHORIZED_USER : ROLES.GUEST;
   const [currentRole, setRole] = useState<ROLES>(role);
-  useEffect(() => {onAuthStateChanged(auth, (currentUser)=>{setRole(currentUser? ROLES.AUTHORIZED_USER : ROLES.GUEST)})}, [auth.currentUser]);
+//   useEffect(() => {
+//   onAuthStateChanged(auth, (currentUser) => {
+//     console.log("Current user: ", currentUser); // Для дебагу
+//     setRole(currentUser ? ROLES.AUTHORIZED_USER : ROLES.GUEST);
+//   });
+// }, [auth.currentUser]);
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+    if (currentUser) {
+      // Спробуйте дати невеликий таймер перед оновленням ролі
+      setTimeout(() => {
+        setRole(ROLES.AUTHORIZED_USER);
+      }, 1000);  // Затримка у 100 мс для безпеки
+    } else {
+      setRole(ROLES.GUEST);
+    }
+  });
+
+  return () => unsubscribe();
+}, []);
   const router = createBrowserRouter([{
     path: "/",
     element: <Layout/>,

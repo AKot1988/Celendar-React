@@ -8,9 +8,9 @@ const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "calendar-react-85cff.firebaseapp.com",
   projectId: "calendar-react-85cff",
+  storageBucket: "calendar-react-85cff.appspot.com",
   messagingSenderId: "966242575668",
   appId: "1:966242575668:web:4bdcf637d9b90c8f52b161",
-  storageBucket: "gs://calendar-react-85cff.appspot.com",
 };
 
 export const app = initializeApp(firebaseConfig);
@@ -21,6 +21,3 @@ export const storage = getStorage(app);
 
 //storage operations
 export const firebaseApp = getApp();
-
-
-
