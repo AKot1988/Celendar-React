@@ -13,6 +13,7 @@ const Contact: FC = () => {
       <motion.h1 custom={1} variants={textAnimation}>
         Contact
       </motion.h1>
+      <motion.iframe className={classes.contactPagePDF} src="https://firebasestorage.googleapis.com/v0/b/calendar-react-85cff.appspot.com/o/commonFiles%2FAnton_Kulibabenko_CV_FrontEnd%2015.10.2024.pdf?alt=media&token=bb5a5c09-23d9-404e-823d-2beea531c5c1"></motion.iframe>
     </motion.div>
   );
 };

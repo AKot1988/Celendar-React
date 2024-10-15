@@ -13,4 +13,47 @@
     border: 0px solid $mainGray;
     padding: 10px;
     margin: 0 auto;
-}
+    background-size: cover;
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/calendar-react-85cff.appspot.com/o/commonImages%2F%D0%91%D0%B5%D0%BA%20%D0%A4%D0%BE%D1%82%D0%BE.jpg?alt=media&token=8a9a9472-b6c3-41d2-862f-b1ec7d077e7d");
+  
+    &Title {
+      margin-bottom: 0;
+    }
+  
+    & * {
+      font-family: "Poppins", sans-serif;
+      color: $main;
+    }
+  
+    & p {
+      padding: 10px;
+      font-size: 18px;
+      line-height: 2;
+    }
+  
+    //   &Content {
+    //     background-size: cover;
+    //     background-image: url("https://console.firebase.google.com/project/calendar-react-85cff/storage/calendar-react-85cff.appspot.com/files/~2FEventsImages") !important;
+    //   }
+  
+    &Buttons {
+      display: flex;
+      justify-content: end;
+      align-items: end;
+      width: 100%;
+      margin: 0;
+    }
+  
+    &SetLanguageButton {
+      background: $mainGray;
+      transition: all 0.3s ease;
+      margin: 0 5px;
+    
+  
+      &:hover {
+        color: $mainGray;
+        background: $main;
+      }
+    }
+  }
+  

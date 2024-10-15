@@ -47,18 +47,18 @@ export enum MOUNTHS {
 }
 
 export enum UKRMOUNTS {
-  Jan = "Січеня",
+  Jan = "Січня",
   Feb = "Лютого",
-  Mar = "Березеня",
-  Apr = "Квітеня",
-  May = "Травеня",
+  Mar = "Березня",
+  Apr = "Квітня",
+  May = "Травня",
   Jun = "Червня",
-  Jul = "Липеня",
-  Aug = "Серпеня",
-  Sep = "Вересеня",
-  Oct = "Жовтеня",
+  Jul = "Липня",
+  Aug = "Серпня",
+  Sep = "Вересня",
+  Oct = "Жовтня",
   Nov = "Листопада",
-  Dec = "Груденя",
+  Dec = "Грудня",
 }
 
 export enum WEEKDAYS {

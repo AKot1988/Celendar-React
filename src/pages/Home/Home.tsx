@@ -5,7 +5,7 @@ import { heroSectionInfo } from "./helper.tsx";
 import classes from "./Home.module.scss";
 
 const Home: FC = () => {
-  const [welcomeLanguage, setWelcomeLanguage] = useState("eng");
+  const [welcomeLanguage, setWelcomeLanguage] = useState("ukr");
 
   return (
     <motion.div
@@ -39,9 +39,7 @@ const setHopageContent = (welcomeLanguage: string) => {
           <motion.h2 custom={1} variants={textAnimation}>
             Welcome to the home page!
           </motion.h2>
-          <motion.p custom={2} variants={textAnimation}>
-            {heroSectionInfo.ENG}
-          </motion.p>
+          <motion.p custom={2} variants={textAnimation} dangerouslySetInnerHTML={{ __html: heroSectionInfo.ENG as string }}/>
         </motion.div>
       );
     case "ukr":
@@ -54,9 +52,7 @@ const setHopageContent = (welcomeLanguage: string) => {
           <motion.h2 custom={1} variants={textAnimation}>
             Вітаю на домашній сторінці!
           </motion.h2>
-          <motion.p custom={2} variants={textAnimation}>
-            {heroSectionInfo.UKR}
-          </motion.p>
+          <motion.p custom={2} variants={textAnimation} dangerouslySetInnerHTML={{ __html: heroSectionInfo.UKR as string }}/>
         </motion.div>
       );
     default:
