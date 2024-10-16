@@ -1,30 +1,65 @@
 @import "../../app/variables.scss";
 
 .contactPage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-width: $contentWidth;
+  background: $mainGradient;
+  border: 0px solid $mainGray;
+  padding: 10px;
+  margin: 0 auto;
+
+  & h1 {
+    z-index: 2;
+  }
+
+  &ContactPage {
     display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: start;
-    box-sizing: border-box;
+  }
+
+  &MyFace {
+    position: relative;
+    top: -100px;
+    // max-width: 50%;
+    max-height: 1000px;
+    z-index: 1;
+  }
+
+  &RegistrationBlock {
+    position: relative;
+    display: inline-block;
+
+    &Background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      background-color: black;
+      z-index: -1;
+    }
+
+    & h1 {
+      font-size: 48px;
+      font-weight: bold;
+      color: white;
+      padding: 20px;
+    }
+  }
+
+  & * {
+    font-family: "Poppins", sans-serif;
+    color: $main;
+  }
+
+  &PDF {
     width: 100%;
     height: 100%;
-    max-width: $contentWidth;
-    background: $mainGradient;
-    border: 0px solid $mainGray;
-    padding: 10px;
-    margin: 0 auto;
-
-    &MyFace {
-        height: 50vh;
-    }
-
-    & * {
-        font-family: "Poppins", sans-serif;
-        color: $main;
-      }
-
-    &PDF {
-        width: 100%;
-        height: 100%;
-    }
+  }
 }
