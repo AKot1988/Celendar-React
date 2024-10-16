@@ -1,5 +1,5 @@
-import { duration } from "@mui/material";
-import { delay } from "framer-motion";
+// import { duration } from "@mui/material";
+// import { delay } from "framer-motion";
 
 export const textAnimation = {
   hidden: { opacity: 0, x: -100 },
