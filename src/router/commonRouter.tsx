@@ -25,6 +25,6 @@ export const commonRouter = [
   {
     path: COMMON_ROUTES.LOGIN,
     element: <LogIn/>,
-    action: authType
+    action: authType,
   }
 ]

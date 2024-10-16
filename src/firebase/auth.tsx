@@ -38,9 +38,15 @@ export const signUpWithEmailAndPassword = async (
       createUserEvCollection(userCredential.user.uid);
     })
     .catch((error) => {
-      throw new Error(
-        "Сталась помилка аутентифікації" + error.code + error.message
-      );
+      let errorMsg = "";
+      if (
+        error.code === "auth/email-already-in-use"
+      ) {
+        errorMsg = "пошта вже зареєстрована";
+      } else {
+        errorMsg = error.message;
+      }
+      alert(`Сталась помилка: ${errorMsg}`);
     });
 };
 
@@ -50,9 +56,14 @@ export const logInWithEmailAndPassword = async (
 ) => {
   await signInWithEmailAndPassword(auth, email, password) // This is the function that signs in a user
     .catch((error) => {
-      throw new Error(
-        "Сталась помилка аутентифікації" + error.code + error.message
-      );
+      let errorMsg = "";
+      if (
+        error.code === "auth/invalid-credential" ||
+        error.message === "auth/invalid-credential"
+      ) {
+        errorMsg = "Невірний логін або пароль";
+      }
+      alert(`Сталась помилка ${errorMsg}`);
     });
 };
 

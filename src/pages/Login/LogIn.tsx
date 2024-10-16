@@ -33,15 +33,17 @@ export const authType = async ({ request }: ActionFunctionArgs) => {
 
   switch (formData.get("formType")) {
     case "signUp": {
-      signUpWithEmailAndPassword(newUserData);
-      return redirect(AUTH_USER_ROUTES.CALENDAR);
+      await signUpWithEmailAndPassword(newUserData);if (auth.currentUser) {
+        return redirect(AUTH_USER_ROUTES.CALENDAR);
+      } else {
+        return redirect(COMMON_ROUTES.LOGIN);
+      }
     }
     case "logIn": {
       await logInWithEmailAndPassword(newUserData.email, newUserData.password);
       if (auth.currentUser) {
         return redirect(AUTH_USER_ROUTES.CALENDAR);
       } else {
-        alert("такий мейл уже є, або ви не правильно ввели пароль");
         return redirect(COMMON_ROUTES.LOGIN);
       }
     }
