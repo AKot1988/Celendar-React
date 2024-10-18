@@ -25,10 +25,11 @@ export const myFotoAnimation = {
 };
 
 export const contactBlockAnimation = {
-  hidden: { opacity: 0, x: -200 },
+  hidden: { opacity: 0, x: -200, width: 0 },
   visible: (custom: number) => ({
     opacity: 1,
     x: 0,
+    width: "100%",
     transition: {
       delay: custom * 0.2,
       duration: 1,
