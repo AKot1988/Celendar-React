@@ -69,6 +69,7 @@ const Edit: FC = () => {
               }
               setBeginModalState(!beginModalState);
             }}
+            onCancel={() => setBeginModalState(!beginModalState)}
           />
         }
         visible={beginModalState}
@@ -85,6 +86,7 @@ const Edit: FC = () => {
               }
               setEndModalState(!endModalState);
             }}
+            onCancel={() => setEndModalState(!endModalState)}
             initDate={new Date(data.end)}
           />
         }
