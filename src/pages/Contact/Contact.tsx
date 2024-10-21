@@ -62,6 +62,7 @@ const Contact: FC = () => {
           </motion.div>
         </div>
       </div>
+
     </motion.div>
   );
 };

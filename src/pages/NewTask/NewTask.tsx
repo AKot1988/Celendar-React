@@ -57,6 +57,7 @@ const NewTask: FC = () => {
                   }
                   setVisBegin(!visBegin);
                 }}
+                onCancel={() => setVisBegin(!visBegin)}
               />
             }
             visible={visBegin}
@@ -77,6 +78,7 @@ const NewTask: FC = () => {
                   }
                   setVisEnd(!visEnd);
                 }}
+                onCancel={() => setVisEnd(!visEnd)}
                 initDate={new Date(dateMapper(day as string))}
               />
             }

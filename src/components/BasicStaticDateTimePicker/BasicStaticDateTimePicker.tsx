@@ -8,18 +8,29 @@ import classes from "./BasicStaticDateTimePicker.module.scss";
 type DatePickerProps = {
   initDate: string | Date; // similar to string "August 23, 2024"
   onAccept: (value: Dayjs | null) => void;
+  onCancel?: () => void;
 };
 
 const BasicStaticDateTimePicker: FC<DatePickerProps> = ({
   onAccept = () => {},
   initDate = "",
+  onCancel = () => {},
 }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <StaticDateTimePicker className={classes.datePicker}
+      <StaticDateTimePicker
+        className={classes.datePicker}
         defaultValue={dayjs(initDate)}
         orientation="portrait"
         ampm={false}
+        slotProps={{
+          actionBar: {
+            actions: ["cancel", "accept"],
+          },
+        }}
+        onClose={() => {
+          onCancel();
+        }}
         onAccept={(val) => {
           onAccept(val);
         }}
