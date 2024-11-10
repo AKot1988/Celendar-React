@@ -77,7 +77,7 @@ export const googleSignIn = async () => { // This is the function that signs in 
   try {
     await signInWithPopup(auth, googleAuthProvider);
     await checkDoesUserExist(auth);
-    return redirect(AUTH_USER_ROUTES.CALENDAR);
+    // return redirect(AUTH_USER_ROUTES.CALENDAR);
   } catch (error) {
     console.log(error);
     return redirect(COMMON_ROUTES.LOGIN);

@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { NewEventData } from "../../firebase/types.tsx";
+import { dateMapper } from "./helper.tsx";
 import classes from "./Task.module.scss";
 
 const Task: FC<NewEventData> = ({
@@ -11,17 +12,15 @@ const Task: FC<NewEventData> = ({
   photoURL,
 }) => {
   return (
-    <div
-      className={classes.expandedDay}
-    >
+    <div className={classes.expandedDay}>
       <h3 className={classes.expandedDayTitle}>{title}</h3>
       <p className={classes.expandedDayBegin}>
         <span className={classes.expandedDayRowsHeaders}> Початок: </span>
-        {begin}
+        {dateMapper(begin)}
       </p>
       <p className={classes.expandedDayEnd}>
         <span className={classes.expandedDayRowsHeaders}> Кінець: </span>
-        {end}
+        {dateMapper(end)}
       </p>
       <p className={classes.expandedDayDescription}>
         <span className={classes.expandedDayRowsHeaders}>
