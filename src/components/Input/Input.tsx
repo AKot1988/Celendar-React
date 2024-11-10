@@ -47,7 +47,7 @@ const Input: FC<InputElementProps> = ({
     const newValue = (e.target as HTMLTextAreaElement).value;
     setErrorMessage(validation(type, newValue));
     setValueData(newValue);
-  }
+  };
 
   useEffect(() => {
     setValueData(value as string);
@@ -168,9 +168,9 @@ export default Input;
 const validation = (type: InputType, value: string): string | undefined => {
   switch (type) {
     case InputType.TEXT:
-      return value.length <= 3 ? "Введіть більше 3-x символів" : "";
+      return value.length <= 1 ? "Введіть більше 1-го символа" : "";
     case InputType.TEXTAREA:
-      return value.length <= 3 ? "Введіть більше 3-x символів" : "";
+      return value.length <= 1 ? "Введіть більше 1-го символа" : "";
     case InputType.PASSWORD:
       const passwordRegexp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
       return !passwordRegexp.test(value) ? "min 4 букви та 4 цифри" : "";

@@ -24,7 +24,6 @@ export const EditAction = async function ({ request }: ActionFunctionArgs) {
     id: formData.get("id") as string,
     photoURL: formData.get("photoURL") as string,
   };
-  console.log(editedTaskData);
 
   await editEventAction(editedTaskData);
 

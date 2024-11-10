@@ -42,8 +42,10 @@ export const authType = async ({ request }: ActionFunctionArgs) => {
     case "logIn": {
       await logInWithEmailAndPassword(newUserData.email, newUserData.password);
       if (auth.currentUser) {
+        console.log("auth.currentUser", auth.currentUser);
         return redirect(AUTH_USER_ROUTES.CALENDAR);
       } else {
+        console.log("auth.currentUser", auth.currentUser);
         return redirect(COMMON_ROUTES.LOGIN);
       }
     }

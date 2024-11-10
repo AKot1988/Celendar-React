@@ -1,22 +1,24 @@
 .addButton {
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 45px;
-    height: 45px;
-    cursor: pointer;
-    background-color: #D9D9D9;
-    border-color: transparent;
-    border-radius: 0px;
-    box-sizing: border-box;
-    transition: all 0.2s;
-    &:hover {
-        border: 1px solid #787878;
-    }
-    &:focus,
-    &:focus-visible {
-        background-color: #787878;
-        outline: none;
-    }
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  background-color: #d9d9d9;
+  border-color: transparent;
+  border-radius: 0px;
+  box-sizing: border-box;
+  transition: all 0.2s;
+  border: 1px solid #787878;
+  transition: all 0.2s;
+  &:hover {
+    border: 1.5px solid #787878;
+  }
+  &:focus,
+  &:focus-visible {
+    background-color: #787878;
+    outline: none;
+  }
 }

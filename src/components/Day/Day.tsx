@@ -50,7 +50,6 @@ const Day: FC<{ content: NewEventData[] }> = ({ content }) => {
               onClick={() => {
                 setVisibleExtendedTask(!visibleExtendedTask);
                 extendedTask = item;
-
               }}
             >
               <motion.h3 custom={1} variants={textAnimation}>
@@ -100,23 +99,25 @@ const Day: FC<{ content: NewEventData[] }> = ({ content }) => {
           ))}
         </div>
         {visibleExtendedTask && (
-                <UniversalModal
-                  content={<Task {...extendedTask} />}
-                  title={"Деталі задачі"}
-                  setVisible={setVisibleExtendedTask}
-                  visible={visibleExtendedTask}
-                />
-              )}
+          <UniversalModal
+            content={<Task {...extendedTask} />}
+            title={"Деталі задачі"}
+            setVisible={setVisibleExtendedTask}
+            visible={visibleExtendedTask}
+          />
+        )}
+      <button className={classes.goBackButton} type='button' onClick={() => navigate(-1)}>Go back</button>
       </div>
     </>
   ) : (
-    <>
+    <div className={classes.day}>
       <AddButton
         type="link"
         to={`${AUTH_USER_ROUTES.CALENDAR}/${currentUser}/${day}/newTask`}
       />
-      <p>На цей день задачі відсутні</p>
-    </>
+      <h2>На цей день задачі відсутні</h2>
+      <button className={classes.goBackButton} type='button' onClick={() => navigate(-1)}>Go back</button>
+    </div>
   );
 };
 
