@@ -31,7 +31,6 @@ export const authType = async ({ request }: ActionFunctionArgs) => {
     avatar: formData.get("photo") as string,
   };
 
-  // debugger;
   let user = auth.currentUser;
   switch (formData.get("formType")) {
     case "signUp": {
@@ -65,6 +64,7 @@ export const authType = async ({ request }: ActionFunctionArgs) => {
 const LogIn: FC = () => {
   const [isOpenLogIn, setVisibleLogIn] = useState(false);
   const [isOpenSignUp, setVisibleSignUp] = useState(false);
+  let defaultPath: string = "";
 
   return (
     <div className={classes.content}>
@@ -73,12 +73,18 @@ const LogIn: FC = () => {
         <div className={classes.contentButtons}>
           <CustomNavLink
             title="SignIn by google"
-            path=""
             className={classes.contentButtonsButtonGoogle}
-            onClick={() => {
-              googleSignIn();
-              redirect(AUTH_USER_ROUTES.CALENDAR);
+            onClick={async () => {
+              await googleSignIn()
+                .then(() => {
+                  defaultPath = AUTH_USER_ROUTES.CALENDAR;
+                })
+                .catch(() => {
+                  defaultPath = COMMON_ROUTES.LOGIN;
+                });
+              return redirect(defaultPath);
             }}
+            path={AUTH_USER_ROUTES.CALENDAR}
           />
           <CustomNavLink
             title="Login by e-mail"

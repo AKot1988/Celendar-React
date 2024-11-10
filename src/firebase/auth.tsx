@@ -39,9 +39,7 @@ export const signUpWithEmailAndPassword = async (
     })
     .catch((error) => {
       let errorMsg = "";
-      if (
-        error.code === "auth/email-already-in-use"
-      ) {
+      if (error.code === "auth/email-already-in-use") {
         errorMsg = "пошта вже зареєстрована";
       } else {
         errorMsg = error.message;
@@ -75,22 +73,19 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-export const googleSignIn = async () => {
-  // debugger;
-  let userExist = false;
+export const googleSignIn = async () => { // This is the function that signs in a user with Google
   try {
     await signInWithPopup(auth, googleAuthProvider);
     await checkDoesUserExist(auth);
-    userExist = true;
-    // return redirect(AUTH_USER_ROUTES.CALENDAR);
+    return redirect(AUTH_USER_ROUTES.CALENDAR);
   } catch (error) {
     console.log(error);
-    // return redirect(COMMON_ROUTES.LOGIN);
+    return redirect(COMMON_ROUTES.LOGIN);
   }
 
-  userExist
-    ? redirect(AUTH_USER_ROUTES.CALENDAR)
-    : redirect(COMMON_ROUTES.LOGIN);
+  // userExist
+  //   ? redirect(AUTH_USER_ROUTES.CALENDAR)
+  //   : redirect(COMMON_ROUTES.LOGIN);
 };
 
 export const googleSignOut = async () => {

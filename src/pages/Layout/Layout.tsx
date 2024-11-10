@@ -22,7 +22,6 @@ const Layout: FC = () => {
 
   return (
     <>
-      {/* {state === "loading" ? <Loader /> : null} */}
       <Header
         logo={headerData.logo}
         navMenu={headerData.navMenu}
@@ -36,7 +35,6 @@ const Layout: FC = () => {
           <Outlet />
         </div>
       )}
-
       <Footer title={footerProps()} />
     </>
   );
