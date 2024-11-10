@@ -31,21 +31,29 @@ export const authType = async ({ request }: ActionFunctionArgs) => {
     avatar: formData.get("photo") as string,
   };
 
+  // debugger;
+  let user = auth.currentUser;
   switch (formData.get("formType")) {
     case "signUp": {
-      await signUpWithEmailAndPassword(newUserData);if (auth.currentUser) {
+      await signUpWithEmailAndPassword(newUserData).then(() => {
+        user = auth.currentUser;
+      });
+      if (user) {
         return redirect(AUTH_USER_ROUTES.CALENDAR);
       } else {
         return redirect(COMMON_ROUTES.LOGIN);
       }
     }
     case "logIn": {
-      await logInWithEmailAndPassword(newUserData.email, newUserData.password);
+      await logInWithEmailAndPassword(
+        newUserData.email,
+        newUserData.password
+      ).then(() => {
+        user = auth.currentUser;
+      });
       if (auth.currentUser) {
-        console.log("auth.currentUser", auth.currentUser);
         return redirect(AUTH_USER_ROUTES.CALENDAR);
       } else {
-        console.log("auth.currentUser", auth.currentUser);
         return redirect(COMMON_ROUTES.LOGIN);
       }
     }

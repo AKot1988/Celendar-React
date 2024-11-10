@@ -22,16 +22,21 @@ const Layout: FC = () => {
 
   return (
     <>
-      {state === "loading" ? <Loader /> : null}
+      {/* {state === "loading" ? <Loader /> : null} */}
       <Header
         logo={headerData.logo}
         navMenu={headerData.navMenu}
         onClick={handleAuthClick}
         avatarLink={userData?.avatar as string}
       />
-      <div className={classes.container}>
-        <Outlet />
-      </div>
+      {state === "loading" ? (
+        <Loader />
+      ) : (
+        <div className={classes.container}>
+          <Outlet />
+        </div>
+      )}
+
       <Footer title={footerProps()} />
     </>
   );
